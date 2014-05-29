@@ -36,11 +36,20 @@ module.exports.routes = {
     view: 'home/index'
   },
 
+
+// MARKETING BLOG ROUTES
+  // external routes
   'get /marketingblog': {
     controller: "MarketingPostController",
     action: 'index'
   },
 
+  'get /marketingblog/:id': {
+    controller: 'MarketingPostController',
+    action: 'showOne'
+  },
+
+  // internal routes
   'get /marketingPost/new': {
     controller: "MarketingPostController",
     action: 'newPost'
@@ -49,6 +58,16 @@ module.exports.routes = {
   'post /marketingPost/new': {
     controller: "MarketingPostController",
     action: 'createPost'
+  },
+
+  'get /marketingPost/edit/:id': {
+    controller: "MarketingPostController",
+    action: 'edit'
+  },
+
+  'post /marketingPost/editpost': {
+    controller: "MarketingPostController",
+    action: 'update'
   }
 
   /*

@@ -16,6 +16,19 @@
  */
 var humanize = require('humanize');
 
+///////BEGIN UTILITY FUNCTIONS
+var boolify = function(obj){
+  if(obj == "true"){
+    obj = true;
+  }
+  else {
+    obj = false;
+  };
+  return obj;
+};
+///////END UTILITY FUNCTIONS
+
+
 module.exports = {
 
   index: function(req, res){
@@ -25,17 +38,21 @@ module.exports = {
     });
   },
 
+  showOne: function(req, res){
+    var id = req.param('id');
+    MarketingPost.findOne({ id: id }, function(err, post){
+      if(err) return res.redirect('/');
+      res.view({ post: post });
+    })
+  },
+
   newPost: function(req, res){
     res.view();
   },
 
   createPost: function(req, res){
     var b = req.body;
-    var isPublished = false;
-
-    if(b.published == "true"){
-      isPublished = true;
-    };
+    var isPublished = boolify(b.published);
 
     MarketingPost.create({ title: b.title, content: b.content, published: isPublished }, function(err, post){
       if (err){
@@ -55,14 +72,30 @@ module.exports = {
   },
 
   edit: function(req, res){
-    var title = req.param('title');
-    MarketingPost.findOne({ title: title }, function(err, post){
+    var id = req.param('id');
+    MarketingPost.findOne({ id: id }, function(err, post){
+      console.log(post);
       res.view({ post: post });
     });
   },
 
   update: function(req, res){
-
+    var b = req.body;
+    var isPublished = boolify(b.published);
+    MarketingPost.findOne({ title: b.title }, function(err, post){
+      if(err) return res.redirect('/');
+      MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished }, function(err, post){
+        var id = post[0].id;
+        if(err) return res.redirect('/');
+        req.flash("Post updated.");
+        if (isPublished == true){
+          res.redirect('/marketingblog/' + id);
+        }
+        else {
+          res.redirect('/marketingPosts/drafts');
+        }
+      });
+    });
   }
 
 };

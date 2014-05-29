@@ -1,0 +1,10 @@
+<h1>Edit Marketing Post</h1>
+
+<section id="editMarketingBlogPostForm">
+  <form action="/marketingPost/editpost" method="post">
+    <div><input type="text" name="title" size="70" value="<%= post.title %>"></div>
+    <div><textarea name="content" rows="30" cols="50"><%= post.content %></textarea></div>
+    <div><input type="checkbox" name="published" value="true">Publish now?</div>
+    <div><input type="submit"</div>
+  </form>
+</section>
