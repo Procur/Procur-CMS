@@ -29,7 +29,12 @@ module.exports = {
       if(err) return res.redirect('/admin/drafts');
       payload.push(marketingPosts[0]);
       console.log(payload);
-      res.view({ drafts: payload });
+      NewsPost.find({ published: false }, function(err, newsPosts){
+        if(err) return res.redirect('/admin/drafts');
+        payload.push(newsPosts[0]);
+        console.log(payload);
+        res.view({ drafts: payload });
+      });
     });
 
 
