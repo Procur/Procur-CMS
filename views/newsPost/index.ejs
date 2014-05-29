@@ -1,0 +1,9 @@
+<h1>Application Updates/ News Blog</h1>
+
+<% posts.forEach(function(post){ %>
+  <% if(post.published == true){ %>
+    <div><a href="/newsblog/<%= post.id %>"><h3><%= post.title %></h3></a></div>
+    <div><strong>Posted: <%= post.createdAt %></strong></div>
+    <div><p><%= post.content %></p></div>
+  <% } %>
+<% }); %>

@@ -15,16 +15,97 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
+//////BEGIN UTILITY FUNCTIONS
+var boolify = function(obj){
+  if(obj == "true"){
+    obj = true;
+  }
+  else{
+    obj = false;
+  };
+  return obj;
+};
+//////END UTILITY FUNCTIONS
+
+
 module.exports = {
-    
-  
 
+  index: function(req,res){
+    NewsPost.find({ published: true }, function(err,posts){
+      if(err) return res.redirect('/');
+      res.view({ posts: posts });
+    });
+  },
 
-  /**
-   * Overrides for the settings in `config/controllers.js`
-   * (specific to NewsPostController)
-   */
-  _config: {}
+  showOne: function(req,res){
+    var id = req.param('id');
+    NewsPost.findOne({ id: id }, function(err,post){
+      if(err) return res.redirect('/');
+      res.view({ post: post });
+    })
+  },
 
-  
+  newPost: function(req,res){
+    res.view();
+  },
+
+  createPost: function(req,res){
+    var b = req.body;
+    var isPublished = boolify(b.published)
+
+    NewsPost.create({ title: b.title, content: b.content, published: isPublished }, function(err, post){
+      if (err){
+        req.flash("There was a problem. Try again.");
+        res.redirect('/newsPost/new');
+      }
+      else {
+        req.flash("Post successfully created.")
+        if (isPublished == false){
+          res.redirect('/newsPost/drafts');
+        }
+        else {
+          res.redirect('/newsblog');
+        }
+      }
+    });
+  },
+
+  edit: function(req,res){
+    var id = req.param('id');
+    NewsPost.findOne({ id: id }, function(err, post){
+      res.view({ post: post })
+    });
+  },
+
+  update: function(req, res){
+    var b = req.body;
+    var isPublished = boolify(b.published);
+    NewsPost.findOne({ title: b.title }, function(err, post){
+      if(err) return res.redirect('/');
+      NewsPost.update(post, { title: b.title, content: b.content, published: isPublished }, function(err, post){
+        var id = post[0].id;
+        if(err) return res.redirect('/');
+        req.flash("Post updated.");
+        if (isPublished == true){
+          res.redirect('/newsblog/' + id);
+        }
+        else {
+          res.redirect('/newsPosts/drafts');
+        }
+      });
+    });
+  },
+
+  unpublish: function(req,res){
+    var id = req.param('id');
+    NewsPost.findOne({ id: id }, function(err,post){
+      if(err) return res.redirect('/newsPost/edit/' + id);
+      NewsPost.update(post, { published: false }, function(err, post){
+        if(err) return res.redirect('/newsPost/edit/' + id);
+        req.flash('Post unpublished.');
+        res.redirect('/newsPosts/drafts');
+      });
+    });
+  }
+
 };

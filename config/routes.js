@@ -75,6 +75,44 @@ module.exports.routes = {
     action: 'unpublish'
   },
 
+// NEWS BLOG
+  // external routes
+  'get /newsblog': {
+    controller: 'NewsPostController',
+    action: 'index'
+  },
+
+  'get /newsblog/:id': {
+    controller: 'NewsPostController',
+    action: 'showOne'
+  },
+
+  //internal routes
+  'get /newsPost/new': {
+    controller: 'NewsPostController',
+    action: 'newPost'
+  },
+
+  'post /newsPost/new': {
+    controller: 'NewsPostController',
+    action: 'createPost'
+  },
+
+  'get /newsPost/edit/:id': {
+    controller: 'NewsPostController',
+    action: 'edit'
+  },
+
+  'post /newsPost/editpost': {
+    controller: 'NewsPostController',
+    action: 'update'
+  },
+
+  'get /newsPost/unpublish/:id': {
+    controller: 'NewsPostController',
+    action: 'unpublish'
+  },
+
 // ADMIN ROUTES
 
   'get /admin/drafts': {
