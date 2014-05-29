@@ -14,6 +14,7 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
+var humanize = require('humanize');
 
 module.exports = {
 
@@ -22,6 +23,46 @@ module.exports = {
       if(err) return res.redirect('/');
       res.view({ posts: posts });
     });
+  },
+
+  newPost: function(req, res){
+    res.view();
+  },
+
+  createPost: function(req, res){
+    var b = req.body;
+    var isPublished = false;
+
+    if(b.published == "true"){
+      isPublished = true;
+    };
+
+    MarketingPost.create({ title: b.title, content: b.content, published: isPublished }, function(err, post){
+      if (err){
+        req.flash("There was a problem. Try again.");
+        res.redirect('/marketingPost/new');
+      }
+      else {
+        req.flash("Post successfully created.")
+        if (isPublished == false){
+          res.redirect('/marketingPost/drafts');
+        }
+        else {
+          res.redirect('/marketingblog');
+        }
+      }
+    });
+  },
+
+  edit: function(req, res){
+    var title = req.param('title');
+    MarketingPost.findOne({ title: title }, function(err, post){
+      res.view({ post: post });
+    });
+  },
+
+  update: function(req, res){
+
   }
 
 };

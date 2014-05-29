@@ -1,0 +1,9 @@
+<h1>Marketing Blog</h1>
+
+<% posts.forEach(function(post){ %>
+  <% if(post.published == true){ %>
+    <div><h3><%= post.title %></h3></div>
+    <div><strong>Posted: <%= post.createdAt %></strong></div>
+    <div><p><%= post.content %></p></div>
+  <% } %>
+<% }); %>
