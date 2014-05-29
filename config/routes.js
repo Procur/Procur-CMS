@@ -73,6 +73,13 @@ module.exports.routes = {
   'get /marketingPost/unpublish/:id': {
     controller: "MarketingPostController",
     action: 'unpublish'
+  },
+
+// ADMIN ROUTES
+
+  'get /admin/drafts': {
+    controller: 'AdminController',
+    action: 'drafts'
   }
 
   /*

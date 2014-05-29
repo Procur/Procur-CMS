@@ -1,0 +1,8 @@
+<h1>Drafts</h1>
+
+<% drafts.forEach(function(draft){ %>
+
+  <a href="/marketingPost/edit/<%= draft.id %>"><strong><%= draft.title %></strong></a>
+  <p><%= draft.content %></p>
+
+<% }); %>
