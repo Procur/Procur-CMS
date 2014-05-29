@@ -96,6 +96,18 @@ module.exports = {
         }
       });
     });
+  },
+
+  unpublish: function(req, res){
+    var id = req.param('id');
+    MarketingPost.findOne({ id: id }, function(err, post){
+      if(err) return res.redirect('/marketingPost/edit/' + id);
+      MarketingPost.update(post, { published: false }, function(err, post){
+        if(err) return res.redirect('/marketingPost/edit/' + id);
+        req.flash('Post unpublished.');
+        res.redirect('/marketingPosts/drafts');
+      });
+    });
   }
 
 };

@@ -68,6 +68,11 @@ module.exports.routes = {
   'post /marketingPost/editpost': {
     controller: "MarketingPostController",
     action: 'update'
+  },
+
+  'get /marketingPost/unpublish/:id': {
+    controller: "MarketingPostController",
+    action: 'unpublish'
   }
 
   /*
