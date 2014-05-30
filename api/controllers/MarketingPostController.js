@@ -15,6 +15,7 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 var humanize = require('humanize');
+var cloudinary = require('cloudinary');
 
 ///////BEGIN UTILITY FUNCTIONS
 var boolify = function(obj){
@@ -54,20 +55,23 @@ module.exports = {
     var b = req.body;
     var isPublished = boolify(b.published);
 
-    MarketingPost.create({ title: b.title, content: b.content, published: isPublished }, function(err, post){
-      if (err){
-        req.flash("There was a problem. Try again.");
-        res.redirect('/marketingPost/new');
-      }
-      else {
-        req.flash("Post successfully created.")
-        if (isPublished == false){
-          res.redirect('/marketingPost/drafts');
+    cloudinary.uploader.upload(req.files.image.path, function(result){
+      console.log(result.url);
+      MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url }, function(err, post){
+        if (err){
+          req.flash("There was a problem. Try again.");
+          res.redirect('/marketingPost/new');
         }
         else {
-          res.redirect('/marketingblog');
+          req.flash("Post successfully created.")
+          if (isPublished == false){
+            res.redirect('/marketingPost/drafts');
+          }
+          else {
+            res.redirect('/marketingblog');
+          }
         }
-      }
+      });
     });
   },
 
