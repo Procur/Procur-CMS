@@ -9,8 +9,14 @@
  */
 
 module.exports.bootstrap = function (cb) {
+  var cloudinary = require('cloudinary');
 
-  // It's very important to trigger this callack method when you are finished 
+  cloudinary: cloudinary.config({
+    cloud_name: 'huewqecyr',
+    api_key: '881324675953382',
+    api_secret: 'ba-JzMMUoznUYbnalqxZD3ogTe4'
+  });
+  // It's very important to trigger this callack method when you are finished
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   cb();
 };

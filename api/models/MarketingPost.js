@@ -20,7 +20,7 @@ module.exports = {
       required: 'true'
     },
     images: {
-      type: 'json',
+      type: 'string',
     },
     published: {
       type: 'boolean',
