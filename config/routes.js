@@ -32,10 +32,43 @@ module.exports.routes = {
   // located at `views/home/index.ejs`
   //
   // (This would also work if you had a file at: `/views/home.ejs`)
-  '/': {
-    view: 'home/index'
+
+//INDUSTRY NEWS ROUTES
+  // external routes
+  'get /industrynews': {
+    controller: "IndustryNewsPostController",
+    action: 'index'
   },
 
+  'get /industrynews/:id': {
+    controller: "IndustryNewsPostController",
+    action: 'showOne'
+  },
+
+  'get /industrynewsPost/new': {
+    controller: "IndustryNewsPostController",
+    action: 'newPost'
+  },
+
+  'post /industrynewsPost/new': {
+    controller: "IndustryNewsPostController",
+    action: 'createPost'
+  },
+
+  'get /industrynewsPost/edit/:id': {
+    controller: "IndustryNewsPostController",
+    action: 'edit'
+  },
+
+  'post /industrynewsPost/editpost': {
+    controller: "IndustryNewsPostController",
+    action: 'update'
+  },
+
+  'get /industrynewsPost/unpublish/:id': {
+    controller: "IndustryNewsPostController",
+    action: 'unpublish'
+  },
 
 // MARKETING BLOG ROUTES
   // external routes
@@ -110,6 +143,44 @@ module.exports.routes = {
 
   'get /newsPost/unpublish/:id': {
     controller: 'NewsPostController',
+    action: 'unpublish'
+  },
+
+// TRADESHOW LISTING ROUTES
+  // external routes
+  'get /tradeshows': {
+    controller: "TradeShowPostController",
+    action: 'index'
+  },
+
+  'get /tradeshows/:id': {
+    controller: "TradeShowPostController",
+    action: 'showOne'
+  },
+
+  // internal routes
+  'get /tradeshowPost/new': {
+    controller: "TradeShowPostController",
+    action: 'newPost'
+  },
+
+  'post /tradeshowPost/new': {
+    controller: "TradeShowPostController",
+    action: 'createPost'
+  },
+
+  'get /tradeshowPost/edit/:id': {
+    controller: "TradeShowPostController",
+    action: 'edit'
+  },
+
+  'post /tradeshowPost/editpost': {
+    controller: "TradeShowPostController",
+    action: 'update'
+  },
+
+  'get /tradeshowPost/unpublish/:id': {
+    controller: "TradeShowPostController",
     action: 'unpublish'
   },
 

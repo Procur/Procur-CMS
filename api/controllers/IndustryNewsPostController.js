@@ -15,16 +15,100 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
+var humanize = require('humanize');
+
+///////BEGIN UTILITY FUNCTIONS
+var boolify = function(obj){
+  if(obj == "true"){
+    obj = true;
+  }
+  else {
+    obj = false;
+  };
+  return obj;
+};
+///////END UTILITY FUNCTIONS
+
+
 module.exports = {
-    
-  
 
+  index: function(req, res){
+    IndustryNewsPost.find({ published: true }, function(err, posts){
+      if(err) return res.redirect('/');
+      res.view({ posts: posts });
+    });
+  },
 
-  /**
-   * Overrides for the settings in `config/controllers.js`
-   * (specific to IndustryNewsPostController)
-   */
-  _config: {}
+  showOne: function(req, res){
+    var id = req.param('id');
+    IndustryNewsPost.findOne({ id: id }, function(err, post){
+      if(err) return res.redirect('/');
+      res.view({ post: post });
+    })
+  },
 
-  
+  newPost: function(req, res){
+    res.view();
+  },
+
+  createPost: function(req, res){
+    var b = req.body;
+    var isPublished = boolify(b.published);
+
+    IndustryNewsPost.create({ title: b.title, content: b.content, published: isPublished }, function(err, post){
+      if (err){
+        req.flash("There was a problem. Try again.");
+        res.redirect('/industrynewsPost/new');
+      }
+      else {
+        req.flash("Post successfully created.")
+        if (isPublished == false){
+          res.redirect('/industrynewsPost/drafts');
+        }
+        else {
+          res.redirect('/industrynews');
+        }
+      }
+    });
+  },
+
+  edit: function(req, res){
+    var id = req.param('id');
+    IndustryNewsPost.findOne({ id: id }, function(err, post){
+      console.log(post);
+      res.view({ post: post });
+    });
+  },
+
+  update: function(req, res){
+    var b = req.body;
+    var isPublished = boolify(b.published);
+    IndustryNewsPost.findOne({ title: b.title }, function(err, post){
+      if(err) return res.redirect('/');
+      IndustryNewsPost.update(post, { title: b.title, content: b.content, published: isPublished }, function(err, post){
+        var id = post[0].id;
+        if(err) return res.redirect('/');
+        req.flash("Post updated.");
+        if (isPublished == true){
+          res.redirect('/industrynews/' + id);
+        }
+        else {
+          res.redirect('/industrynewsPosts/drafts');
+        }
+      });
+    });
+  },
+
+  unpublish: function(req, res){
+    var id = req.param('id');
+    IndustryNewsPost.findOne({ id: id }, function(err, post){
+      if(err) return res.redirect('/industrynewsPost/edit/' + id);
+      IndustryNewsPost.update(post, { published: false }, function(err, post){
+        if(err) return res.redirect('/industrynewsPost/edit/' + id);
+        req.flash('Post unpublished.');
+        res.redirect('/industrynewsPosts/drafts');
+      });
+    });
+  }
+
 };

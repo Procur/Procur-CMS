@@ -9,11 +9,27 @@
 module.exports = {
 
   attributes: {
-  	
-  	/* e.g.
-  	nickname: 'string'
-  	*/
-    
+
+    title: {
+      type: 'string',
+      required: true,
+      unique: true
+    },
+    content: {
+      type: 'text',
+      required: 'true'
+    },
+    images: {
+      type: 'json',
+    },
+    published: {
+      type: 'boolean',
+      required: 'true'
+    },
+    thumbnail: {
+      type: 'json'
+    }
+
   }
 
 };
