@@ -87,9 +87,12 @@ module.exports = {
   update: function(req, res){
     var b = req.body;
     var isPublished = boolify(b.published);
-    MarketingPost.findOne({ title: b.title }, function(err, post){
-      if(err) return res.redirect('/');
-      MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished }, function(err, post){
+
+    cloudinary.uploader.upload(req.files.image.path, function(result){
+      console.log(result.url);
+      MarketingPost.findOne({ title: b.title }, function(err, post){
+        if(err) return res.redirect('/');
+      MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url }, function(err, post){
         var id = post[0].id;
         if(err) return res.redirect('/');
         req.flash("Post updated.");
@@ -101,6 +104,7 @@ module.exports = {
         }
       });
     });
+  },{ width: 150, height: 150 });
   },
 
   unpublish: function(req, res){
