@@ -14,6 +14,8 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
+var humanize = require('humanize');
+var cloudinary = require('cloudinary');
 
 //////BEGIN UTILITY FUNCTIONS
 var boolify = function(obj){
@@ -53,7 +55,11 @@ module.exports = {
     var b = req.body;
     var isPublished = boolify(b.published)
 
-    NewsPost.create({ title: b.title, content: b.content, published: isPublished }, function(err, post){
+  cloudinary.uploader.upload(req.files.image.path, function(result){
+    console.log(result.url);
+
+
+    NewsPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url }, function(err, post){
       if (err){
         req.flash("There was a problem. Try again.");
         res.redirect('/newsPost/new');
@@ -68,6 +74,7 @@ module.exports = {
         }
       }
     });
+  },{ width: 150, height: 150 });
   },
 
   edit: function(req,res){
@@ -80,9 +87,12 @@ module.exports = {
   update: function(req, res){
     var b = req.body;
     var isPublished = boolify(b.published);
+
+    cloudinary.uploader.upload(req.files.image.path, function(result){
+      console.log(result.url);
     NewsPost.findOne({ title: b.title }, function(err, post){
       if(err) return res.redirect('/');
-      NewsPost.update(post, { title: b.title, content: b.content, published: isPublished }, function(err, post){
+      NewsPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url }, function(err, post){
         var id = post[0].id;
         if(err) return res.redirect('/');
         req.flash("Post updated.");
@@ -94,6 +104,7 @@ module.exports = {
         }
       });
     });
+  },{ width: 150, height: 150 });
   },
 
   unpublish: function(req,res){
