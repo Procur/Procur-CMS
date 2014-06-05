@@ -16,6 +16,7 @@
  */
 
 var humanize = require('humanize');
+var cloudinary = require('cloudinary');
 
 ///////BEGIN UTILITY FUNCTIONS
 var boolify = function(obj){
@@ -55,7 +56,11 @@ module.exports = {
     var b = req.body;
     var isPublished = boolify(b.published);
 
-    IndustryNewsPost.create({ title: b.title, content: b.content, published: isPublished }, function(err, post){
+cloudinary.uploader.upload(req.files.image.path, function(result){
+  console.log(result.url);
+
+
+    IndustryNewsPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url }, function(err, post){
       if (err){
         req.flash("There was a problem. Try again.");
         res.redirect('/industrynewsPost/new');
@@ -70,6 +75,7 @@ module.exports = {
         }
       }
     });
+  },{ width: 150, height: 150 });
   },
 
   edit: function(req, res){
@@ -83,9 +89,13 @@ module.exports = {
   update: function(req, res){
     var b = req.body;
     var isPublished = boolify(b.published);
+
+    cloudinary.uploader.upload(req.files.image.path, function(result){
+      console.log(result.url);
+
     IndustryNewsPost.findOne({ title: b.title }, function(err, post){
       if(err) return res.redirect('/');
-      IndustryNewsPost.update(post, { title: b.title, content: b.content, published: isPublished }, function(err, post){
+      IndustryNewsPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url }, function(err, post){
         var id = post[0].id;
         if(err) return res.redirect('/');
         req.flash("Post updated.");
@@ -97,6 +107,7 @@ module.exports = {
         }
       });
     });
+  },{ width: 150, height: 150 });
   },
 
   unpublish: function(req, res){
@@ -106,7 +117,7 @@ module.exports = {
       IndustryNewsPost.update(post, { published: false }, function(err, post){
         if(err) return res.redirect('/industrynewsPost/edit/' + id);
         req.flash('Post unpublished.');
-        res.redirect('/industrynewsPosts/drafts');
+        res.redirect('/industrynews/');
       });
     });
   }

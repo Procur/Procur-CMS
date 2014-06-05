@@ -5,5 +5,8 @@
     <div><a href="/industrynews/<%= post.id %>"><h3><%= post.title %></h3></a></div>
     <div><strong>Posted: <%= post.createdAt %></strong></div>
     <div><p><%= post.content %></p></div>
+    <div><img src="<%= post.images %>"></div>
   <% } %>
 <% }); %>
+
+<a href="/industrynewsPost/new">Create New Post</a>
