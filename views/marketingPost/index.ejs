@@ -1,9 +1,12 @@
-<h1>Marketing Blog</h1>
+<h1>Marketing Blog</h1><hr>
 
 <% posts.forEach(function(post){ %>
   <% if(post.published == true){ %>
     <div><a href="/marketingblog/<%= post.id %>"><h3><%= post.title %></h3></a></div>
     <div><strong>Posted: <%= post.createdAt %></strong></div>
     <div><p><%= post.content %></p></div>
+    <div><img src="<%= post.images %>"></div>
   <% } %>
 <% }); %>
+
+<a href="/marketingPost/new">Create New Post</a>

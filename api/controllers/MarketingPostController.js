@@ -43,6 +43,7 @@ module.exports = {
     var id = req.param('id');
     MarketingPost.findOne({ id: id }, function(err, post){
       if(err) return res.redirect('/');
+      console.log(MarketingPost.published)
       res.view({ post: post });
     })
   },
@@ -72,7 +73,7 @@ module.exports = {
           }
         }
       });
-    });
+    },{ width: 150, height: 150 });
   },
 
   edit: function(req, res){
@@ -109,7 +110,7 @@ module.exports = {
       MarketingPost.update(post, { published: false }, function(err, post){
         if(err) return res.redirect('/marketingPost/edit/' + id);
         req.flash('Post unpublished.');
-        res.redirect('/marketingPosts/drafts');
+        res.redirect('/marketingblog');
       });
     });
   }

@@ -3,10 +3,11 @@
 <% posts.forEach(function(post){ %>
   <% if(post.published == true){ %>
     <div><a href="/tradeshows/<%= post.id %>"><h3><%= post.title %></h3></a></div>
-    <div><strong>Date of Show: <%= post.date %></strong></div>
-    <div><strong>Location of Show: <%= post.location %></strong></div>
-    <div><strong>Website of Show: <%= post.website %></strong></div>
-    <div><strong>Posted: <%= post.createdAt %></strong></div>
+    <div><strong>Date: <%= post.date %></strong></div>
+    <div><strong>Location: <%= post.location %></strong></div>
+    <div><strong>Website: <a href="<%= post.website %>"><%= post.website %></a></strong></div>
     <div><p><%= post.content %></p></div>
   <% } %>
 <% }); %>
+
+<a href="/tradeshowPost/new">Create New Post</a>

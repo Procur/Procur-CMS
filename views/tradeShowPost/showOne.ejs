@@ -1,10 +1,12 @@
 <% if(post.published == true){ %>
-  <div><h1><%= post.date %></h1></div>
-  <div><h1><%= post.location %></h1></div>
-  <div><h1><%= post.website %></h1></div>
-  <div><h1><%= post.title %></h1></div>
-  <div><strong>Posted: <%= post.createdAt %></strong></div>
+  <div><strong><h1><%= post.title %></h1></strong></div>
+  <div><%= post.date %></div>
+  <div><%= post.location %></div>
+  <div><%= post.website %></div>
+
   <div><p><%= post.content %></p></div>
 <% } %>
 
 <a href="/tradeshows">Home</a>
+<a href="/tradeshowPost/edit/<%= post.id %>">Edit</a>
+<a href="/tradeshowPost/unpublish/<%= post.id %>">Unpublish</a>

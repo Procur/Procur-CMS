@@ -18,8 +18,13 @@
 
       You can link any CSS, LESS, or image files in your `assets` directory
       as you would normally: using <link/> tags.
-      
+
     -->
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src='/js/jquery.ui.widget.js' type='text/javascript'></script>
+<script src='/js/jquery.iframe-transport.js' type='text/javascript'></script>
+<script src='/js/jquery.fileupload.js' type='text/javascript'></script>
+<script src='/js/jquery.cloudinary.js' type='text/javascript'></script>-->
 
     <!--
 
@@ -30,7 +35,7 @@
       located in the top-level of this Sails app.  If you run into issues with styles
       not reloading, check the Sails log output in your console for LESS compilation errors.
       If necessary, shut down and then lift your app again.
-      
+
     -->
 
   </head>
@@ -46,21 +51,31 @@
       Client-side Javascript
       ========================
 
-      You can import any js files in your `assets` directory as you would 
+      You can import any js files in your `assets` directory as you would
       normally: using <script></script> tags.
 
       Here's an example of importing a few dependencies, in order:
     -->
     <!-- Bring in the socket.io client -->
+
+
+
+
     <script type="text/javascript" src="/js/socket.io.js"></script>
     <!-- then beef it up with some convenience logic for talking to Sails.js -->
     <script type="text/javascript" src="/js/sails.io.js"></script>
     <!-- listen on socket.io for incoming messages -->
     <script type="text/javascript" src="/js/app.js"></script>
 
+    <!-- OUR SHIT-->
+
     <!-- Your scripts here? -->
     <!-- Your scripts here? -->
     <!-- Your scripts here? -->
+    <!--<script>$(document).ready(function(){
+        $("h1").text("jquery overwriting h1");
+    });
+  </script>-->
 
 
     <!--
@@ -82,7 +97,7 @@
       Another way: The Asset Linker
       ========================
 
-      Sails supports a Grunt-based asset linker, to automatically inject 
+      Sails supports a Grunt-based asset linker, to automatically inject
       <link> and <script> tags, as well any client-side templates you're using
       into your HTML layouts and views, respecting dependencies.
 
