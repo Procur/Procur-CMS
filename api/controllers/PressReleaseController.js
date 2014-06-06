@@ -1,5 +1,7 @@
 
 var humanize = require('humanize');
+var slug = require('slug');
+var print = console.log.bind(console,'>');
 
 //UTILITY
 var boolify = function(obj){
@@ -24,6 +26,7 @@ module.exports = {
     },
 
     showOne: function(req, res){
+      console.log('in SHOWONE action');
       var id = req.param('id');
       PressRelease.findOne({ id: id }, function(err, post){
         if(err) return res.redirect('/');
@@ -39,9 +42,11 @@ module.exports = {
       var b = req.body;
       var isPublished = boolify(b.published);
 
+
       console.log("in CREATEPOST controller");
-      PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract, published: isPublished }, function(err,post){
-        console.log(post.title);
+      PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase() }, function(err,post){
+
+        console.log(post);
         if (err){
           req.flash("There was a problem. Try again.");
           res.redirect("/pressRelease/new");

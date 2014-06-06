@@ -43,7 +43,7 @@ module.exports.routes = {
     action: "index"
   },
 
-  'get /pressreleases/:id': {
+  'get /pressreleases/:slug': {
     controller: "PressReleaseController",
     action: "showOne"
   },

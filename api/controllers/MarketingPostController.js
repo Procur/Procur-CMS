@@ -91,8 +91,9 @@ module.exports = {
     var isPublished = boolify(b.published);
 
     cloudinary.uploader.upload(req.files.image.path, function(result){
-      console.log(result.url);
+      console.log('test1');
       MarketingPost.findOne({ title: b.title }, function(err, post){
+        console.log('test2');
         if(err) return res.redirect('/');
       MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url }, function(err, post){
         var id = post[0].id;

@@ -10,11 +10,11 @@ module.exports = {
       required: true,
       unique: true
     },
-    /*slug: {
+    slug: {
       type: 'string',
       required: false,
       unique: true
-    },*/
+    },
     abstract: {
       type: 'string',
       required: true,
