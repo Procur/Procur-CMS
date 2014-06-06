@@ -1,10 +1,11 @@
 <h1>Edit Trade Show Listing</h1>
 
 <section id="editTradeShowPostForm">
-  <form action="/tradeshowPost/editpost" method="post">
+  <form action="/tradeshowPost/editpost" method="post" enctype="multipart/form-data">
     <div><input type="text" name="title" size="70" value="<%= post.title %>"></div>
     <div><textarea name="content" rows="30" cols="50"><%= post.content %></textarea></div>
     <div><input type="checkbox" name="published" value="true">Publish now?</div>
+    <p>Change current image?: <input type="file" name="image" /></p>
     <div><input type="submit"</div>
   </form>
 </section>

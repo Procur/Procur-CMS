@@ -14,6 +14,8 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
+var humanize = require('humanize');
+var cloudinary = require('cloudinary');
 
 ///////BEGIN UTILITY FUNCTIONS
 var boolify = function(obj){
@@ -54,7 +56,10 @@ module.exports = {
     var b = req.body;
     var isPublished = boolify(b.published);
 
-    TradeShowPost.create({ title: b.title, content: b.content, date: b.date, location: b.location, website: b.website, published: isPublished }, function(err, post){
+    cloudinary.uploader.upload(req.files.image.path, function(result){
+      console.log(result.url);
+
+    TradeShowPost.create({ title: b.title, content: b.content, date: b.date, location: b.location, website: b.website, published: isPublished, images: result.url }, function(err, post){
       if (err){
         req.flash("There was a problem. Try again.");
         res.redirect('/tradeshowPost/new');
@@ -69,6 +74,7 @@ module.exports = {
         }
       }
     });
+  },{ width: 150, height: 150 });
   },
 
   edit: function(req, res){
@@ -82,9 +88,13 @@ module.exports = {
   update: function(req, res){
     var b = req.body;
     var isPublished = boolify(b.published);
+
+    cloudinary.uploader.upload(req.files.image.path, function(result){
+      console.log(result.url);
+
     TradeShowPost.findOne({ title: b.title }, function(err, post){
       if(err) return res.redirect('/');
-      TradeShowPost.update(post, { title: b.title, content: b.content, published: isPublished }, function(err, post){
+      TradeShowPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url }, function(err, post){
         var id = post[0].id;
         if(err) return res.redirect('/');
         req.flash("Post updated.");
@@ -96,6 +106,7 @@ module.exports = {
         }
       });
     });
+  },{ width: 150, height: 150 });
   },
 
   unpublish: function(req, res){
@@ -105,7 +116,7 @@ module.exports = {
       TradeShowPost.update(post, { published: false }, function(err, post){
         if(err) return res.redirect('/tradeshowPost/edit/' + id);
         req.flash('Post unpublished.');
-        res.redirect('/tradingshowPosts/drafts');
+        res.redirect('/tradeshows');
       });
     });
   },

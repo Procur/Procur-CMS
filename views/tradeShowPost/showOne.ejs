@@ -3,10 +3,10 @@
   <div><%= post.date %></div>
   <div><%= post.location %></div>
   <div><%= post.website %></div>
-
   <div><p><%= post.content %></p></div>
+  <div><img src="<%= post.images %>"></div>
 <% } %>
 
 <a href="/tradeshows">Home</a>
-<a href="/tradeshowPost/edit/<%= post.id %>">Edit</a>
 <a href="/tradeshowPost/unpublish/<%= post.id %>">Unpublish</a>
+<a href="/tradeshowPost/edit/<%= post.id %>">Edit</a>

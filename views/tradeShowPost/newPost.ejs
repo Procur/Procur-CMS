@@ -1,13 +1,14 @@
 <h1>New Trade Show Listing</h1>
 
 <section id="tradeshowPostForm">
-  <form action="/tradeshowPost/new" method="post">
+  <form action="/tradeshowPost/new" method="post" enctype="multipart/form-data">
     <div><input type="text" name="title" placeholder="Title of Show" size="70"></div>
     <div><input type="text" name="date" placeholder="Date of Show" size="70"></div>
     <div><input type="text" name="location" placeholder="Location of Show" size="70"></div>
     <div><input type="text" name="website" placeholder="Website of Show" size="70"></div>
     <div><textarea name="content" rows="20" cols="50" placeholder="Content"></textarea></div>
     <div><input type="checkbox" name="published" value="true">Publish now?</div>
+    <p>Image: <input type="file" name="image" /></p>
     <div><input type="submit"</div>
   </form>
 </section>
