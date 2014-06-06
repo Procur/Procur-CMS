@@ -57,7 +57,7 @@ module.exports = {
     var isPublished = boolify(b.published);
 
     cloudinary.uploader.upload(req.files.image.path, function(result){
-      console.log(result.url);
+      console.log(req.files.image.path);
 
       MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url }, function(err, post){
         console.log(post.title);

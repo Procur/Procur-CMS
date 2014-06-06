@@ -1,8 +1,9 @@
 
 <% if(post.published == true){ %>
   <div><h1><%= post.title %></h1></div>
-
-  <div><p><%= post.content %></p><div>
+  <div><p><%= post.createdAt %></p></div>
+  <div><p><%= post.abstract %></p></div>
+  <div><p><%= post.content %></p></div>
 <% } %>
 
 <a href="/pressreleases">Home</a>

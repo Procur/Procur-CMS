@@ -27,8 +27,8 @@ module.exports = {
 
     showOne: function(req, res){
       console.log('in SHOWONE action');
-      var id = req.param('id');
-      PressRelease.findOne({ id: id }, function(err, post){
+      var slug = req.param('slug');
+      PressRelease.findOne({ slug: slug }, function(err, post){
         if(err) return res.redirect('/');
         res.view({ post: post });
       })

@@ -16,7 +16,7 @@ module.exports = {
       unique: true
     },
     abstract: {
-      type: 'string',
+      type: 'text',
       required: true,
       unique: false
     },
