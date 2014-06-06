@@ -33,6 +33,48 @@ module.exports.routes = {
   //
   // (This would also work if you had a file at: `/views/home.ejs`)
 
+
+// PRESS RELEASE & MEDIA
+
+  //external routes
+
+  'get /pressreleases': {
+    controller: "PressReleaseController",
+    action: "index"
+  },
+
+  'get /pressreleases/:id': {
+    controller: "PressReleaseController",
+    action: "showOne"
+  },
+
+  //internal routes
+
+  'get /pressRelease/new': {
+    controller: "PressReleaseController",
+    action: "newPost"
+  },
+
+  'post /pressRelease/new': {
+    controller: "PressReleaseController",
+    action: "createPost"
+  },
+
+  'get /pressRelease/edit/:id': {
+    controller: "PressReleaseController",
+    action: "edit"
+  },
+
+  "post /pressRelease/editpost": {
+    controller: "PressReleaseController",
+    action: "update"
+  },
+
+  "get /pressRelease/unpublish/:id": {
+    controller: "PressReleaseController",
+    action: "unpublish"
+  },
+
 //INDUSTRY NEWS ROUTES
   // external routes
   'get /industrynews': {
@@ -44,6 +86,8 @@ module.exports.routes = {
     controller: "IndustryNewsPostController",
     action: 'showOne'
   },
+
+  // internal routes
 
   'get /industrynewsPost/new': {
     controller: "IndustryNewsPostController",
@@ -237,7 +281,7 @@ module.exports.routes = {
   'post /signup': 'UserController.signup'
 
 
-  // What about the ever-popular "vanity URLs" aka URL slugs?
+  // What about the ever-popular "vanity URLs" aka URLs?
   // (you might remember doing this with `mod_rewrite` in Apache)
   //
   // This is where you want to set up root-relative dynamic routes like:

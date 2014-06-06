@@ -58,7 +58,9 @@ module.exports = {
 
     cloudinary.uploader.upload(req.files.image.path, function(result){
       console.log(result.url);
+
       MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url }, function(err, post){
+        console.log(post.title);
         if (err){
           req.flash("There was a problem. Try again.");
           res.redirect('/marketingPost/new');

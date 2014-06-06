@@ -1,0 +1,13 @@
+<h1>Press Release and Media</h1>
+
+<hr>
+
+<% posts.forEach(function(post){ %>
+  <% if(post.published == true){ %>
+  <div><a href="/pressreleases/<%= post.slug %>"><h3><%= post.title %></h3></a></div>
+  <div><strong>Date Released: <%= post.createdAt %></strong></div>
+  <div><p><%= post.abstract %></p></div>
+ <% } %>
+<% }); %>
+
+ <a href="/pressRelease/new">Create New Press Release</a>

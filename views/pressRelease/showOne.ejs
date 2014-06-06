@@ -1,0 +1,10 @@
+
+<% if(post.published == true){ %>
+  <div><h1><%= post.title %></h1></div>
+
+  <div><p><%= post.content %></p><div>
+<% } %>
+
+<a href="/pressreleases">Home</a>
+<a href="/pressRelease/unpublish/<%= post.slug %>">Unpublish</a>
+<a href="/pressRelease/edit/<%= post.slug %>">Edit</a>
