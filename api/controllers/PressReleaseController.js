@@ -2,6 +2,7 @@
 var humanize = require('humanize');
 var slug = require('slug');
 var print = console.log.bind(console,'>');
+var url = require('url');
 
 //UTILITY
 var boolify = function(obj){
@@ -18,16 +19,19 @@ var boolify = function(obj){
 module.exports = {
 
     index: function(req, res){
-      console.log("in INDEX action");
-      PressRelease.find({ published: true }, function(err, posts){
+      var query = url.parse(req.url, true).query;
+      var pageNumber = query['page'];
+
+
+      PressRelease.find({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
         if(err) return res.redirect('/');
-        res.view({ posts: posts});
-      });
+          res.view({posts: posts});
+        });
     },
 
     showOne: function(req, res){
-      console.log('in SHOWONE action');
       var slug = req.param('slug');
+      console.log(slug);
       PressRelease.findOne({ slug: slug }, function(err, post){
         if(err) return res.redirect('/');
         res.view({ post: post });
@@ -91,11 +95,11 @@ module.exports = {
     },
 
     unpublish: function(req, res){
-      var id = req.param('id');
-      PressRelease.findOne({ id: id }, function(err, post){
-        if(err) return res.redirect('/pressRelease/edit' + id);
+      var slug = req.param('slug');
+      PressRelease.findOne({ slug: slug }, function(err, post){
+        if(err) return res.redirect('/pressRelease/edit/' + slug);
         PressRelease.update(post, { published: false}, function(err, post){
-          if(err) return res.redirect('/pressRelease/edit' + id);
+          if(err) return res.redirect('/pressRelease/edit/' + slug);
           req.flash('Post unpublished.');
           res.redirect('/pressreleases')
         });

@@ -6,6 +6,13 @@
   <div><p><%= post.content %></p></div>
 <% } %>
 
+<form method="get" action="file.doc">
+<button type="submit">Download the Zip!</button>
+</form>
+<form method="get" action="file.doc">
+<button type="submit">Download the PDF!</button>
+</form>
+
 <a href="/pressreleases">Home</a>
 <a href="/pressRelease/unpublish/<%= post.slug %>">Unpublish</a>
 <a href="/pressRelease/edit/<%= post.slug %>">Edit</a>

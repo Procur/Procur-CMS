@@ -1,8 +1,7 @@
 
 
 module.exports = {
-
-
+  
   attributes: {
 
     title: {
@@ -30,4 +29,5 @@ module.exports = {
     }
 
   }
+
 };

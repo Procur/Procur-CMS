@@ -38,7 +38,12 @@ module.exports.routes = {
 
   //external routes
 
-  'get /pressreleases': {
+  //'get /pressreleases' : {
+  //  controller: "PressReleaseController",
+  //  action: "index"
+  //},
+
+  'get /pressreleases?:querystring': {
     controller: "PressReleaseController",
     action: "index"
   },
