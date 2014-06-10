@@ -11,3 +11,44 @@
 <% }); %>
 
  <a href="/pressRelease/new">Create New Press Release</a>
+
+<script>
+
+   function nextPageFire(){
+     var a = document.createElement('a');
+     a.href = '';
+     if (a.href == 'http://localhost:1337/pressreleases'){
+     a.href = '/pressreleases?page=2';
+     } else {
+     var pageNumber = a.search.replace( /^\D+/g, '');
+     a.href = '/pressreleases?page='+(parseInt(pageNumber)+1);
+     }
+     //a.innerHTML = "NEXT PAGE";
+     //document.body.appendChild(a);
+     return a.href;
+   }
+
+   function previousPageFire(){
+     var a = document.createElement('a');
+     a.href = '';
+     if (a.href == 'http://localhost:1337/pressreleases'){
+     return
+     } else {
+     var pageNumber = a.search.replace( /^\D+/g, '');
+     a.href = '/pressreleases?page='+(parseInt(pageNumber)-1);
+     }
+     return a.href;
+   }
+
+function nextPage(){
+  window.location = nextPageFire();
+}
+
+function previousPage(){
+  window.location = previousPageFire();
+}
+
+</script>
+
+<a href="#" onclick="nextPage(); return false;">NEXT</a>
+<a href="#" onclick="previousPage(); return false;">PREVIOUS</a>

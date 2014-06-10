@@ -65,7 +65,7 @@ module.exports.routes = {
     action: "createPost"
   },
 
-  'get /pressRelease/edit/:id': {
+  'get /pressRelease/edit/:slug': {
     controller: "PressReleaseController",
     action: "edit"
   },
@@ -75,7 +75,7 @@ module.exports.routes = {
     action: "update"
   },
 
-  "get /pressRelease/unpublish/:id": {
+  "get /pressRelease/unpublish/:slug": {
     controller: "PressReleaseController",
     action: "unpublish"
   },
