@@ -14,7 +14,7 @@
 
 <script>
 
-   function nextPageFire(){
+function nextPageFire(){
      var a = document.createElement('a');
      a.href = '';
      if (a.href == 'http://localhost:1337/pressreleases'){
@@ -26,9 +26,9 @@
      //a.innerHTML = "NEXT PAGE";
      //document.body.appendChild(a);
      return a.href;
-   }
+}
 
-   function previousPageFire(){
+function previousPageFire(){
      var a = document.createElement('a');
      a.href = '';
      if (a.href == 'http://localhost:1337/pressreleases'){
@@ -38,7 +38,7 @@
      a.href = '/pressreleases?page='+(parseInt(pageNumber)-1);
      }
      return a.href;
-   }
+}
 
 function nextPage(){
   window.location = nextPageFire();

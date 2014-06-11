@@ -16,6 +16,7 @@
  */
 var humanize = require('humanize');
 var cloudinary = require('cloudinary');
+var url = require('url');
 
 ///////BEGIN UTILITY FUNCTIONS
 var boolify = function(obj){
@@ -33,7 +34,10 @@ var boolify = function(obj){
 module.exports = {
 
   index: function(req, res){
-    MarketingPost.find({ published: true }, function(err, posts){
+    var query = url.parse(req.url, true).query;
+    var pageNumber = query['page'];
+
+    MarketingPost.find({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
       if(err) return res.redirect('/');
       res.view({ posts: posts });
     });

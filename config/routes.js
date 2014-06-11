@@ -121,7 +121,7 @@ module.exports.routes = {
 
 // MARKETING BLOG ROUTES
   // external routes
-  'get /marketingblog': {
+  'get /marketingblog?:querystring': {
     controller: "MarketingPostController",
     action: 'index'
   },

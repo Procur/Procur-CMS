@@ -4,6 +4,7 @@ var slug = require('slug');
 var print = console.log.bind(console,'>');
 var url = require('url');
 
+
 //UTILITY
 var boolify = function(obj){
   if(obj == "true"){
@@ -45,26 +46,30 @@ module.exports = {
     createPost: function(req, res){
       var b = req.body;
       var isPublished = boolify(b.published);
-
-
       console.log("in CREATEPOST controller");
-      PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase() }, function(err,post){
-
-        console.log(post);
-        if (err){
-          req.flash("There was a problem. Try again.");
-          res.redirect("/pressRelease/new");
-        }
-        else {
-          req.flash("Post successfully created.")
-          if(isPublished == false){
-            res.redirect("/pressRelease/drafts");
+      console.log(req.files);
+        req.files.upload(function (err, files){
+          if (err) return res.serverError(err);
+          return res.json({
+            message: files.length + 'file(s) uploaded successfully!',
+            files: files
+          });
+        });
+        PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase() }, function(err,post){
+          if (err){
+            req.flash("There was a problem. Try again.");
+            res.redirect("/pressRelease/new");
           }
           else {
-            res.redirect("/pressreleases");
+            req.flash("Post successfully created.")
+            if(isPublished == false){
+              res.redirect("/pressRelease/drafts");
+            }
+            else {
+              res.redirect("/pressreleases");
+            }
           }
-        }
-      });
+        });
     },
 
     edit: function(req, res){
@@ -104,6 +109,6 @@ module.exports = {
           res.redirect('/pressreleases')
         });
       });
-    }
+    },
 
 };
