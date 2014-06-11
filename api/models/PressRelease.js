@@ -1,7 +1,7 @@
 
 
 module.exports = {
-  
+
   attributes: {
 
     title: {
@@ -26,6 +26,9 @@ module.exports = {
     published: {
       type: 'boolean',
       required: 'true'
+    },
+    zip: {
+      type: 'string'
     }
 
   }

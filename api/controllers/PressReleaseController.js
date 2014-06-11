@@ -3,7 +3,10 @@ var humanize = require('humanize');
 var slug = require('slug');
 var print = console.log.bind(console,'>');
 var url = require('url');
-
+var fsx = require('fs-extra');
+var MultiPartUpload = require('knox-mpu');
+var knox = require('knox');
+var UUIDGenerator = require('node-uuid');
 
 //UTILITY
 var boolify = function(obj){
@@ -44,18 +47,72 @@ module.exports = {
     },
 
     createPost: function(req, res){
+
+      //////////S3 RECEIVER///////////
+      function newReceiverStream(options) {
+
+        // These credentials can be fetched from options:
+        var S3_API_KEY = 'AKIAIPCUDSE5TKUQFEEA';
+        var S3_API_SECRET = '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';
+        var S3_BUCKET = 'procurPressMedia';
+
+        var log = console.log;
+
+        var Writable = require('stream').Writable;
+        var receiver__ = Writable({
+          objectMode: true
+        });
+        var client = knox.createClient({
+          key: S3_API_KEY,
+          secret: S3_API_SECRET,
+          bucket: S3_BUCKET
+        });
+
+        receiver__._write = function onFile(__newFile, encoding, next) {
+
+          // Create a unique(?) filename
+          var fsName = UUIDGenerator.v1();
+          log(('Receiver: Received file `' + __newFile.filename + '` from an Upstream.').grey);
+
+          var mpu = new MultiPartUpload({
+            client: client,
+            objectName: fsName,
+            stream: __newFile,
+            maxUploadSize: options.maxBytes
+          }, function(err, body) {
+            if (err) {
+              log(('Receiver: Error writing `' + __newFile.filename + '`:: ' + require('util').inspect(err) + ' :: Cancelling upload and cleaning up already-written bytes...').red);
+              receiver__.emit('error', err);
+              return;
+            }
+            __newFile.extra = body;
+            __newFile.extra.fsName = fsName;
+
+            log(('Receiver: Finished writing `' + __newFile.filename + '`').grey);
+            next();
+          });
+
+          mpu.on('progress', function(data) {
+            receiver__.emit('progress', {
+              name: __newFile.filename,
+              written: data.written,
+              total: data.total,
+              percent: data.percent
+            });
+          });
+
+        };
+
+        return receiver__;
+      };
+
+      ///////FIRE UPLOAD/////
+      var exampleZip = '/Users/treyschneider/Downloads/jquery-validation-1.12.0.zip'
       var b = req.body;
       var isPublished = boolify(b.published);
-      console.log("in CREATEPOST controller");
-      console.log(req.files);
-        req.files.upload(function (err, files){
-          if (err) return res.serverError(err);
-          return res.json({
-            message: files.length + 'file(s) uploaded successfully!',
-            files: files
-          });
-        });
-        PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase() }, function(err,post){
+
+      req.file('zip').upload( newReceiverStream(exampleZip), function (result) {
+        PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), zip: b.zip }, function(err,post){
           if (err){
             req.flash("There was a problem. Try again.");
             res.redirect("/pressRelease/new");
@@ -70,7 +127,11 @@ module.exports = {
             }
           }
         });
+      });
     },
+
+
+
 
     edit: function(req, res){
       var id = req.param('id');
