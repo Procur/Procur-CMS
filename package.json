@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "description": "a Sails application",
   "dependencies": {
+    "aws-sdk": "^2.0.0-rc.19",
     "cloudinary": "^1.0.9",
     "ejs": "0.8.4",
     "fs-extra": "^0.9.1",

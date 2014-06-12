@@ -29,6 +29,9 @@ module.exports = {
     },
     zip: {
       type: 'string'
+    },
+    pdf: {
+      type: 'string'
     }
 
   }

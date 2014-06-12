@@ -6,10 +6,11 @@
   <div><p><%= post.content %></p></div>
 <% } %>
 
-<form method="get" action="file.doc">
+<!--
+<form action="/pressRelease/download/<%= post.slug %>" method="get" >
 <button type="submit">Download the Zip!</button>
 </form>
-
+-->
 
 <a href="/pressreleases">Home</a>
 <a href="/pressRelease/unpublish/<%= post.slug %>">Unpublish</a>

@@ -7,6 +7,8 @@ var fsx = require('fs-extra');
 var MultiPartUpload = require('knox-mpu');
 var knox = require('knox');
 var UUIDGenerator = require('node-uuid');
+var AWS = require('aws-sdk');
+var fs = require('fs');
 
 //UTILITY
 var boolify = function(obj){
@@ -39,6 +41,7 @@ module.exports = {
       PressRelease.findOne({ slug: slug }, function(err, post){
         if(err) return res.redirect('/');
         res.view({ post: post });
+        console.log(post);
       })
     },
 
@@ -47,10 +50,10 @@ module.exports = {
     },
 
     createPost: function(req, res){
-
+      /*
       //////////S3 RECEIVER///////////
       function newReceiverStream(options) {
-
+        console.log('1');
         // These credentials can be fetched from options:
         var S3_API_KEY = 'AKIAIPCUDSE5TKUQFEEA';
         var S3_API_SECRET = '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';
@@ -69,25 +72,28 @@ module.exports = {
         });
 
         receiver__._write = function onFile(__newFile, encoding, next) {
-
+          console.log('2');
           // Create a unique(?) filename
           var fsName = UUIDGenerator.v1();
           log(('Receiver: Received file `' + __newFile.filename + '` from an Upstream.').grey);
-
+          console.log('3');
           var mpu = new MultiPartUpload({
             client: client,
             objectName: fsName,
             stream: __newFile,
             maxUploadSize: options.maxBytes
+
           }, function(err, body) {
+            console.log('4');
             if (err) {
               log(('Receiver: Error writing `' + __newFile.filename + '`:: ' + require('util').inspect(err) + ' :: Cancelling upload and cleaning up already-written bytes...').red);
               receiver__.emit('error', err);
               return;
             }
+          console.log('5');
             __newFile.extra = body;
             __newFile.extra.fsName = fsName;
-
+          console.log('6');
             log(('Receiver: Finished writing `' + __newFile.filename + '`').grey);
             next();
           });
@@ -107,27 +113,35 @@ module.exports = {
       };
 
       ///////FIRE UPLOAD/////
-      var exampleZip = '/Users/treyschneider/Downloads/jquery-validation-1.12.0.zip'
+      console.log("here1");
+      var exampleZip = '/Users/treyschneider/Downloads/jquery-validation-1.12.0.zip'*/
       var b = req.body;
       var isPublished = boolify(b.published);
 
-      req.file('zip').upload( newReceiverStream(exampleZip), function (result) {
-        PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), zip: b.zip }, function(err,post){
-          if (err){
-            req.flash("There was a problem. Try again.");
-            res.redirect("/pressRelease/new");
-          }
-          else {
-            req.flash("Post successfully created.")
-            if(isPublished == false){
-              res.redirect("/pressRelease/drafts");
-            }
-            else {
-              res.redirect("/pressreleases");
-            }
-          }
-        });
-      });
+        //  req.file('zip').upload( newReceiverStream(exampleZip), function (err, result1) {
+        //if (err) return res.serverError(err);
+        //console.log(result1);
+        //  req.file('pdf').upload( newReceiverStream(exampleZip), function (err, result2){
+        //    if (err) return res.serverError(err);
+        //    console.log(result2);
+              PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase()/*, zip: result1[0].extra.Location, pdf: result2[0].extra.Location*/ }, function(err,post){
+                if (err){
+                  req.flash("There was a problem. Try again.");
+                  res.redirect("/pressRelease/new");
+                }
+                else {
+                  req.flash("Post successfully created.")
+                  if(isPublished == false){
+                    res.redirect("/pressRelease/drafts");
+                  }
+                  else {
+                    res.redirect("/pressreleases");
+                  }
+                }
+              console.log(post);
+              });
+        //  });
+        //});
     },
 
 
@@ -171,5 +185,16 @@ module.exports = {
         });
       });
     },
+
+
+//////////FIX S3 DOWNLOAD PERMISSIONS///////
+   /* download: function(req,res){
+        console.log("DOWNLOADING...")
+        var slug = req.param('slug');
+        PressRelease.findOne({ slug: slug }, function(err,post){
+          if (err) return res.redirect('/');
+          res.redirect('https://s3.amazonaws.com/procurPressMedia/6378ddd0-f239-11e3-b4fe-5584631e5daf');
+        });
+    }*/
 
 };
