@@ -28,6 +28,9 @@ module.exports = {
     },
     thumbnail: {
       type: 'json'
+    },
+    timestamp: {
+      type: 'string'
     }
   }
 

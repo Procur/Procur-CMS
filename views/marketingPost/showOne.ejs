@@ -2,9 +2,9 @@
 <% if(post.published == true){ %>
   <div><h1><%= post.title %></h1></div>
 
-  <div><strong>Posted: <%= post.createdAt %></strong></div>
+  <div><strong>Posted: <%= post.timestamp %></strong></div>
   <div><p><%= post.content %></p></div>
-  <div><img src="<%= post.images %>"></div>
+  <% if(post.images!=null){ %><div><img src="<%= post.images %>"></div><% } %>
 <% } %>
 
 

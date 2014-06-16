@@ -6,9 +6,9 @@
 <% posts.forEach(function(post){ %>
   <% if(post.published == true){ %>
     <div><a href="/marketingblog/<%= post.id %>"><h3><%= post.title %></h3></a></div>
-    <div><strong>Posted: <%= post.createdAt %></strong></div>
+    <div><strong>Posted: <%= post.timestamp %></strong></div>
     <div><p><%= post.content %></p></div>
-    <div><img src="<%= post.images %>"></div>
+    <% if(post.images!=null){ %><div><img src="<%= post.images %>"></div><% } %>
   <% } %>
 <% }); %>
 

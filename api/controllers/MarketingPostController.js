@@ -14,9 +14,10 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
-var humanize = require('humanize');
+//var humanize = require('humanize');
 var cloudinary = require('cloudinary');
 var url = require('url');
+var moment = require('moment');
 
 ///////BEGIN UTILITY FUNCTIONS
 var boolify = function(obj){
@@ -68,8 +69,9 @@ module.exports = {
 
     cloudinary.uploader.upload(req.files.image.path, function(result){
 
-      MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url }, function(err, post){
-        console.log(post);
+      MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')}, function(err, post){
+      console.log(post);
+
         if (err){
           req.flash("There was a problem. Try again.");
           res.redirect('/marketingPost/new');
