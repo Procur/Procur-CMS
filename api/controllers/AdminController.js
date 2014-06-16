@@ -34,6 +34,12 @@ module.exports = {
         payload.push(newsPosts[0]);
         console.log(payload);
         res.view({ drafts: payload });
+        PressRelease.find({ published: false }, function(err, pressRelease){
+          if(err) return res.redirect('/admin/drafts');
+          payload.push(pressRelease[0]);
+          console.log(payload);
+          res.view({ drafts: payload});
+        });
       });
     });
 

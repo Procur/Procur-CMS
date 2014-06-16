@@ -53,8 +53,8 @@ module.exports = {
 
   createPost: function(req,res){
     var b = req.body;
-    var isPublished = boolify(b.published)
-
+    var isPublished = boolify(b.published);
+    console.log(req);
   cloudinary.uploader.upload(req.files.image.path, function(result){
     console.log(result.url);
 

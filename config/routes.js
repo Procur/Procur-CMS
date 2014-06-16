@@ -80,10 +80,10 @@ module.exports.routes = {
     action: "unpublish"
   },
 
-  "get /pressRelease/download/:slug": {
-    controller: "PressReleaseController",
-    action: "download"
-  },
+//  "get /pressRelease/download/:slug": {
+//    controller: "PressReleaseController",
+//    action: "download"
+//  },
 
 //INDUSTRY NEWS ROUTES
   // external routes
@@ -161,6 +161,7 @@ module.exports.routes = {
     controller: "MarketingPostController",
     action: 'unpublish'
   },
+
 
 // NEWS BLOG
   // external routes

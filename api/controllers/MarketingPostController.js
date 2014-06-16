@@ -37,9 +37,15 @@ module.exports = {
     var query = url.parse(req.url, true).query;
     var pageNumber = query['page'];
 
+    MarketingPost.find({ published: true }).exec(function(err, posts1){
+      if(err) return res.redirect('/');
+      numTruePosts = posts1.length;
+      //res.view({ numTruePosts: numTruePosts });
+    });
+
     MarketingPost.find({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
       if(err) return res.redirect('/');
-      res.view({ posts: posts });
+      res.view({ posts: posts }, { numTruePosts: numTruePosts});
     });
   },
 
@@ -61,10 +67,9 @@ module.exports = {
     var isPublished = boolify(b.published);
 
     cloudinary.uploader.upload(req.files.image.path, function(result){
-      console.log(req.files.image.path);
 
       MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url }, function(err, post){
-        console.log(post.title);
+        console.log(post);
         if (err){
           req.flash("There was a problem. Try again.");
           res.redirect('/marketingPost/new');
@@ -125,6 +130,6 @@ module.exports = {
       });
     });
   }
-  
+
 
 };

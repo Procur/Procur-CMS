@@ -1,7 +1,8 @@
 <h1>Marketing Blog</h1>
 
 <hr>
-
+<% console.log(numTruePosts) %>
+<% console.log(posts.length) %>
 <% posts.forEach(function(post){ %>
   <% if(post.published == true){ %>
     <div><a href="/marketingblog/<%= post.id %>"><h3><%= post.title %></h3></a></div>
@@ -12,6 +13,8 @@
 <% }); %>
 
 <a href="/marketingPost/new">Create New Post</a>
+<a class="next" href="#" onclick="nextPage(); return false;">NEXT</a>
+<a class="previous" href="#" onclick="previousPage(); return false;">PREVIOUS</a>
 
 <script>
 
@@ -49,7 +52,29 @@ function previousPage(){
   window.location = previousPageFire();
 }
 
-</script>
+function isFirstPage(){
+  var a = document.createElement('a');
+  a.href = '';
+  var pageNumber = a.search.replace( /^\D+/g, '');
+  if (pageNumber == 1) return true;
+  return false;
+}
 
-<a href="#" onclick="nextPage(); return false;">NEXT</a>
-<a href="#" onclick="previousPage(); return false;">PREVIOUS</a>
+function isLastPage(){
+  var a = document.createElement('a');
+  a.href = '';
+  var pageNumber = a.search.replace( /^\D+/g, '');
+  console.log(pageNumber);
+  if((((pageNumber -1)*3)+<%= posts.length %>) == <%= numTruePosts %>) return true;
+  return false;
+}
+
+if (isFirstPage()==true){
+    $(".previous").hide();
+}
+
+if (isLastPage()==true){
+    $(".next").hide();
+}
+
+</script>
