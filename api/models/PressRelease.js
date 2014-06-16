@@ -32,6 +32,12 @@ module.exports = {
     },
     pdf: {
       type: 'string'
+    },
+    category: {
+      type: 'string'
+    },
+    timestamp: {
+      type: 'string'
     }
 
   }

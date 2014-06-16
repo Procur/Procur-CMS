@@ -69,7 +69,7 @@ module.exports = {
 
     cloudinary.uploader.upload(req.files.image.path, function(result){
 
-      MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')}, function(err, post){
+      MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),  category: 'marketingpost'}, function(err, post){
       console.log(post);
 
         if (err){

@@ -29,16 +29,14 @@ module.exports = {
       for (i=0; i < marketingPosts.length; i++){
         payload.push(marketingPosts[i]);
       }
-      //payload.push(marketingPosts[0]);
       console.log(payload.length);
-      //console.log(payload);
-      NewsPost.find({ published: false }, function(err, newsPosts){
+      /*NewsPost.find({ published: false }, function(err, newsPosts){
         if(err) return res.redirect('/admin/drafts');
         for (i=0; i < newsPosts.length; i++){
           payload.push(newsPosts[i]);
         }
         console.log(payload.length);
-        //console.log(payload);
+        //console.log(payload);*/
         PressRelease.find({ published: false }, function(err, pressRelease){
           if(err) return res.redirect('/admin/drafts');
           for (i=0; i < pressRelease.length; i++){
@@ -48,7 +46,7 @@ module.exports = {
           //console.log(payload);
           res.view({ drafts: payload});
         });
-      });
+      //});
     });
 
 

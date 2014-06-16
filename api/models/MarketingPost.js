@@ -31,6 +31,9 @@ module.exports = {
     },
     timestamp: {
       type: 'string'
+    },
+    category: {
+      type: 'string'
     }
   }
 

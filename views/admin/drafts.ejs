@@ -2,7 +2,14 @@
 
 <% drafts.forEach(function(draft){ %>
 
+  <% if(draft.category=='marketingpost'){ %>
   <a href="/marketingPost/edit/<%= draft.id %>"><strong><%= draft.title %></strong></a>
   <p><%= draft.content %></p>
+  <% } %>
+  
+  <% if(draft.category=='pressrelease'){ %>
+  <a href="/pressRelease/edit/<%= draft.slug %>"><strong><%= draft.title %></strong></a>
+  <p><%= draft.content %></p>
+  <% } %>
 
 <% }); %>

@@ -124,7 +124,7 @@ module.exports = {
         //  req.file('pdf').upload( newReceiverStream(exampleZip), function (err, result2){
         //    if (err) return res.serverError(err);
         //    console.log(result2);
-              PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase()/*, zip: result1[0].extra.Location, pdf: result2[0].extra.Location*/ }, function(err,post){
+      PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease'/*, zip: result1[0].extra.Location, pdf: result2[0].extra.Location*/ }, function(err,post){
                 if (err){
                   req.flash("There was a problem. Try again.");
                   res.redirect("/pressRelease/new");
