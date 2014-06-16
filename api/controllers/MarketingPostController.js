@@ -112,7 +112,7 @@ module.exports = {
           res.redirect('/marketingblog/' + id);
         }
         else {
-          res.redirect('/marketingPosts/drafts');
+          res.redirect('/marketingblog');
         }
       });
     });
