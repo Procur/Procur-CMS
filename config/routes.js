@@ -244,6 +244,11 @@ module.exports.routes = {
   'get /admin/drafts': {
     controller: 'AdminController',
     action: 'drafts'
+  },
+
+  'get /admin/index': {
+    controller: 'AdminController',
+    action: 'index'
   }
 
 

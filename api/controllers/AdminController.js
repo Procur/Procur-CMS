@@ -24,20 +24,28 @@ module.exports = {
 
   drafts: function(req, res){
     var payload = [];
-
     MarketingPost.find({ published: false }, function(err, marketingPosts){
       if(err) return res.redirect('/admin/drafts');
-      payload.push(marketingPosts[0]);
-      console.log(payload);
+      for (i=0; i < marketingPosts.length; i++){
+        payload.push(marketingPosts[i]);
+      }
+      //payload.push(marketingPosts[0]);
+      console.log(payload.length);
+      //console.log(payload);
       NewsPost.find({ published: false }, function(err, newsPosts){
         if(err) return res.redirect('/admin/drafts');
-        payload.push(newsPosts[0]);
-        console.log(payload);
-        res.view({ drafts: payload });
+        for (i=0; i < newsPosts.length; i++){
+          payload.push(newsPosts[i]);
+        }
+        console.log(payload.length);
+        //console.log(payload);
         PressRelease.find({ published: false }, function(err, pressRelease){
           if(err) return res.redirect('/admin/drafts');
-          payload.push(pressRelease[0]);
-          console.log(payload);
+          for (i=0; i < pressRelease.length; i++){
+            payload.push(pressRelease[i]);
+          }
+          console.log(payload.length);
+          //console.log(payload);
           res.view({ drafts: payload});
         });
       });
