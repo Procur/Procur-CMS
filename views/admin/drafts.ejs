@@ -3,11 +3,13 @@
 <% drafts.forEach(function(draft){ %>
 
   <% if(draft.category=='marketingpost'){ %>
+  <p>Marketing Post DRAFT</p>
   <a href="/marketingPost/edit/<%= draft.id %>"><strong><%= draft.title %></strong></a>
   <p><%= draft.content %></p>
   <% } %>
-  
+
   <% if(draft.category=='pressrelease'){ %>
+  <p>Press Release DRAFT</p>
   <a href="/pressRelease/edit/<%= draft.slug %>"><strong><%= draft.title %></strong></a>
   <p><%= draft.content %></p>
   <% } %>
