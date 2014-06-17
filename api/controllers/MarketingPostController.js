@@ -100,10 +100,10 @@ module.exports = {
   update: function(req, res){
     var b = req.body;
     var isPublished = boolify(b.published);
-
+    var id = req.param('id');
     cloudinary.uploader.upload(req.files.image.path, function(result){
       console.log('test1');
-      MarketingPost.findOne({ title: b.title }, function(err, post){
+      MarketingPost.findOne({ id: id }, function(err, post){
         console.log('test2');
         if(err) return res.redirect('/');
       MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a') }, function(err, post){

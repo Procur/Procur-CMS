@@ -70,6 +70,8 @@ function isLastPage(){
   return false;
 }
 
+
+
 if (isFirstPage()==true){
     $(".previous").hide();
 }
@@ -77,5 +79,14 @@ if (isFirstPage()==true){
 if (isLastPage()==true){
     $(".next").hide();
 }
+
+function pageNumberAssembler(){
+  for (i=1;i<=(<%= numTruePosts %>/(3));i++){
+    document.write("helloo");
+}
+}
+
+pageNumberAssembler();
+
 
 </script>

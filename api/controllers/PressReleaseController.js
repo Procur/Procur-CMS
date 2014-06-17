@@ -42,11 +42,11 @@ module.exports = {
 
     showOne: function(req, res){
       var slug = req.param('slug');
-      console.log(slug);
+
       PressRelease.findOne({ slug: slug }, function(err, post){
         if(err) return res.redirect('/');
         res.view({ post: post });
-        console.log(post);
+
       })
     },
 
@@ -165,8 +165,9 @@ module.exports = {
 
       PressRelease.findOne({ title: b.title }, function(err, post){
         if(err) return res.redirect('/');
-      PressRelease.update(post, { title: b.title, content: b.content, published: isPublished, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a') }, function(err, post){
-        console.log('')
+      PressRelease.update(post, { title: b.title, content: b.content, abstract: b.abstract, slug: slug(b.title).toLowerCase(), published: isPublished, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a') }, function(err, post){
+        console.log("HERE");
+        console.log(post);
         var slug = post[0].slug;
         if(err) return res.redirect('/');
         req.flash("Post updated.");
