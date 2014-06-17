@@ -9,6 +9,7 @@ var knox = require('knox');
 var UUIDGenerator = require('node-uuid');
 var AWS = require('aws-sdk');
 var fs = require('fs');
+var moment = require('moment');
 
 //UTILITY
 var boolify = function(obj){
@@ -128,7 +129,7 @@ module.exports = {
         //  req.file('pdf').upload( newReceiverStream(exampleZip), function (err, result2){
         //    if (err) return res.serverError(err);
         //    console.log(result2);
-      PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease'/*, zip: result1[0].extra.Location, pdf: result2[0].extra.Location*/ }, function(err,post){
+      PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')/*, zip: result1[0].extra.Location, pdf: result2[0].extra.Location*/ }, function(err,post){
                 if (err){
                   req.flash("There was a problem. Try again.");
                   res.redirect("/pressRelease/new");
@@ -152,8 +153,8 @@ module.exports = {
 
 
     edit: function(req, res){
-      var id = req.param('id');
-      PressRelease.findOne({ id: id }, function(err, post){
+      var slug = req.param('slug');
+      PressRelease.findOne({ slug: slug }, function(err, post){
         res.view({ post: post });
       });
     },
@@ -164,12 +165,13 @@ module.exports = {
 
       PressRelease.findOne({ title: b.title }, function(err, post){
         if(err) return res.redirect('/');
-      PressRelease.update(post, { title: b.title, content: b.content, published: isPublished }, function(err, post){
-        var id = post[0].id;
+      PressRelease.update(post, { title: b.title, content: b.content, published: isPublished, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a') }, function(err, post){
+        console.log('')
+        var slug = post[0].slug;
         if(err) return res.redirect('/');
         req.flash("Post updated.");
         if (isPublished == true){
-          res.redirect('/pressreleases/' + id);
+          res.redirect('/pressreleases/' + slug);
         }
         else {
           res.redirect('/pressRelease/drafts');

@@ -106,7 +106,7 @@ module.exports = {
       MarketingPost.findOne({ title: b.title }, function(err, post){
         console.log('test2');
         if(err) return res.redirect('/');
-      MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url }, function(err, post){
+      MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a') }, function(err, post){
         var id = post[0].id;
         if(err) return res.redirect('/');
         req.flash("Post updated.");
