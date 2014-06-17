@@ -28,10 +28,14 @@ module.exports = {
       var query = url.parse(req.url, true).query;
       var pageNumber = query['page'];
 
+      PressRelease.find({ published: true }).exec(function(err, posts1){
+        if(err) return res.direct('/');
+        numTruePosts = posts1.length;
+      });
 
       PressRelease.find({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
         if(err) return res.redirect('/');
-          res.view({posts: posts});
+          res.view({posts: posts}, { numTruePosts: numTruePosts});
         });
     },
 

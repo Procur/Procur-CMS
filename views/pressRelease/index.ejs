@@ -4,7 +4,6 @@
 
 <% posts.forEach(function(post){ %>
   <% if(post.published == true){ %>
-
   <div><a href="/pressreleases/<%= post.slug %>"><h3><%= post.title %></h3></a></div>
   <div><strong>Date Released: <%= post.createdAt %></strong></div>
   <div><p><%= post.abstract %></p></div>
@@ -12,7 +11,7 @@
 <% }); %>
 
  <a href="/pressRelease/new">Create New Press Release</a>
- <a href="#" onclick="nextPage(); return false;">NEXT</a>
+ <a class="next" href="#" onclick="nextPage(); return false;">NEXT</a>
  <a class="previous" href="#" onclick="previousPage(); return false;">PREVIOUS</a>
 
 
@@ -57,21 +56,25 @@ function isFirstPage(){
   var a = document.createElement('a');
   a.href = '';
   var pageNumber = a.search.replace( /^\D+/g, '');
-  if (pageNumber == 1) return true;
+  if (pageNumber == 1 || pageNumber == '') return true;
   return false;
 }
 
-function isNextPageBlank(){
+function isLastPage(){
   var a = document.createElement('a');
-  a.href
+  a.href = '';
+  var pageNumber = a.search.replace( /^\D+/g, '');
+  console.log(pageNumber);
+  if((((pageNumber -1)*3)+<%= posts.length %>) == <%= numTruePosts %> || (pageNumber=="" && <%= numTruePosts %> <= 3)) return true;
+  return false;
 }
 
 if (isFirstPage()==true){
     $(".previous").hide();
 }
 
-
-
-
+if (isLastPage()==true){
+    $(".next").hide();
+}
 
 </script>

@@ -3,6 +3,7 @@
 <hr>
 <% console.log(numTruePosts) %>
 <% console.log(posts.length) %>
+
 <% posts.forEach(function(post){ %>
   <% if(post.published == true){ %>
     <div><a href="/marketingblog/<%= post.id %>"><h3><%= post.title %></h3></a></div>
