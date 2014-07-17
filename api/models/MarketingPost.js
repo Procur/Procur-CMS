@@ -34,6 +34,12 @@ module.exports = {
     },
     category: {
       type: 'string'
+    },
+    date: {
+      type: 'string'
+    },
+    tags: {
+      type: 'array'
     }
   }
 

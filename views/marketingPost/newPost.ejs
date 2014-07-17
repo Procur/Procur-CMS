@@ -1,11 +1,35 @@
-<h1>New Marketing Blog Post</h1>
+<h1>New Company Blog Post</h1>
 
 <section id="marketingBlogPostForm">
   <form action="/marketingPost/new" method="post" enctype="multipart/form-data">
     <div><input type="text" name="title" placeholder="Title" size="70"></div>
-    <div><textarea name="content" rows="30" cols="50" placeholder="Content"></textarea></div>
+    <div><textarea name="content" rows="15" cols="50" placeholder="Content"></textarea></div>
+    <div><input type="text" name="date" placeholder="Date to Release Post (ex. 05 January 2014)" size="70"></div>
+    <div><input type="text" class="tagField" name="tag" placeholder="type a TAG and PRESS RIGHT ARROW and add more..." size="70"><span class='tagContainer'></span></div>
+
+    <div>
+      <select type="text" name="category" placeholder="Category">
+        <option value="category1">Category1</option>
+        <option value="category2">Category2</option>
+        <option value="category3">Category3</option>
+        <option value="category4">Category4</option>
+        <option value="category5">Category5</option>
+      </select></br></br>
+    </div>
     <div><input type="checkbox" name="published" value="true">Publish now?</div>
     <p>Image: <input type="file" name="image" /></p>
     <div><input type="submit"</div>
   </form>
 </section>
+
+
+<script>
+  $('.tagField').keydown(function(e) {
+    var w = $(this).val();
+    if(e.which == 39) {
+      $('.tagContainer').append('<span>'+w+'&nbsp;&nbsp;</span>');
+      $('.tagField').val('');
+
+    }
+  });
+</script>

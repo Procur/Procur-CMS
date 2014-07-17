@@ -64,7 +64,7 @@ module.exports = {
     var b = req.body;
     var isPublished = boolify(b.published);
     cloudinary.uploader.upload(req.files.image.path, function(result){
-      MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),  category: 'marketingpost'}, function(err, post){
+      MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, /*timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),*/  category: b.category, date: b.date}, function(err, post){
         if (err){
           req.flash("There was a problem. Try again.");
           res.redirect('/marketingPost/new');
