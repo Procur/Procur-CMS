@@ -1,8 +1,8 @@
-<h1>Marketing Blog</h1>
+<h1>Company Blog</h1>
 
 <hr>
-<% console.log(numTruePosts) %>
-<% console.log(posts.length) %>
+<% //console.log(numTruePosts) %>
+<% //console.log(posts.length) %>
 
 <% posts.forEach(function(post){ %>
   <% if(post.published == true){ %>
@@ -14,35 +14,38 @@
 <% }); %>
 
 <a href="/marketingPost/new">Create New Post</a>
-<a class="next" href="#" onclick="nextPage(); return false;">NEXT</a>
+<span class>Navigate by page:</span>
+<% for (i=1;i<=Math.ceil(numTruePosts/3);i++) { %>
+  <a class="pagenumberLink" href='/marketingblog?page=<%=i%>'><%= i %></a>
+<% } %>
 <a class="previous" href="#" onclick="previousPage(); return false;">PREVIOUS</a>
+<a class="next" href="#" onclick="nextPage(); return false;">NEXT</a>
+
 
 <script>
 
 function nextPageFire(){
-     var a = document.createElement('a');
-     a.href = '';
-     if (a.href == 'http://localhost:1337/marketingblog'){
-     a.href = '/marketingblog?page=2';
-     } else {
-     var pageNumber = a.search.replace( /^\D+/g, '');
-     a.href = '/marketingblog?page='+(parseInt(pageNumber)+1);
-     }
-     //a.innerHTML = "NEXT PAGE";
-     //document.body.appendChild(a);
-     return a.href;
+  var a = document.createElement('a');
+  a.href = '';
+  if (a.href == 'http://localhost:1337/marketingblog'){
+    a.href = '/marketingblog?page=2';
+  } else {
+    var pageNumber = a.search.replace( /^\D+/g, '');
+    a.href = '/marketingblog?page='+(parseInt(pageNumber)+1);
+  }
+  return a.href;
 }
 
 function previousPageFire(){
-     var a = document.createElement('a');
-     a.href = '';
-     if (a.href == 'http://localhost:1337/marketingblog'){
-     return
-     } else {
-     var pageNumber = a.search.replace( /^\D+/g, '');
-     a.href = '/marketingblog?page='+(parseInt(pageNumber)-1);
-     }
-     return a.href;
+  var a = document.createElement('a');
+  a.href = '';
+  if (a.href == 'http://localhost:1337/marketingblog'){
+    return
+  } else {
+    var pageNumber = a.search.replace( /^\D+/g, '');
+    a.href = '/marketingblog?page='+(parseInt(pageNumber)-1);
+  }
+  return a.href;
 }
 
 function nextPage(){
@@ -65,25 +68,21 @@ function isLastPage(){
   var a = document.createElement('a');
   a.href = '';
   var pageNumber = a.search.replace( /^\D+/g, '');
-  console.log(pageNumber);
   if((((pageNumber -1)*3)+<%= posts.length %>) == <%= numTruePosts %> || (pageNumber=="" && <%= numTruePosts %> <= 3)) return true;
   return false;
 }
 
-
-
 if (isFirstPage()==true){
-    $(".previous").hide();
+  $(".previous").hide();
 }
 
 if (isLastPage()==true){
-    $(".next").hide();
+  $(".next").hide();
 }
 
 function pageNumberAssembler(){
   for (i=1;i<=(<%= numTruePosts %>/(3));i++){
-    document.write("helloo");
-}
+  }
 }
 
 pageNumberAssembler();

@@ -26,7 +26,7 @@ var boolify = function(obj){
   }
   else {
     obj = false;
-  };
+  }
   return obj;
 };
 ///////END UTILITY FUNCTIONS
@@ -37,16 +37,14 @@ module.exports = {
   index: function(req, res){
     var query = url.parse(req.url, true).query;
     var pageNumber = query['page'];
-
     MarketingPost.find({ published: true }).exec(function(err, posts1){
       if(err) return res.redirect('/');
       numTruePosts = posts1.length;
-      //res.view({ numTruePosts: numTruePosts });
     });
-
     MarketingPost.find({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
       if(err) return res.redirect('/');
       res.view({ posts: posts }, { numTruePosts: numTruePosts});
+      //console.log(numTruePosts);
     });
   },
 
@@ -54,9 +52,8 @@ module.exports = {
     var id = req.param('id');
     MarketingPost.findOne({ id: id }, function(err, post){
       if(err) return res.redirect('/');
-      console.log(MarketingPost.published)
       res.view({ post: post });
-    })
+    });
   },
 
   newPost: function(req, res){
@@ -66,18 +63,14 @@ module.exports = {
   createPost: function(req, res){
     var b = req.body;
     var isPublished = boolify(b.published);
-
     cloudinary.uploader.upload(req.files.image.path, function(result){
-
       MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),  category: 'marketingpost'}, function(err, post){
-      console.log(post);
-
         if (err){
           req.flash("There was a problem. Try again.");
           res.redirect('/marketingPost/new');
         }
         else {
-          req.flash("Post successfully created.")
+          req.flash("Post successfully created.");
           if (isPublished == false){
             res.redirect('/marketingPost/drafts');
           }
@@ -92,7 +85,6 @@ module.exports = {
   edit: function(req, res){
     var id = req.param('id');
     MarketingPost.findOne({ id: id }, function(err, post){
-      console.log(post);
       res.view({ post: post });
     });
   },
@@ -102,9 +94,7 @@ module.exports = {
     var isPublished = boolify(b.published);
     var id = req.param('id');
     cloudinary.uploader.upload(req.files.image.path, function(result){
-      console.log('test1');
       MarketingPost.findOne({ id: id }, function(err, post){
-        console.log('test2');
         if(err) return res.redirect('/');
       MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a') }, function(err, post){
         var id = post[0].id;
