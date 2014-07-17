@@ -5,7 +5,7 @@
     <div><input type="text" name="title" placeholder="Title" size="70"></div>
     <div><textarea name="content" rows="15" cols="50" placeholder="Content"></textarea></div>
     <div><input type="text" name="date" placeholder="Date to Release Post (ex. 05 January 2014)" size="70"></div>
-    <div><input type="text" class="tagField" name="tag" placeholder="type a TAG and PRESS RIGHT ARROW and add more..." size="70"><span class='tagContainer'></span></div>
+    <div><input type="text" class="tagField" name="tag" placeholder="type a TAG and PRESS RIGHT ARROW and add more..." size="70"><span><input type='button' onclick="removeTags();" value="Delete Tags"></span><span class='tagContainer'></span></div>
 
     <div>
       <select type="text" name="category" placeholder="Category">
@@ -24,12 +24,19 @@
 
 
 <script>
+  var tagArray = [];
   $('.tagField').keydown(function(e) {
-    var w = $(this).val();
+    var currentTag = $(this).val();
     if(e.which == 39) {
-      $('.tagContainer').append('<span>'+w+'&nbsp;&nbsp;</span>');
+      $('.tagContainer').append('<span class="oneTag">'+currentTag+'&nbsp;&nbsp;</span>');
       $('.tagField').val('');
-
+      tagArray.push(currentTag);
+      $('.tagField').attr('value',tagArray);
     }
   });
+
+  function removeTags() {
+    $('.oneTag').remove();
+    window.tagArray = [];
+  }
 </script>
