@@ -12,8 +12,7 @@ module.exports = {
 
   	title: {
       type: 'string',
-      required: true,
-      unique: true
+      required: true
     },
     content: {
       type: 'text',
@@ -38,8 +37,10 @@ module.exports = {
     date: {
       type: 'string'
     },
-    tags: {
-      type: 'array'
+    tagArray: {
+      type: 'array',
+      minLength: 1,
+      maxLength: 100
     }
   }
 

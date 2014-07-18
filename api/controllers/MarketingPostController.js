@@ -61,10 +61,33 @@ module.exports = {
   },
 
   createPost: function(req, res){
+    console.log('hit createPost action');
     var b = req.body;
     var isPublished = boolify(b.published);
     cloudinary.uploader.upload(req.files.image.path, function(result){
-      MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, /*timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),*/  category: b.category, date: b.date, tags: b.tag}, function(err, post){
+    MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, /*timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),*/  category: b.category, date: b.date , tagArray: [b.tagSender]}, function(err, post){
+        //console.log(JSON.stringify(post,null,' '));
+
+        //---Clean the tagArray to hold one tag in each indice---//
+        if (post){
+          var realTagArray = [];
+          var tag = '';
+          var lengthString = post.tagArray[0].length;
+          for (i=0;i<lengthString;i++) {
+            if(post.tagArray[0][i] != (','))  {
+              tag = tag + post.tagArray[0][i];
+              if (i == lengthString-1) {
+                realTagArray.push(tag);
+              }
+            } else {
+              realTagArray.push(tag);
+              tag = '';
+            }
+          }
+          post.tagArray = realTagArray;
+        }
+        //Finish cleaing of tagArray
+
         if (err){
           req.flash("There was a problem. Try again.");
           res.redirect('/marketingPost/new');
@@ -75,9 +98,10 @@ module.exports = {
             res.redirect('/marketingPost/drafts');
           }
           else {
+
             res.redirect('/marketingblog');
           }
-          console.log(post);
+
         }
       });
     },{ width: 150, height: 150 });
