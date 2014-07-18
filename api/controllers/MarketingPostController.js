@@ -69,7 +69,7 @@ module.exports = {
         //console.log(JSON.stringify(post,null,' '));
 
         //---Clean the tagArray to hold one tag in each indice---//
-        if (post){
+        /*if (post){
           var realTagArray = [];
           var tag = '';
           var lengthString = post.tagArray[0].length;
@@ -85,8 +85,13 @@ module.exports = {
             }
           }
           post.tagArray = realTagArray;
-        }
+        }*/
         //Finish cleaing of tagArray
+        if (post) {
+          var tags = post["tagArray"].toString();
+          var newTags = tags.split(",");
+          post["tagArray"] = newTags;
+        }
 
         if (err){
           req.flash("There was a problem. Try again.");
