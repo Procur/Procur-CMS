@@ -1,27 +1,40 @@
 
-<div id="companyBlogIndex">
+<div id="companyBlogSearch">
   <div class="container">
     <div class="row">
       <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-        <h1>Company Blog</h1> <a href="/marketingblog">Company Blog Home</a>
-
-        <hr>
-
-        <% posts.forEach(function(post){ %>
-          <% if(post.published == true){ %>
-            <div><a href="/marketingblog/<%= post.id %>"><h3><%= post.title %></h3></a></div>
-            <span><%= post.date %></span><span style="margin-left:30px"><%= post.category %></span><span style="margin-left:30px;color:red"><%= post.tagArray %></span>
-            <div><p><%= post.content %></p></div>
-            <% if(post.images!=null){ %><div><img src="<%= post.images %>"></div><% } %>
-          <% } %>
-        <% }); %>
-
-        <span class='pageNumbers'>Navigate by page:</span>
-        <% for (i=1;i<=Math.ceil(numTruePosts/3);i++) { %>
-          <a class="pagenumberLink" href='/marketingblog?page=<%=i%>'><%= i %></a>
+      <h1>Company Blog</h1><a href="/marketingblog">Company Blog Home</a>
+      <hr>
+      <% posts.forEach(function(post){ %>
+        <% if(post.published == true){ %>
+          <div><a href="/marketingblog/<%= post.id %>"><h3><%= post.title %></h3></a></div>
+          <span><%= post.date %></span><span style="margin-left:30px"><%= post.category %></span><span style="margin-left:30px;color:red"><%= post.tagArray %></span>
+          <div><p><%= post.content %></p></div>
+          <% if(post.images!=null){ %><div><img src="<%= post.images %>"></div><% } %>
         <% } %>
-        <a class="previous" href="#" onclick="previousPage(); return false;">PREVIOUS</a>
-        <a class="next" href="#" onclick="nextPage(); return false;">NEXT</a>
+      <% }); %>
+      <!--Functionality for the page links-->
+      <span class=pageNumbers>Navigate by page:</span>
+      <% for (i=1;i<=Math.ceil(numTruePosts/3);i++) { %>
+        <script>
+          var a = document.createElement('a');
+          a.href='';
+          if (a.href.indexOf('page')==-1){
+            a.href = a.href + '&page=<%=i%>';
+          } else {
+            var indexPage = a.href.indexOf('page');
+            a.href = a.href.substr(0,indexPage+5) + '<%=i%>';
+          }
+          var page = $('<a />');
+          page.attr('href',a.href);
+          page.text('<%=i%>');
+          $('.pageNumbers').append(page);
+         </script>
+      <% } %>
+
+      <!--Next/Previous Links-->
+      <a class="previous" href="#" onclick="previousPage(); return false;">PREVIOUS</a>
+      <a class="next" href="#" onclick="nextPage(); return false;">NEXT</a>
       </div>
 
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -29,7 +42,6 @@
         <form action="/marketingblog" class="searchForm" name="searchForm" method="post" enctype="multipart/form-data">
           <input type="text" class="searchInput" name="searchInput" placeholder="Search for Something..." size="30">
         </form>
-        <a href="/marketingPost/new">Create New Post</a>
         <h2>Blog Categories</h2>
         <a href="/marketingblogsearch?word=category1">Platform Announcements &amp; Updates</a>
         <a href="/marketingblogsearch?word=category2">Company News</a>
@@ -67,76 +79,80 @@
 
       </div>
 
-    <div>
+    </div>
   </div>
 </div>
 
 
-
 <script>
-
+//Next Page Functionality
 function nextPageFire(){
   var a = document.createElement('a');
   a.href = '';
-  if (a.href == 'http://localhost:1337/marketingblog'){
-    a.href = '/marketingblog?page=2';
-  } else {
-    var pageNumber = a.search.replace( /^\D+/g, '');
-    a.href = '/marketingblog?page='+(parseInt(pageNumber)+1);
+  if (a.href.indexOf('page')==-1){
+    a.href = a.href + '&page=2';
+    return a.href;
   }
+  var pageNumber = myPageNumber();
+  var indexPage = a.href.indexOf('page');
+  a.href = a.href.substr(0,indexPage+5) + (parseInt(pageNumber)+1);
   return a.href;
 }
-
+//Previous Page Functionality
 function previousPageFire(){
   var a = document.createElement('a');
-  a.href = '';
-  if (a.href == 'http://localhost:1337/marketingblog'){
-    return
-  } else {
-    var pageNumber = a.search.replace( /^\D+/g, '');
-    a.href = '/marketingblog?page='+(parseInt(pageNumber)-1);
-  }
+  a.href='';
+  var pageNumber = myPageNumber();
+  var indexPage = a.href.indexOf('page');
+  a.href = a.href.substr(0,indexPage+5) + (parseInt(pageNumber)-1);
   return a.href;
 }
 
+//Next page handler
 function nextPage(){
   window.location = nextPageFire();
 }
 
+//Previous page handler
 function previousPage(){
   window.location = previousPageFire();
 }
 
+//Are we on the first page?
 function isFirstPage(){
   var a = document.createElement('a');
   a.href = '';
-  var pageNumber = a.search.replace( /^\D+/g, '');
-  if (pageNumber == 1 || pageNumber == '') return true;
+  if (a.href.indexOf('page')==-1 || myPageNumber()==1) {return true}
   return false;
 }
 
+//Are we on the last page?
 function isLastPage(){
   var a = document.createElement('a');
   a.href = '';
+  if (<%= numTruePosts %> <= 3) {return true};
   var pageNumber = a.search.replace( /^\D+/g, '');
+
   if((((pageNumber -1)*3)+<%= posts.length %>) == <%= numTruePosts %> || (pageNumber=="" && <%= numTruePosts %> <= 3)) return true;
   return false;
 }
 
+//if we are on the first page, hide the 'previous' link...
 if (isFirstPage()==true){
   $(".previous").hide();
 }
 
+//if we are on the last page, hide the 'next' link...
 if (isLastPage()==true){
   $(".next").hide();
 }
 
-function pageNumberAssembler(){
-  for (i=1;i<=(<%= numTruePosts %>/(3));i++){
-  }
+//parse the url and return the page number
+function myPageNumber(){
+  var queryString = window.location.search;
+  var pageIndex = queryString.indexOf('page');
+  var lengthQueryString = queryString.length;
+  var pageNumber = queryString.substr(pageIndex+5,lengthQueryString-1);
+  return pageNumber;
 }
-
-pageNumberAssembler();
-
-
 </script>

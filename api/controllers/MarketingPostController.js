@@ -35,6 +35,7 @@ var boolify = function(obj){
 module.exports = {
 
   index: function(req, res){
+    console.log('index action hit');
     var query = url.parse(req.url, true).query;
     var pageNumber = query['page'];
     MarketingPost.find({ published: true }).exec(function(err, posts1){
@@ -43,6 +44,7 @@ module.exports = {
     });
     MarketingPost.find({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
       if(err) return res.redirect('/');
+
       res.view({ posts: posts }, { numTruePosts: numTruePosts});
       //console.log(numTruePosts);
     });
@@ -65,18 +67,22 @@ module.exports = {
     var b = req.body;
     var isPublished = boolify(b.published);
     cloudinary.uploader.upload(req.files.image.path, function(result){
-    MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, /*timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),*/  category: b.category, date: b.date , tagArray: [b.tagSender]}, function(err, post){
+    MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , tagArray: [b.tagSender]}, function(err, post){
         //---Clean Array---//
-        if (post){
-          post.tagArray = cleanMyArray.cleanMe(post.tagArray);
-        } console.log(post.tagArray[1]);
+        /*if (post){
+          var tags = post.tagArray.toString();
+          var newTags = tags.split(",");
+          post.tagArray = newTags;
+          MarketingPost.update( post, { tagArray:post.tagArray });
+        }*/
+        console.log(post);
         if (err){
           req.flash("There was a problem. Try again.");
           res.redirect('/marketingPost/new');
         }
         else {
           req.flash("Post successfully created.");
-          if (isPublished == false){
+          if (isPublished === false){
             res.redirect('/marketingPost/drafts');
           }
           else {
@@ -103,7 +109,7 @@ module.exports = {
     cloudinary.uploader.upload(req.files.image.path, function(result){
       MarketingPost.findOne({ id: id }, function(err, post){
         if(err) return res.redirect('/');
-      MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a') }, function(err, post){
+      MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date, tagArray: [b.tagSender] }, function(err, post){
         var id = post[0].id;
         if(err) return res.redirect('/');
         req.flash("Post updated.");
@@ -128,7 +134,45 @@ module.exports = {
         res.redirect('/marketingblog');
       });
     });
-  }
+  },
 
+  search: function(req, res){
+    var query = url.parse(req.url, true).query;
+    var searchWord = query['word'];
+    var pageNumber = query['page'];
+    //for category searches...
+    if (searchWord.indexOf('category') != -1) {
+      MarketingPost.find().where({ category: { contains: searchWord} }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
+        if(err) return res.redirect('/');
+        numTruePosts = posts1.length;
+        if(numTruePosts == 0) return res.redirect('/marketingPost/nosearch');
+      });
+      return MarketingPost.find().where({ category: { contains: searchWord} }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+        if(err) return res.redirect('/');
+          console.log(searchResults);
+        if(searchResults) {
+          res.view({ posts: searchResults }, { numTruePosts: numTruePosts });
+        }
+      });
+    }
+
+    MarketingPost.find().where({ tagArray: { contains: searchWord} }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
+      if(err) return res.redirect('/');
+      numTruePosts = posts1.length;
+      if(numTruePosts == 0) return res.redirect('/marketingPost/nosearch');
+    });
+
+    return MarketingPost.find().where({ tagArray: { contains: searchWord} }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+      if(err) return res.redirect('/');
+        console.log(searchResults);
+      if(searchResults) {
+        res.view({ posts: searchResults }, { numTruePosts: numTruePosts });
+      }
+    });
+  },
+
+  nosearch: function(req,res){
+    res.view();
+  }
 
 };

@@ -4,6 +4,20 @@
   <form action="/marketingPost/editpost" method="post" enctype="multipart/form-data">
     <div><input type="text" name="title" size="70" value="<%= post.title %>"></div>
     <div><textarea name="content" rows="30" cols="50"><%= post.content %></textarea></div>
+    <div><input type="text" name="date" value="<%= post.date %>" size="70"></div>
+    <div><input type="text" class="tagField" name="tagArray" value="<%= post.tagArray %>" size="70"><span><input type='button' onclick="removeTags();" value="Delete Tags"></span><span class='tagContainer'></span></div>
+    <div><input type="text" class="tagSender" name="tagSender" value="<%= post.tagSender %>" size="70"></div>
+    <div>
+      <select type="text" name="category" value="<%= post.category %>">
+        <option value="category1">Category1</option>
+        <option value="category2">Category2</option>
+        <option value="category3">Category3</option>
+        <option value="category4">Category4</option>
+        <option value="category5">Category5</option>
+      </select></br></br>
+    </div>
+
+
     <div><input type="checkbox" name="published" value="true">Publish now?</div>
     <p>Change current image?:<input type="file" name="image" /></p>
     <div><input type="submit"</div>
@@ -11,3 +25,24 @@
 </section>
 
 <div><a href="/marketingPost/unpublish/<%= post.id %>">Unpublish?</a></div>
+
+<script>
+  var tagArrayAll = [];
+  $('.tagField').keydown(function(e) {
+    var currentTag = $(this).val();
+    if(e.which == 39) {
+      $('.tagContainer').append('<span class="oneTag">'+currentTag+'&nbsp;&nbsp;</span>');
+      $('.tagField').val('');
+      tagArrayAll.push(currentTag);
+      $('.tagSender').val(tagArrayAll);
+      console.log(tagArrayAll);
+      console.log(typeof tagArrayAll);
+    }
+  });
+
+  function removeTags() {
+    $('.oneTag').remove();
+    window.tagArrayAll = [];
+  }
+
+</script>

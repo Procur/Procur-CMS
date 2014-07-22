@@ -125,6 +125,20 @@ module.exports.routes = {
   },
 
 // MARKETING BLOG ROUTES
+
+// SEARCH ROUTES
+  'post /marketingblogsearch?:querystring': {
+    controller: 'MarketingPostController',
+    action: 'search'
+  },
+
+  'get /marketingblogsearch?:querystring': {
+    controller: 'MarketingPostController',
+    action: 'search'
+  },
+
+
+
   // external routes
   'get /marketingblog?:querystring': {
     controller: "MarketingPostController",
@@ -137,6 +151,11 @@ module.exports.routes = {
   },
 
   // internal routes
+  'get /marketingPost/nosearch': {
+    controller: 'MarketingPostController',
+    action: 'nosearch'
+  },
+
   'get /marketingPost/new': {
     controller: "MarketingPostController",
     action: 'newPost'
@@ -250,6 +269,8 @@ module.exports.routes = {
     controller: 'AdminController',
     action: 'index'
   }
+
+
 
 
 
