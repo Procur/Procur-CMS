@@ -63,36 +63,32 @@ module.exports = {
   },
 
   createPost: function(req, res){
-    console.log('hit createPost action');
     var b = req.body;
     var isPublished = boolify(b.published);
     cloudinary.uploader.upload(req.files.image.path, function(result){
-    MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , tagArray: [b.tagSender]}, function(err, post){
-        //---Clean Array---//
-        /*if (post){
-          var tags = post.tagArray.toString();
-          var newTags = tags.split(",");
-          post.tagArray = newTags;
-          MarketingPost.update( post, { tagArray:post.tagArray });
-        }*/
-        console.log(post);
-        if (err){
-          req.flash("There was a problem. Try again.");
-          res.redirect('/marketingPost/new');
-        }
-        else {
-          req.flash("Post successfully created.");
-          if (isPublished === false){
-            res.redirect('/marketingPost/drafts');
-          }
-          else {
+      MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , tagArray: [b.tagSender]}, function(err, post){
+        var finalText = shortenContent.shortenMe(post.content); //SHORTEN CONTENT FOR VIEW
+        MarketingPost.findOne({ title: b.title }, function(err, post){
+          if(err) return res.redirect('/');
+          MarketingPost.update(post, { shortContent: finalText }, function(err,post){
+            if (err){
+              req.flash("There was a problem. Try again.");
+              res.redirect('/marketingPost/new');
+            }
+            else {
+              req.flash("Post successfully created.");
+              if (isPublished === false){
+                res.redirect('/marketingPost/drafts');
+              }
+              else {
+                res.redirect('/marketingblog');
+              }
 
-            res.redirect('/marketingblog');
-          }
-
-        }
+            }
+          });
+        });
       });
-    },{ width: 150, height: 150 });
+    });
   },
 
   edit: function(req, res){
@@ -121,7 +117,7 @@ module.exports = {
         }
       });
     });
-  },{ width: 150, height: 150 });
+  });
   },
 
   unpublish: function(req, res){
@@ -137,9 +133,11 @@ module.exports = {
   },
 
   search: function(req, res){
+    console.log('in search action');
     var query = url.parse(req.url, true).query;
     var searchWord = query['word'];
     var pageNumber = query['page'];
+
     //for category searches...
     if (searchWord.indexOf('category') != -1) {
       MarketingPost.find().where({ category: { contains: searchWord} }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
@@ -156,12 +154,32 @@ module.exports = {
       });
     }
 
+    //for date searches...
+    else if (searchWord.indexOf('201') != -1) {
+      var numberIndex = searchWord.indexOf('2');
+      searchWord = searchWord.substr(0,numberIndex) + ' ' + searchWord.substr(numberIndex,searchWord.length-1);
+      console.log(searchWord);
+      MarketingPost.find().where({ date: { contains: searchWord} }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
+        if(err) return res.redirect('/');
+        numTruePosts = posts1.length;
+        if(numTruePosts == 0) return res.redirect('/marketingPost/nosearch');
+      });
+      return MarketingPost.find().where({ date: { contains: searchWord} }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+        if(err) return res.redirect('/');
+          console.log(searchResults);
+        if(searchResults) {
+          res.view({ posts: searchResults }, { numTruePosts: numTruePosts });
+        }
+      });
+    }
+
+    //for tag searches...
+    else {
     MarketingPost.find().where({ tagArray: { contains: searchWord} }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
       if(err) return res.redirect('/');
       numTruePosts = posts1.length;
       if(numTruePosts == 0) return res.redirect('/marketingPost/nosearch');
     });
-
     return MarketingPost.find().where({ tagArray: { contains: searchWord} }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
       if(err) return res.redirect('/');
         console.log(searchResults);
@@ -169,6 +187,7 @@ module.exports = {
         res.view({ posts: searchResults }, { numTruePosts: numTruePosts });
       }
     });
+    }
   },
 
   nosearch: function(req,res){

@@ -2,32 +2,48 @@
 <div id="companyBlogIndex">
   <div class="container">
     <div class="row">
+      <!--START LEFT COLUMN-->
       <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
         <h1>Company Blog</h1> <a href="/marketingblog">Company Blog Home</a>
-
         <hr>
-
+        <!--ITERATIVELY ADD POSTS-->
         <% posts.forEach(function(post){ %>
           <% if(post.published == true){ %>
-            <div><a href="/marketingblog/<%= post.id %>"><h3><%= post.title %></h3></a></div>
-            <span><%= post.date %></span><span style="margin-left:30px"><%= post.category %></span><span style="margin-left:30px;color:red"><%= post.tagArray %></span>
-            <div><p><%= post.content %></p></div>
-            <% if(post.images!=null){ %><div><img src="<%= post.images %>"></div><% } %>
+            <div class="postContainer">
+              <div class="postTitle"><h3><%= post.title %></h3></a></div>
+              <div class="blogPostSpecs">
+                <h6>Posted On</h6><span><%= post.date %></span>
+                <h6>Under</h6><span><%= post.category %></span>
+                <h6>Tags</h6><span><%= post.tagArray %></span>
+              </div>
+              <% if(post.images!=null){ %><div class="companyBlogPostPhotoWrapper"><img class="companyBlogPostPhoto" src="<%= post.images %>"></div><% } %>
+              <div class="postContent"><p><%=post.shortContent%><a class="readMoreLink" href="/marketingblog/<%= post.id %>">Read More ></a></p></div>
+            </div>
           <% } %>
         <% }); %>
+        <!--END POSTS-->
 
+        <!--START PAGINATION CALLS-->
+        <div class="pageNavigationWrapper">
         <span class='pageNumbers'>Navigate by page:</span>
         <% for (i=1;i<=Math.ceil(numTruePosts/3);i++) { %>
           <a class="pagenumberLink" href='/marketingblog?page=<%=i%>'><%= i %></a>
         <% } %>
-        <a class="previous" href="#" onclick="previousPage(); return false;">PREVIOUS</a>
-        <a class="next" href="#" onclick="nextPage(); return false;">NEXT</a>
+        <div class="nextpreviousWrapper">
+        <a class="previous" href="#" onclick="previousPage(); return false;">< PREVIOUS</a>
+        <a class="next" href="#" onclick="nextPage(); return false;">NEXT ></a>
+        </div>
       </div>
+        <!-- END PAGINATION-->
+      </div>
+      <!--END COLUNM LEFT-->
 
+
+      <!--START COLUMN RIGHT-->
       <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
         <h2>Search the Blog</h2>
         <form action="/marketingblog" class="searchForm" name="searchForm" method="post" enctype="multipart/form-data">
-          <input type="text" class="searchInput" name="searchInput" placeholder="Search for Something..." size="30">
+          <input type="text" class="searchInput" name="searchInput" placeholder="Search for Something..." size="22">
         </form>
         <a href="/marketingPost/new">Create New Post</a>
         <h2>Blog Categories</h2>
@@ -64,15 +80,15 @@
         <a href="/marketingblogsearch?word=OCTOBER2014">October</a>
         <a href="/marketingblogsearch?word=NOVEMBER2014">November</a>
         <a href="/marketingblogsearch?word=DECEMBER2014">December</a>
-
       </div>
+      <!--END COLUMN RIGHT-->
 
     <div>
   </div>
 </div>
 
 
-
+<!--START PAGINATION SCRIPTS-->
 <script>
 
 function nextPageFire(){
@@ -131,12 +147,6 @@ if (isLastPage()==true){
   $(".next").hide();
 }
 
-function pageNumberAssembler(){
-  for (i=1;i<=(<%= numTruePosts %>/(3));i++){
-  }
-}
-
-pageNumberAssembler();
-
 
 </script>
+<!--END PAGINATION SCRIPTS-->

@@ -1,4 +1,4 @@
-module.exports = {
+/*module.exports = {
   cleanMe: function(uncleanArray){
     var cleanArray = [];
     var delimitedString = '';
@@ -17,3 +17,12 @@ module.exports = {
     return cleanArray;
   }
 };
+
+//---ADAMS WAY---//
+if (post){
+  var tags = post.tagArray.toString();
+  var newTags = tags.split(",");
+  post.tagArray = newTags;
+  MarketingPost.update( post, { tagArray:post.tagArray });
+}
+*/

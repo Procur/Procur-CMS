@@ -41,7 +41,28 @@ module.exports = {
       type: 'array',
       minLength: 1,
       maxLength: 100
+    },
+    shortContent: {
+      type: 'string'
     }
+
+    /*
+    shortContent: function(){
+      var wordLimit = 10;
+      var textToLimit = this.content;
+      var finalText = "";
+      var text2 = textToLimit.replace(/\s+/g, ' ');
+      var text3 = text2.split(' ');
+      var numberOfWords = text3.length;
+      var i=0;
+      if(numberOfWords > wordLimit) {
+        for(i=0; i< wordLimit; i++)
+          finalText = finalText+" "+ text3[i]+" ";
+          return finalText+"...";
+        }
+      else return textToLimit;
+      }*/
+
   }
 
 };

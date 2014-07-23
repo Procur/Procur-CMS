@@ -1,0 +1,58 @@
+#companyBlogIndex h6 {
+  display: inline;
+  margin-right:7px;
+  font-family: Monterrat, sans-serif;
+  font-weight: 600;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #AFAFAF;
+
+}
+
+#companyBlogIndex .blogPostSpecs {
+  border-bottom: 3px solid #cecece;
+  border-top: 1px solid #cecece;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  margin-bottom: 25px;
+}
+
+
+#companyBlogIndex .blogPostSpecs span {
+  margin-right: 20px;
+  color: #c0c0c0;
+}
+
+#companyBlogIndex .companyBlogPostPhoto {
+  width: 100%;
+  height: auto;
+}
+
+#companyBlogIndex .companyBlogPostPhotoWrapper {
+  margin-bottom: 25px;
+}
+
+#companyBlogIndex .postTitle {
+  margin-bottom: 15px;
+}
+
+#companyBlogIndex h3 {
+  font-family: 'Open Sans',sans-serif;
+  font-size: 25px;
+  font-weight: 200;
+  color: black;
+  letter-spacing: 0.06em;
+}
+
+#companyBlogIndex .readMoreLink {
+  color: #fdc683;
+}
+
+#companyBlogIndex .nextpreviousWrapper {
+  float:right
+}
+
+#companyBlogIndex .pageNavigationWrapper {
+  border-top: 1px solid #cecece;
+  padding-top: 10px;
+}
