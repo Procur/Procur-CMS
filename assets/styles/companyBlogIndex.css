@@ -2,11 +2,42 @@
   display: inline;
   margin-right:7px;
   font-family: Monterrat, sans-serif;
-  font-weight: 600;
+  font-weight: 800;
   font-size: 10px;
   text-transform: uppercase;
-  color: #AFAFAF;
+  color: black;
 
+}
+
+#companyBlogIndex h2 {
+  font-family: Monterrat, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: black;
+}
+
+#companyBlogIndex .rightColumnLinks h3 {
+  font-size: 12px;
+  font-family: Roboto, sans-serif;
+  color: black;
+  font-style: italic;
+  font-weight: 500;
+}
+#companyBlogIndex .rightColumnLinks a {
+  text-decoration: none;
+  color: black;
+  font-size: 12px;
+  font-family: Roboto, sans-serif;
+  line-height: 20px;
+}
+
+#companyBlogIndex .rightColumnLinks a:hover {
+  color: #fdc683;
+}
+
+#companyBlogIndex .rightColumnLinks .rightColumnLinksBlock a {
+  display: block;
 }
 
 #companyBlogIndex .blogPostSpecs {
@@ -20,7 +51,8 @@
 
 #companyBlogIndex .blogPostSpecs span {
   margin-right: 20px;
-  color: #c0c0c0;
+  color: black;
+  font-family: Roboto, sans-serif;
 }
 
 #companyBlogIndex .companyBlogPostPhoto {
@@ -46,6 +78,7 @@
 
 #companyBlogIndex .readMoreLink {
   color: #fdc683;
+  text-decoration: none;
 }
 
 #companyBlogIndex .nextpreviousWrapper {
@@ -55,4 +88,63 @@
 #companyBlogIndex .pageNavigationWrapper {
   border-top: 1px solid #cecece;
   padding-top: 10px;
+}
+
+#companyBlogIndex .searchText input {
+  float:left;
+  width:75%;
+  border: 2px solid #cecece;
+  font-family: Roboto, sans-serif;
+  font-style: italic;
+  font-size: 10px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+
+}
+
+#companyBlogIndex .searchIcon {
+  float:left;
+  height: 34px;
+  width: 34px;
+  padding-left: 10px;
+  padding-top: 5px;
+  border: 2px solid #cecece;
+  border-left: 0px;
+}
+
+#companyBlogIndex .searchBoxWrapper {
+}
+
+#companyBlogIndex #marginHook {
+  margin-top: 70px;
+  border-top: 1px solid #cecece;
+  padding-top: 30px;
+}
+
+#companyBlogIndex .altTopBorder {
+  border-top: 1px solid #cecece;
+  padding-top: 20px;
+}
+
+#companyBlogIndex .postContent {
+  line-height: 23px;
+  font-family: Roboto, sans-serif;
+  margin-bottom: 50px;
+}
+
+#companyBlogIndex .pageNavigationWrapper {
+  font-family: Roboto, sans-serif;
+  margin-bottom: 30px;
+}
+
+#companyBlogIndex .pageNavigationWrapper a {
+  text-decoration: none;
+  color: black;
+
+}
+
+#companyBlogIndex .pageNavigationWrapper a:hover {
+  color: #fdc683;
+
 }
