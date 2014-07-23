@@ -148,3 +148,11 @@
   color: #fdc683;
 
 }
+
+#companyBlogIndex .searchAlt {
+  display: inline;
+}
+
+#companyBlogIndex .searchAlternativesWrapper {
+  margin-top: 30px;
+}

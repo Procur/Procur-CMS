@@ -1,10 +1,43 @@
-<h1>Company Blog</h1>
 
-<form action="/marketingblog" class="searchForm" name="searchForm" method="post" enctype="multipart/form-data">
-  <input type="text" class="searchInput" name="searchInput" placeholder="Search for Something..." size="30">
-</form>
-<hr>
+<div id="companyBlogIndex">
+  <div class="container">
+    <div class="row">
+      <!--START LEFT COLUMN-->
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
 
-<h2>Sorry, no posts found</h2>
+        <div class="searchAlternativesWrapper">
+          <p>Sorry, we can't locate that page. You may have followed an outdated link or typed an address incorrectly. If you know what you're looking for, you can try:</p>
 
-<a href="/marketingblog">Return to Home Company Blog Page</a>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <i class="fa fa-font"></i><h5 class="searchAlt">Typing the address again</h5>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <i class="fa fa-search"></i><h5 class="searchAlt">Searching the blog</h5>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <i class="fa fa-calendar"></i><h5 class="searchAlt">Browsing posts by date</h5>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <i class="fa fa-list-alt"></i><h5 class="searchAlt">Viewing posts by category</h5>
+                </div>
+              </div>
+        
+        </div>
+      </div>
+      <!--END COLUMN LEFT-->
+
+
+
+
+
+
+      <!--START COLUMN RIGHT-->
+      <%- partial('../partials/blogRightColumn') %>
+      <!--END COLUMN RIGHT-->
+
+    </div>
+  </div>
+</div>
