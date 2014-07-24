@@ -81,6 +81,7 @@ module.exports = {
                 res.redirect('/marketingPost/drafts');
               }
               else {
+                console.log(post);
                 res.redirect('/marketingblog');
               }
 
@@ -139,7 +140,7 @@ module.exports = {
     var pageNumber = query['page'];
 
     //for category searches...
-    if (searchWord.indexOf('category') != -1) {
+    if ((searchWord.indexOf('Platform') != -1)||(searchWord.indexOf('Company') != -1)|| (searchWord.indexOf('International') != -1)||(searchWord.indexOf('Philosophy') != -1)||(searchWord.indexOf('Philanthropy') != -1)) {
       MarketingPost.find().where({ category: { contains: searchWord} }).where({ published: true }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
         if(err) return res.redirect('/');
         numTruePosts = posts1.length;

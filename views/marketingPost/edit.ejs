@@ -1,30 +1,46 @@
-<h1>Edit Marketing Post</h1>
 
-<section id="editMarketingBlogPostForm">
-  <form action="/marketingPost/editpost" method="post" enctype="multipart/form-data">
-    <div><input type="text" name="title" size="70" value="<%= post.title %>"></div>
-    <div><textarea name="content" rows="30" cols="50"><%= post.content %></textarea></div>
-    <div><input type="text" name="date" value="<%= post.date %>" size="70"></div>
-    <div><input type="text" class="tagField" name="tagArray" value="<%= post.tagArray %>" size="70"><span><input type='button' onclick="removeTags();" value="Delete Tags"></span><span class='tagContainer'></span></div>
-    <div><input type="text" class="tagSender" name="tagSender" value="<%= post.tagSender %>" size="70"></div>
-    <div>
-      <select type="text" name="category" value="<%= post.category %>">
-        <option value="category1">Category1</option>
-        <option value="category2">Category2</option>
-        <option value="category3">Category3</option>
-        <option value="category4">Category4</option>
-        <option value="category5">Category5</option>
-      </select></br></br>
-    </div>
+<div id="createNewPost">
+  <div class="container">
+    <h1>Edit Company Blog Post</h1>
+    <section id="editMarketingBlogPostForm">
+      <form action="/marketingPost/editpost" method="post" enctype="multipart/form-data">
+        <!--TITLE-->
+        <h3>TITLE:</h3>
+        <div><input type="text" name="title" size="70" value="<%= post.title %>"></div>
+        <!--DATE-->
+        <h3>DATE:</h3>
+        <div><input type="text" name="date" value="<%= post.date %>" size="70"></div>
+        <!--CATEGORY-->
+        <h3>CATEGORY:</h3>
+        <div>
+          <select type="text" name="category">
+            <option selected value="<%=post.category%>"><%=post.category%></option>
+            <option value="Platform Announcements &amp; Updates">Platform Announcements &amp; Updates</option>
+            <option value="Company News">Company News</option>
+            <option value="International Trade News &amp; Events Events">International Trade News &amp; Events Events</option>
+            <option value="Initiatives and Company Philosophy">Initiatives and Company Philosophy</option>
+            <option value="Philanthropy">Philanthropy</option>
+          </select></br></br>
+        </div>
+        <!--TAGS-->
+        <h3>TAGS</h3>
+        <div><input type="text" class="tagField" name="tagArray"  size="70" placeholder="type a TAG and PRESS RIGHT ARROW and add more..."><span><input type='button' onclick="removeTags();" value="Delete Tags"></span><span class='tagContainer'></span></div>
+        <div><input type="text" class="tagSender" name="tagSender" value="<%= post.tagArray %>" size="70"></div>
+        <!--IMAGE-->
+        <h3>IMAGE</h3>
+        <p>Change current image?:<input type="file" name="image" /></p>
+        <!--CONTENT-->
+        <h3>CONTENT</h3>
+        <div><textarea name="content" rows="30" cols="50"><%= post.content %></textarea></div>
+        <!--PUBLISHED NOW???-->
+        <h3>PUBLISH</h3>
+        <div><input type="checkbox" name="published" value="true">Publish now?</div></br>
+        <!--SUBMIT-->
+        <div class="postSubmitButton"><input type="submit"></div>
+      </form>
+    </section>
 
 
-    <div><input type="checkbox" name="published" value="true">Publish now?</div>
-    <p>Change current image?:<input type="file" name="image" /></p>
-    <div><input type="submit"</div>
-  </form>
-</section>
-
-<div><a href="/marketingPost/unpublish/<%= post.id %>">Unpublish?</a></div>
 
 <script>
   var tagArrayAll = [];
@@ -42,6 +58,7 @@
 
   function removeTags() {
     $('.oneTag').remove();
+    $('.tagSender').val("");
     window.tagArrayAll = [];
   }
 

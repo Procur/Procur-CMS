@@ -200,6 +200,12 @@
 	width: 100%;
 }
 
+#createNewPost .postSubmitButton {
+  margin-bottom: 30px;
+}
+
+
+
 /*showOne*/
 
 #companyBlogIndex .adminToolBox h3 {
@@ -220,3 +226,5 @@
   padding-right: 20px;
   color: #ff6666;
 }
+
+/*edit view*/
