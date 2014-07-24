@@ -80,6 +80,11 @@ module.exports.routes = {
     action: "unpublish"
   },
 
+  "get /pressRelease/recent": {
+    controller: "PressReleaseController",
+    action: "recent"
+  },
+
 //  "get /pressRelease/download/:slug": {
 //    controller: "PressReleaseController",
 //    action: "download"

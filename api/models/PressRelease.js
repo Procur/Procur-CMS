@@ -38,6 +38,9 @@ module.exports = {
     },
     timestamp: {
       type: 'string'
+    },
+    date: {
+      type: 'string'
     }
 
   }

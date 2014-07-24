@@ -1,17 +1,25 @@
-<h1>New Press Release</h1>
+<div id="pressReleaseNewPost">
+  <div class="container">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <h1>New Press Release</h1>
+      <section id="pressReleaseForm">
+        <form action="/pressRelease/new" method="post" enctype="multipart/form-data">
+          <h2>TITLE:</h2>
+          <div><input type="text" name="title" placeholder="Enter title..." size = "70"></div>
+          <h2>DATE:</h2>
+          <div><input type="text" name="date" placeholder="Enter date..." size = "70"></div>
+          <h2>ABSTRACT:</h2>
+          <div><textarea name="abstract" placeholder="Type abstract..." rows="7" cols="50"></textarea></div>
+          <h2>CONTENT:</h2>
+          <div><textarea name="content" rows="20" cols="50" placeholder="Type content"></textarea></div>
+          <h2>UPLOADS:</h2>
+          <p>Upload a Zip File: <input type="file" name="zip" /></p>
+          <p>Upload a PDF File: <input type="file" name="pdf" /></p>
+          <h2>PUBLISH:</h2>
+          <div><input type="checkbox" name="published" value="true">Publish now?</div>
 
-<section id="pressReleaseForm">
-  <form action="/pressRelease/new" method="post" enctype="multipart/form-data">
-    <div><input type="text" name="title" placeholder="Title" size = "70"></div>
-    <div><textarea name="abstract" placeholder="Abstract" rows="7" cols="50"></textarea></div>
-    <div><textarea name="content" rows="20" cols="50" placeholder="Enter content Here"></textarea></div>
-    <div><input type="checkbox" name="published" value="true">Publish now?</div>
 
-    <!--
-    <p>Upload a Zip File: <input type="file" name="zip" /></p>
-    <p>Upload a PDF File: <input type="file" name="pdf" /></p>
-    -->
 
-    <div><input type="submit" value="Upload"</div>
+    <div><input type="submit" value="Submit Press Release"</div>
   </form>
 </section>

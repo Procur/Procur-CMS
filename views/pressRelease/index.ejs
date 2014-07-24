@@ -1,16 +1,51 @@
-<h1>Press Release and Media</h1>
+<div id ="pressRelease">
+  <div class="container">
+    <div class="row">
 
-<hr>
+      <!--COL LEFT-->
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+        <h1>Press &amp; Media</h1>
+        <h2>Press Releases</h2>
+        <% posts.forEach(function(post){ %>
+          <% if(post.published == true){ %>
+            <div class="postWrapper">
+              <div class="pressTitleDate"><h3><a href="/pressreleases/<%= post.slug %>"><%= post.title %></a></h3><span><%= post.date %></span></div>
+              <div class="abstractWrapper"><p><%= post.abstract %></p></div>
+            </div>
+         <% } %>
+        <% }); %>
+      </div>
+      <!--END COL LEFT-->
 
-<% posts.forEach(function(post){ %>
-  <% if(post.published == true){ %>
-  <div><a href="/pressreleases/<%= post.slug %>"><h3><%= post.title %></h3></a></div>
-  <div><strong>Date Released: <%= post.timestamp %></strong></div>
-  <div><p><%= post.abstract %></p></div>
- <% } %>
-<% }); %>
+      <!--COL RIGHT-->
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 colRight">
+        <h2>Media Kit</h2>
+        <h4>About our Media Kit</h4>
+        <p>We have provide a downloadable media kit with curated information, images and media in efforts to make generating content about our company efficient and easy. Press Kits can be downloaded individually with related press releases or downloaded as a comprehensive .zip file below.</p>
+        <h4>Contacting us</h4>
+        <p>If you have additional press and/or media related questions that are not addressed in the provided Press Kits(s) or Media Kit, please email us at:<a id="mediaEmail" href="#">media@procur.com</a>.
+        <h4>License and Copyright</h4>
+        <p>You may use the provided media assets in accordance with the Usage Guidelines provided in the Media Kit and Press Kits(s). Please note that these are copyrighted materials.  Any use of these materials that does not adhere to these guidelines is an infringment of Procur's intellectual property rights, and will be prosecuted accordingly.
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <h4>Creative Commons Permissions</h4>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <h4>Download Buttons Go Here:</h4>
+          </div>
+        </div>
+        <a href="/pressRelease/new">Create New Press Release</a>
+      </div>
+      <!--END COL RIGHT-->
 
- <a href="/pressRelease/new">Create New Press Release</a>
+
+
+
+
+
+
+
+
  <a class="next" href="#" onclick="nextPage(); return false;">NEXT</a>
  <a class="previous" href="#" onclick="previousPage(); return false;">PREVIOUS</a>
 

@@ -1,17 +1,53 @@
 
-<% if(post.published == true){ %>
-  <div><h1><%= post.title %></h1></div>
-  <div><p><%= post.timestamp %></p></div>
-  <div><p><%= post.abstract %></p></div>
-  <div><p><%= post.content %></p></div>
-<% } %>
+<div id="pressReleaseShowOne">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+        <div class="backWrapper">
+          <h5>Back to Press &amp; Media page</h5>
+        </div>
+        <% if(post.published == true){ %>
+          <div><h1><%= post.title %></h1></div>
+          <div class="specsContainer">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <h6>Posted On</h6><p><%= post.date %></p><h6>Tags</h6><p>Tag placeholder</p>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                EMAIL/PRINT/DOWNLOAD placeholder
+              </div>
+            </div>
+          </div>
+          <div class="abstractWrapper"><p><strong><%= post.abstract %></strong></p></div>
+          <div class="contentWrapper"><p><%= post.content %></p></div>
+        <% } %>
+        <div class="adminToolBox">
+          <h3>ADMIN TOOLBOX</h3>
+          <div class="adminTools">
+            <a href="/pressreleases">Home</a>
+            <a href="/pressRelease/unpublish/<%= post.slug %>">Unpublish</a>
+            <a href="/pressRelease/edit/<%= post.slug %>">Edit</a>
+            <a href="/pressRelease/new">Create</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <h2>Recent Press Releases</h2>
+        <div class="recentPressRelease">
+        </div>
+        <div>
+          Download Stuff
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<!--
-<form action="/pressRelease/download/<%= post.slug %>" method="get" >
+
+
+
+
+
+<!--<form action="/pressRelease/download/<%= post.slug %>" method="get" >
 <button type="submit">Download the Zip!</button>
-</form>
--->
-
-<a href="/pressreleases">Home</a>
-<a href="/pressRelease/unpublish/<%= post.slug %>">Unpublish</a>
-<a href="/pressRelease/edit/<%= post.slug %>">Edit</a>
+</form>-->

@@ -208,21 +208,21 @@
 
 /*showOne*/
 
-#companyBlogIndex .adminToolBox h3 {
+ .adminToolBox h3 {
   color: red;
   padding-left: 20px;
 }
 
-#companyBlogIndex .adminToolBox {
+ .adminToolBox {
   border: 1px solid black;
 }
 
-#companyBlogIndex .adminTools {
+ .adminTools {
   padding-left: 20px;
   padding-bottom: 10px;
 }
 
-#companyBlogIndex .adminTools a {
+ .adminTools a {
   padding-right: 20px;
   color: #ff6666;
 }

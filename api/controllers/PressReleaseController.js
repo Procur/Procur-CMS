@@ -50,14 +50,21 @@ module.exports = {
       })
     },
 
+    recent: function(req,res){
+      PressRelease.find().limit(10).exec(function(err,posts){
+        if(err) return res.redirect('/');
+        res.send(posts);
+      });
+    },
+
     newPost: function(req, res){
       res.view();
     },
 
     createPost: function(req, res){
-      /*
+
       //////////S3 RECEIVER///////////
-      function newReceiverStream(options) {
+      /*function newReceiverStream(options) {
         console.log('1');
         // These credentials can be fetched from options:
         var S3_API_KEY = 'AKIAIPCUDSE5TKUQFEEA';
@@ -116,20 +123,20 @@ module.exports = {
 
         return receiver__;
       };
-
+*/
       ///////FIRE UPLOAD/////
       console.log("here1");
-      var exampleZip = '/Users/treyschneider/Downloads/jquery-validation-1.12.0.zip'*/
+    //  var exampleZip = '/Users/treyschneider/Downloads/jquery-validation-1.12.0.zip';
       var b = req.body;
       var isPublished = boolify(b.published);
 
-        //  req.file('zip').upload( newReceiverStream(exampleZip), function (err, result1) {
-        //if (err) return res.serverError(err);
-        //console.log(result1);
-        //  req.file('pdf').upload( newReceiverStream(exampleZip), function (err, result2){
-        //    if (err) return res.serverError(err);
-        //    console.log(result2);
-      PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')/*, zip: result1[0].extra.Location, pdf: result2[0].extra.Location*/ }, function(err,post){
+    //      req.file('zip').upload( newReceiverStream(exampleZip), function (err, result1) {
+    //    if (err) return res.serverError(err);
+    //    console.log(result1);
+    //      req.file('pdf').upload( newReceiverStream(exampleZip), function (err, result2){
+    //        if (err) return res.serverError(err);
+    //        console.log(result2);
+  PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date /*timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')*//*, zip: result1[0].extra.Location, pdf: result2[0].extra.Location*/ }, function(err,post){
                 if (err){
                   req.flash("There was a problem. Try again.");
                   res.redirect("/pressRelease/new");
@@ -145,8 +152,8 @@ module.exports = {
                 }
               console.log(post);
               });
-        //  });
-        //});
+    //      });
+    //    });
     },
 
 
@@ -191,7 +198,7 @@ module.exports = {
           res.redirect('/pressreleases')
         });
       });
-    },
+    }
 
 
 //////////FIX S3 DOWNLOAD PERMISSIONS///////
