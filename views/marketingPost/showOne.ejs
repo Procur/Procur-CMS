@@ -1,10 +1,41 @@
 
-<% if(post.published == true){ %>
-  <div><a href="/marketingblog/<%= post.id %>"><h3><%= post.title %></h3></a></div>
-  <span><%= post.date %></span><span style="margin-left:30px"><%= post.category %></span><span style="margin-left:30px;color:red"><%= post.tagArray %></span>
-  <div><p><%= post.content %></p></div>
-  <% if(post.images!=null){ %><div><img src="<%= post.images %>"></div><% } %>
-<% } %>
+<div id="companyBlogIndex">
+  <div class="container">
+    <div class="row">
+      <!--START LEFT COLUMN-->
+      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+
+      <!--ADD POST-->
+        <% if(post.published == true){ %>
+          <div class="postContainer">
+            <div class="postTitle"><h3><%= post.title %></h3></a></div>
+            <div class="blogPostSpecs">
+              <h6>Posted On</h6><span><%= post.date %></span>
+              <h6>Under</h6><span><%= post.category %></span>
+              <h6>Tags</h6><span><%= post.tagArray %></span>
+            </div>
+            <% if(post.images!=null){ %><div class="companyBlogPostPhotoWrapper"><img class="companyBlogPostPhoto" src="<%= post.images %>"></div><% } %>
+            <div class="postContent"><p><%=post.content%></p></div>
+          </div>
+        <% } %>
+      </div>
+
+      <!--START RIGHT COLUMN-->
+      <%- partial('../partials/blogRightColumn') %>
+      <!-- END COLUMN RIGHT-->
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
 
 
 
