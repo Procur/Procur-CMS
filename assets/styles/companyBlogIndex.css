@@ -149,10 +149,43 @@
 
 }
 
-#companyBlogIndex .searchAlt {
+/*Not Found CSS*/
+
+#companyBlogNotFound .searchAlt {
   display: inline;
+  font-family: 'Open Sans',sans-serif;
+  font-size: 25px;
+  font-weight: 100;
+  color: #a6a6a6;
+  letter-spacing: 0.06em;
 }
 
-#companyBlogIndex .searchAlternativesWrapper {
+#companyBlogNotFound .searchAlternativesWrapper {
   margin-top: 30px;
+}
+
+#companyBlogNotFound p {
+  font-family: 'Open Sans',sans-serif;
+  font-size: 25px;
+  font-weight: 200;
+  color: black;
+  letter-spacing: 0.06em;
+  padding-bottom: 33px;
+}
+
+#companyBlogNotFound .outerWrap {
+  padding-left: 0px;
+}
+
+#companyBlogNotFound .innerWrap {
+  padding-left: 0px;
+  padding-bottom: 20px;
+}
+
+#companyBlogNotFound .specialOuter {
+  margin-top: 50px;
+}
+
+#companyBlogNotFound #notFoundContainer {
+  border-bottom: 1px solid #cecece;
 }
