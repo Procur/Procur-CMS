@@ -140,12 +140,12 @@ module.exports = {
 
     //for category searches...
     if (searchWord.indexOf('category') != -1) {
-      MarketingPost.find().where({ category: { contains: searchWord} }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
+      MarketingPost.find().where({ category: { contains: searchWord} }).where({ published: true }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
         if(err) return res.redirect('/');
         numTruePosts = posts1.length;
         if(numTruePosts == 0) return res.redirect('/marketingPost/nosearch');
       });
-      return MarketingPost.find().where({ category: { contains: searchWord} }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+      return MarketingPost.find().where({ category: { contains: searchWord} }).where({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
         if(err) return res.redirect('/');
           console.log(searchResults);
         if(searchResults) {
@@ -159,12 +159,12 @@ module.exports = {
       var numberIndex = searchWord.indexOf('2');
       searchWord = searchWord.substr(0,numberIndex) + ' ' + searchWord.substr(numberIndex,searchWord.length-1);
       console.log(searchWord);
-      MarketingPost.find().where({ date: { contains: searchWord} }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
+      MarketingPost.find().where({ date: { contains: searchWord} }).where({ published: true }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
         if(err) return res.redirect('/');
         numTruePosts = posts1.length;
         if(numTruePosts == 0) return res.redirect('/marketingPost/nosearch');
       });
-      return MarketingPost.find().where({ date: { contains: searchWord} }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+      return MarketingPost.find().where({ date: { contains: searchWord} }).where({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
         if(err) return res.redirect('/');
           console.log(searchResults);
         if(searchResults) {
@@ -175,12 +175,12 @@ module.exports = {
 
     //for tag searches...
     else {
-    MarketingPost.find().where({ tagArray: { contains: searchWord} }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
+    MarketingPost.find().where({ tagArray: { contains: searchWord} }).where({ published: true }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
       if(err) return res.redirect('/');
       numTruePosts = posts1.length;
       if(numTruePosts == 0) return res.redirect('/marketingPost/nosearch');
     });
-    return MarketingPost.find().where({ tagArray: { contains: searchWord} }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+    return MarketingPost.find().where({ tagArray: { contains: searchWord} }).where({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
       if(err) return res.redirect('/');
         console.log(searchResults);
       if(searchResults) {
