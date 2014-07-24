@@ -1,26 +1,46 @@
-<h1>New Company Blog Post</h1>
 
-<section id="marketingBlogPostForm">
-  <form action="/marketingPost/new" method="post" enctype="multipart/form-data">
-    <div><input type="text" name="title" placeholder="Title" size="70"></div>
-    <div><textarea name="content" rows="15" cols="50" placeholder="Content"></textarea></div>
-    <div><input type="text" name="date" placeholder="Date to Release Post (ex. 05 January 2014)" size="70"></div>
-    <div><input type="text" class="tagField" name="tagArray" placeholder="type a TAG and PRESS RIGHT ARROW and add more..." size="70"><span><input type='button' onclick="removeTags();" value="Delete Tags"></span><span class='tagContainer'></span></div>
-    <div><input type="text" class="tagSender" name="tagSender" placeholder="tag sender" size="70"></div>
-    <div>
-      <select type="text" name="category" placeholder="Category">
-        <option value="category1">Category1</option>
-        <option value="category2">Category2</option>
-        <option value="category3">Category3</option>
-        <option value="category4">Category4</option>
-        <option value="category5">Category5</option>
-      </select></br></br>
-    </div>
-    <div><input type="checkbox" name="published" value="true">Publish now?</div>
-    <p>Image: <input type="file" name="image" /></p>
-    <div><input type="submit"</div>
-  </form>
-</section>
+<div id="createNewPost">
+  <div class="container">
+    <h1>New Company Blog Post</h1>
+    <section id="marketingBlogPostForm">
+      <form action="/marketingPost/new" method="post" enctype="multipart/form-data">
+        <!--TITLE-->
+        <h3>TITLE:</h3>
+        <div><input type="text" name="title" placeholder="Enter Title..." size="70"></div>
+        <!--DATE-->
+        <h3>DATE:</h3>
+        <div><input type="text" name="date" placeholder="Enter Date... (example --> 05 January 2014)" size="70"></div>
+        <!--CATEGORY-->
+        <h3>CATEGORY:</h3>
+        <div>
+          <select type="text" name="category" placeholder="Category">
+            <option>Select a category</option>
+            <option value="category1">Platform Announcements &amp; Updates</option>
+            <option value="category2">Company News</option>
+            <option value="category3">International Trade News &amp; Events Events</option>
+            <option value="category4">Initiatives and Company Philosophy</option>
+            <option value="category5">Philanthropy</option>
+          </select></br></br>
+        </div>
+        <!--TAGS-->
+        <h3>TAGS</h3>
+        <div><input type="text" class="tagField" name="tagArray" placeholder="type a TAG and PRESS RIGHT ARROW and add more..." size="70"><span><input type='button' onclick="removeTags();" value="Delete Tags"></span><span class='tagContainer'></span></div>
+        <div><input type="text" class="tagSender" name="tagSender" placeholder="tag sender" size="70"></div>
+        <!--IMAGE-->
+        <h3>IMAGE</h3>
+        <p>Image: <input type="file" name="image" /></p>
+        <!--CONTENT-->
+        <h3>CONTENT</h3>
+        <div><textarea name="content" rows="15" cols="50" placeholder="Content"></textarea></div>
+        <!--PUBLISHED NOW???-->
+        <h3>PUBLISH</h3>
+        <div><input type="checkbox" name="published" value="true">Check to publish NOW|||Uncheck to send to DRAFTS</div></br></br>
+        <!--SUBMIT-->
+        <div><input type="submit"></div>
+      </form>
+    </section>
+  </div>
+</div>
 
 
 <script>
@@ -39,6 +59,7 @@
 
   function removeTags() {
     $('.oneTag').remove();
+    $('.tagSender').val("");
     window.tagArrayAll = [];
   }
 
