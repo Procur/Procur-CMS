@@ -6,7 +6,7 @@
 var home = 'http://procur.com';
 
 module.exports = function(req, res, next) {
-  User.findOne({ id: req.session.passport.user }, function(err, user){
+  User.findOne({ id: req.session.user }, function(err, user){
     if(err){ return res.redirect(home); }
     if(user !== undefined){
       if (user.administrator === true){

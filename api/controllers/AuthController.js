@@ -25,6 +25,9 @@ module.exports = {
 						return res.redirect('/login');
 					}
 					req.session.authenticated = true;
+					req.session.user = user.id;
+
+					console.log(req.session);
 					return res.redirect('/admin/drafts');
 				});
 			}
