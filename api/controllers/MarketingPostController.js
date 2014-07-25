@@ -66,7 +66,7 @@ module.exports = {
     var b = req.body;
     var isPublished = boolify(b.published);
     cloudinary.uploader.upload(req.files.image.path, function(result){
-      MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , tagArray: [b.tagSender]}, function(err, post){
+      MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , tagArray: [b.tagSender], generalCategory: 'marketingpost'}, function(err, post){
         var finalText = shortenContent.shortenMe(post.content); //SHORTEN CONTENT FOR VIEW
         MarketingPost.findOne({ title: b.title }, function(err, post){
           if(err) return res.redirect('/');

@@ -44,6 +44,9 @@ module.exports = {
     },
     shortContent: {
       type: 'string'
+    },
+    generalCategory: {
+      type: 'string'
     }
 
     /*

@@ -1,0 +1,14 @@
+#adminCMS a {
+  text-decoration: none;
+  color: black;
+}
+
+#adminCMS a:hover {
+  color: orange;
+}
+
+#adminCMS .dashWrapper {
+  border: 2px solid #cecece;
+  padding: 20px;
+  margin-top: 30px;
+}
