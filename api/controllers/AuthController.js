@@ -30,6 +30,7 @@ module.exports = {
 			}
 			else{
 				req.flash('invalid email address');
+				res.redirect('/login');
 			}
 		});
 	},
