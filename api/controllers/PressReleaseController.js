@@ -4,12 +4,15 @@ var slug = require('slug');
 var print = console.log.bind(console,'>');
 var url = require('url');
 var fsx = require('fs-extra');
-var MultiPartUpload = require('knox-mpu');
-var knox = require('knox');
+
+
 var UUIDGenerator = require('node-uuid');
 var AWS = require('aws-sdk');
 var fs = require('fs');
 var moment = require('moment');
+var Uploader = require('s3-streaming-upload').Uploader,
+    upload = null,
+    stream = require('fs').createReadStream('/etc/resolv.conf');
 
 //UTILITY
 var boolify = function(obj){
@@ -62,98 +65,48 @@ module.exports = {
     },
 
     createPost: function(req, res){
-
-      //////////S3 RECEIVER///////////
-      /*function newReceiverStream(options) {
-        console.log('1');
-        // These credentials can be fetched from options:
-        var S3_API_KEY = 'AKIAIPCUDSE5TKUQFEEA';
-        var S3_API_SECRET = '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';
-        var S3_BUCKET = 'procurPressMedia';
-
-        var log = console.log;
-
-        var Writable = require('stream').Writable;
-        var receiver__ = Writable({
-          objectMode: true
-        });
-        var client = knox.createClient({
-          key: S3_API_KEY,
-          secret: S3_API_SECRET,
-          bucket: S3_BUCKET
-        });
-
-        receiver__._write = function onFile(__newFile, encoding, next) {
-          console.log('2');
-          // Create a unique(?) filename
-          var fsName = UUIDGenerator.v1();
-          log(('Receiver: Received file `' + __newFile.filename + '` from an Upstream.').grey);
-          console.log('3');
-          var mpu = new MultiPartUpload({
-            client: client,
-            objectName: fsName,
-            stream: __newFile,
-            maxUploadSize: options.maxBytes
-
-          }, function(err, body) {
-            console.log('4');
-            if (err) {
-              log(('Receiver: Error writing `' + __newFile.filename + '`:: ' + require('util').inspect(err) + ' :: Cancelling upload and cleaning up already-written bytes...').red);
-              receiver__.emit('error', err);
-              return;
-            }
-          console.log('5');
-            __newFile.extra = body;
-            __newFile.extra.fsName = fsName;
-          console.log('6');
-            log(('Receiver: Finished writing `' + __newFile.filename + '`').grey);
-            next();
-          });
-
-          mpu.on('progress', function(data) {
-            receiver__.emit('progress', {
-              name: __newFile.filename,
-              written: data.written,
-              total: data.total,
-              percent: data.percent
-            });
-          });
-
-        };
-
-        return receiver__;
-      };
-*/
-      ///////FIRE UPLOAD/////
-      console.log("here1");
-    //  var exampleZip = '/Users/treyschneider/Downloads/jquery-validation-1.12.0.zip';
       var b = req.body;
+      console.log(req.files.zip);
       var isPublished = boolify(b.published);
+      //AWS UPLOAD
+      upload = new Uploader({
+        accessKey:  'AKIAIPCUDSE5TKUQFEEA',
+        secretKey:  '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',
+        bucket:     'procurPressMedia',
+        objectName: req.files.zip.path,
+        stream:     stream,
+        objectParams: {
+          ACL: 'public-read'
+        }
+      });
+      upload.on('completed', function (err, S3_response) {
+        console.log('upload completed');
 
-    //      req.file('zip').upload( newReceiverStream(exampleZip), function (err, result1) {
-    //    if (err) return res.serverError(err);
-    //    console.log(result1);
-    //      req.file('pdf').upload( newReceiverStream(exampleZip), function (err, result2){
-    //        if (err) return res.serverError(err);
-    //        console.log(result2);
-  PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date /*timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')*//*, zip: result1[0].extra.Location, pdf: result2[0].extra.Location*/ }, function(err,post){
-                if (err){
-                  req.flash("There was a problem. Try again.");
-                  res.redirect("/pressRelease/new");
-                }
-                else {
-                  req.flash("Post successfully created.")
-                  if(isPublished == false){
-                    res.redirect("/pressRelease/drafts");
+        PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date, zip: S3_response.location, pdf: S3_response.location }, function(err,post){
+                  if (err){
+                    req.flash("There was a problem. Try again.");
+                    res.redirect("/pressRelease/new");
                   }
                   else {
-                    res.redirect("/pressreleases");
+                    req.flash("Post successfully created.")
+                    if(isPublished == false){
+                      res.redirect("/pressRelease/drafts");
+                    }
+                    else {
+                      res.redirect("/pressreleases");
+                    }
                   }
-                }
-              console.log(post);
-              });
-    //      });
-    //    });
+                console.log(post);
+                });
+      });
+
+      upload.on('failed', function (err) {
+        console.log('upload failed with error', err);
+      });
+      //END UPLOAD
+
+
+
     },
 
 
