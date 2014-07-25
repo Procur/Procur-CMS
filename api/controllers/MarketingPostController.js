@@ -67,27 +67,33 @@ module.exports = {
     var isPublished = boolify(b.published);
     cloudinary.uploader.upload(req.files.image.path, function(result){
       MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , tagArray: [b.tagSender], generalCategory: 'marketingpost'}, function(err, post){
-        var finalText = shortenContent.shortenMe(post.content); //SHORTEN CONTENT FOR VIEW
-        MarketingPost.findOne({ title: b.title }, function(err, post){
-          if(err) return res.redirect('/');
-          MarketingPost.update(post, { shortContent: finalText }, function(err,post){
-            if (err){
-              req.flash("There was a problem. Try again.");
-              res.redirect('/marketingPost/new');
-            }
-            else {
-              req.flash("Post successfully created.");
-              if (isPublished === false){
-                res.redirect('/marketingPost/drafts');
+        if(err){ return res.send('there was a db error'); }
+        if (post !== undefined){
+          var finalText = shortenContent.shortenMe(post.content); //SHORTEN CONTENT FOR VIEW
+          MarketingPost.findOne({ title: b.title }, function(err, post){
+            if(err) return res.redirect('/');
+            MarketingPost.update(post, { shortContent: finalText }, function(err,post){
+              if (err){
+                req.flash("There was a problem. Try again.");
+                res.redirect('/marketingPost/new');
               }
               else {
-                console.log(post);
-                res.redirect('/marketingblog');
-              }
+                req.flash("Post successfully created.");
+                if (isPublished === false){
+                  res.redirect('/marketingPost/drafts');
+                }
+                else {
+                  console.log(post);
+                  res.redirect('/marketingblog');
+                }
 
-            }
+              }
+            });
           });
-        });
+        }
+      else {
+        return res.redirect('/marketingblog');
+      }
       });
     });
   },
@@ -107,15 +113,20 @@ module.exports = {
       MarketingPost.findOne({ id: id }, function(err, post){
         if(err) return res.redirect('/');
       MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date, tagArray: [b.tagSender] }, function(err, post){
-        var id = post[0].id;
         if(err) return res.redirect('/');
-        req.flash("Post updated.");
-        if (isPublished == true){
-          res.redirect('/marketingblog/' + id);
+        if(post !== undefined){
+          var id = post[0].id;
+          req.flash("Post updated.");
+          if (isPublished == true){
+            res.redirect('/marketingblog/' + id);
+          }
+          else {
+            res.redirect('/marketingblog');
+          }
         }
-        else {
-          res.redirect('/marketingblog');
-        }
+      else {
+        res.redirect('/marketingblog');
+      }
       });
     });
   });
