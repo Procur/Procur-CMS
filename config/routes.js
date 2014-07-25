@@ -92,7 +92,7 @@ module.exports.routes = {
 
 //INDUSTRY NEWS ROUTES
   // external routes
-  'get /industrynews': {
+  /*'get /industrynews': {
     controller: "IndustryNewsPostController",
     action: 'index'
   },
@@ -127,7 +127,7 @@ module.exports.routes = {
   'get /industrynewsPost/unpublish/:id': {
     controller: "IndustryNewsPostController",
     action: 'unpublish'
-  },
+  },*/
 
 // MARKETING BLOG ROUTES
 

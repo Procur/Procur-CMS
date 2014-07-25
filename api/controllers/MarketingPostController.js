@@ -40,7 +40,9 @@ module.exports = {
     var pageNumber = query['page'];
     MarketingPost.find({ published: true }).exec(function(err, posts1){
       if(err) return res.redirect('/');
-      numTruePosts = posts1.length;
+      if(posts1 !== undefined){
+        numTruePosts = posts1.length;
+      }
     });
     MarketingPost.find({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
       if(err) return res.redirect('/');
@@ -67,27 +69,33 @@ module.exports = {
     var isPublished = boolify(b.published);
     cloudinary.uploader.upload(req.files.image.path, function(result){
       MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , tagArray: [b.tagSender], generalCategory: 'marketingpost'}, function(err, post){
-        var finalText = shortenContent.shortenMe(post.content); //SHORTEN CONTENT FOR VIEW
-        MarketingPost.findOne({ title: b.title }, function(err, post){
-          if(err) return res.redirect('/');
-          MarketingPost.update(post, { shortContent: finalText }, function(err,post){
-            if (err){
-              req.flash("There was a problem. Try again.");
-              res.redirect('/marketingPost/new');
-            }
-            else {
-              req.flash("Post successfully created.");
-              if (isPublished === false){
-                res.redirect('/marketingPost/drafts');
+        if(err){ return res.send(err); }
+        if (post !== undefined){
+          var finalText = shortenContent.shortenMe(post.content); //SHORTEN CONTENT FOR VIEW
+          MarketingPost.findOne({ title: b.title }, function(err, post){
+            if(err) return res.redirect('/');
+            MarketingPost.update(post, { shortContent: finalText }, function(err,post){
+              if (err){
+                req.flash("There was a problem. Try again.");
+                res.redirect('/marketingPost/new');
               }
               else {
-                console.log(post);
-                res.redirect('/marketingblog');
-              }
+                req.flash("Post successfully created.");
+                if (isPublished === false){
+                  res.redirect('/marketingPost/drafts');
+                }
+                else {
+                  console.log(post);
+                  res.redirect('/marketingblog');
+                }
 
-            }
+              }
+            });
           });
-        });
+        }
+      else {
+        return res.redirect('/marketingblog');
+      }
       });
     });
   },
@@ -105,14 +113,19 @@ module.exports = {
     var id = req.param('id');
     cloudinary.uploader.upload(req.files.image.path, function(result){
       MarketingPost.findOne({ id: id }, function(err, post){
-        if(err) return res.redirect('/');
-      MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date, tagArray: [b.tagSender] }, function(err, post){
-        var id = post[0].id;
-        if(err) return res.redirect('/');
-        req.flash("Post updated.");
-        if (isPublished == true){
-          res.redirect('/marketingblog/' + id);
-        }
+        if(err) return res.send(err);
+        MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date, tagArray: [b.tagSender] }, function(err, post){
+          if(err) { return res.send(err); }
+          if(post !== undefined){
+            var id = post[0].id;
+            req.flash("Post updated.");
+            if (isPublished == true){
+              res.redirect('/marketingblog/' + id);
+            }
+            else {
+              res.redirect('/marketingblog');
+            }
+          }
         else {
           res.redirect('/marketingblog');
         }
