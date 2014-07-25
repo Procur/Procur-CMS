@@ -40,7 +40,9 @@ module.exports = {
     var pageNumber = query['page'];
     MarketingPost.find({ published: true }).exec(function(err, posts1){
       if(err) return res.redirect('/');
-      numTruePosts = posts1.length;
+      if(posts1 !== undefined){
+        numTruePosts = posts1.length;
+      }
     });
     MarketingPost.find({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
       if(err) return res.redirect('/');
