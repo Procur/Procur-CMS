@@ -67,7 +67,7 @@ module.exports = {
     var isPublished = boolify(b.published);
     cloudinary.uploader.upload(req.files.image.path, function(result){
       MarketingPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , tagArray: [b.tagSender], generalCategory: 'marketingpost'}, function(err, post){
-        if(err){ return res.send('there was a db error'); }
+        if(err){ return res.send(err); }
         if (post !== undefined){
           var finalText = shortenContent.shortenMe(post.content); //SHORTEN CONTENT FOR VIEW
           MarketingPost.findOne({ title: b.title }, function(err, post){
@@ -111,22 +111,22 @@ module.exports = {
     var id = req.param('id');
     cloudinary.uploader.upload(req.files.image.path, function(result){
       MarketingPost.findOne({ id: id }, function(err, post){
-        if(err) return res.redirect('/');
-      MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date, tagArray: [b.tagSender] }, function(err, post){
-        if(err) return res.redirect('/');
-        if(post !== undefined){
-          var id = post[0].id;
-          req.flash("Post updated.");
-          if (isPublished == true){
-            res.redirect('/marketingblog/' + id);
+        if(err) return res.send(err);
+        MarketingPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date, tagArray: [b.tagSender] }, function(err, post){
+          if(err) { return res.send(err); }
+          if(post !== undefined){
+            var id = post[0].id;
+            req.flash("Post updated.");
+            if (isPublished == true){
+              res.redirect('/marketingblog/' + id);
+            }
+            else {
+              res.redirect('/marketingblog');
+            }
           }
-          else {
-            res.redirect('/marketingblog');
-          }
+        else {
+          res.redirect('/marketingblog');
         }
-      else {
-        res.redirect('/marketingblog');
-      }
       });
     });
   });
