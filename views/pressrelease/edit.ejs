@@ -1,13 +1,18 @@
-<h1>Edit Press Release</h1>
-
-<section id="editPressReleaseForm">
-  <form action="/pressRelease/editpost" method="post">
-    <div><input type="text" name="title" size = "70" value="<%= post.title %>"></div>
-    <div><input type="text" name="abstract" size="100" value="<%= post.abstract %>"></div>
-    <div><textarea name="content" rows="30" cols="50"><%= post.content %></textarea></div>
-    <div><input type="checkbox" name="published" value="true">Publish now?</div>
-    <div><input type="submit"</div>
-  </form>
-</section>
-
-<a href="/pressRelease/unpublish/<%= post.slug %>">Unpublish?</a></div>
+<div class="container">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <h1>Edit Press Release</h1>
+    <section id="editPressReleaseForm">
+      <form action="/pressRelease/editpost" method="post">
+        <h2>TITLE</h2>
+        <div><input type="text" name="title" size = "70" value="<%= post.title %>"></div>
+        <h2>ABSTRACT</h2>
+        <div><textarea type="text" name="abstract" size="100" value="<%= post.abstract %>"></textarea></div>
+        <h2>CONTENT</h2>
+        <div><textarea name="content" rows="30" cols="50"><%= post.content %></textarea></div>
+        <h2>PUBLISH</h2>
+        <div><input type="checkbox" name="published" value="true">Publish now?</div>
+        <div><input type="submit"</div>
+      </form>
+    </section>
+  </div>
+</div>
