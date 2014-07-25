@@ -119,7 +119,7 @@ module.exports = {
           if(post !== undefined){
             var id = post[0].id;
             req.flash("Post updated.");
-            if (isPublished == true){
+            if (isPublished === true){
               res.redirect('/marketingblog/' + id);
             }
             else {
@@ -157,7 +157,7 @@ module.exports = {
       MarketingPost.find().where({ category: { contains: searchWord} }).where({ published: true }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
         if(err) return res.redirect('/');
         numTruePosts = posts1.length;
-        if(numTruePosts == 0) return res.redirect('/marketingPost/nosearch');
+        if(numTruePosts === 0) return res.redirect('/marketingPost/nosearch');
       });
       return MarketingPost.find().where({ category: { contains: searchWord} }).where({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
         if(err) return res.redirect('/');
@@ -176,7 +176,7 @@ module.exports = {
       MarketingPost.find().where({ date: { contains: searchWord} }).where({ published: true }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
         if(err) return res.redirect('/');
         numTruePosts = posts1.length;
-        if(numTruePosts == 0) return res.redirect('/marketingPost/nosearch');
+        if(numTruePosts === 0) return res.redirect('/marketingPost/nosearch');
       });
       return MarketingPost.find().where({ date: { contains: searchWord} }).where({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
         if(err) return res.redirect('/');
@@ -192,7 +192,7 @@ module.exports = {
     MarketingPost.find().where({ tagArray: { contains: searchWord} }).where({ published: true }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
       if(err) return res.redirect('/');
       numTruePosts = posts1.length;
-      if(numTruePosts == 0) return res.redirect('/marketingPost/nosearch');
+      if(numTruePosts === 0) return res.redirect('/marketingPost/nosearch');
     });
     return MarketingPost.find().where({ tagArray: { contains: searchWord} }).where({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
       if(err) return res.redirect('/');
