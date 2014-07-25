@@ -43,6 +43,18 @@ module.exports.routes = {
   //  action: "index"
   //},
 
+  //AUTH ROUTES
+
+  'get /login': {
+    controller: 'AuthController',
+    action: 'login'
+  },
+
+  'post /login': {
+    controller: 'AuthController',
+    action: 'processLogin'
+  },
+
   'get /pressreleases?:querystring': {
     controller: "PressReleaseController",
     action: "index"

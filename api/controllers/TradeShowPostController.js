@@ -24,7 +24,7 @@ var boolify = function(obj){
   }
   else {
     obj = false;
-  };
+  }
   return obj;
 };
 ///////END UTILITY FUNCTIONS
@@ -45,7 +45,7 @@ module.exports = {
     TradeShowPost.findOne({ id: id }, function(err, post){
       if(err) return res.redirect('/');
       res.view({ post: post });
-    })
+    });
   },
 
   newPost: function(req, res){
@@ -65,8 +65,8 @@ module.exports = {
         res.redirect('/tradeshowPost/new');
       }
       else {
-        req.flash("Post successfully created.")
-        if (isPublished == false){
+        req.flash("Post successfully created.");
+        if (isPublished === false){
           res.redirect('/tradeshowPost/drafts');
         }
         else {
@@ -98,7 +98,7 @@ module.exports = {
         var id = post[0].id;
         if(err) return res.redirect('/');
         req.flash("Post updated.");
-        if (isPublished == true){
+        if (isPublished === true){
           res.redirect('/tradeshows/' + id);
         }
         else {

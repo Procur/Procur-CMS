@@ -25,7 +25,7 @@ var boolify = function(obj){
   }
   else {
     obj = false;
-  };
+  }
   return obj;
 };
 ///////END UTILITY FUNCTIONS
@@ -45,7 +45,7 @@ module.exports = {
     IndustryNewsPost.findOne({ id: id }, function(err, post){
       if(err) return res.redirect('/');
       res.view({ post: post });
-    })
+    });
   },
 
   newPost: function(req, res){
@@ -66,8 +66,8 @@ cloudinary.uploader.upload(req.files.image.path, function(result){
         res.redirect('/industrynewsPost/new');
       }
       else {
-        req.flash("Post successfully created.")
-        if (isPublished == false){
+        req.flash("Post successfully created.");
+        if (isPublished === false){
           res.redirect('/industrynewsPost/drafts');
         }
         else {
@@ -99,7 +99,7 @@ cloudinary.uploader.upload(req.files.image.path, function(result){
         var id = post[0].id;
         if(err) return res.redirect('/');
         req.flash("Post updated.");
-        if (isPublished == true){
+        if (isPublished === true){
           res.redirect('/industrynews/' + id);
         }
         else {

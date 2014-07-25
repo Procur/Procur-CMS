@@ -24,7 +24,7 @@ var boolify = function(obj){
   }
   else{
     obj = false;
-  };
+  }
   return obj;
 };
 //////END UTILITY FUNCTIONS
@@ -44,7 +44,7 @@ module.exports = {
     NewsPost.findOne({ id: id }, function(err,post){
       if(err) return res.redirect('/');
       res.view({ post: post });
-    })
+    });
   },
 
   newPost: function(req,res){
@@ -65,8 +65,8 @@ module.exports = {
         res.redirect('/newsPost/new');
       }
       else {
-        req.flash("Post successfully created.")
-        if (isPublished == false){
+        req.flash("Post successfully created.");
+        if (isPublished === false){
           res.redirect('/newsPost/drafts');
         }
         else {
@@ -80,7 +80,7 @@ module.exports = {
   edit: function(req,res){
     var id = req.param('id');
     NewsPost.findOne({ id: id }, function(err, post){
-      res.view({ post: post })
+      res.view({ post: post });
     });
   },
 
@@ -96,7 +96,7 @@ module.exports = {
         var id = post[0].id;
         if(err) return res.redirect('/');
         req.flash("Post updated.");
-        if (isPublished == true){
+        if (isPublished === true){
           res.redirect('/newsblog/' + id);
         }
         else {
