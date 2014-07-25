@@ -43,5 +43,4 @@ module.exports = {
     req.logout();
 		return res.redirect('http://procur.com');
 	}
-
 };
