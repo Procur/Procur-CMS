@@ -15,7 +15,7 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
-var humanize = require('humanize');
+//var humanize = require('humanize');
 var cloudinary = require('cloudinary');
 
 ///////BEGIN UTILITY FUNCTIONS

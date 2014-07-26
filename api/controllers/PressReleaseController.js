@@ -1,18 +1,18 @@
 
-var humanize = require('humanize');
+//var humanize = require('humanize');
 var slug = require('slug');
-var print = console.log.bind(console,'>');
+//var print = console.log.bind(console,'>');
 var url = require('url');
-var fsx = require('fs-extra');
+//var fsx = require('fs-extra');
 
 
-var UUIDGenerator = require('node-uuid');
-var AWS = require('aws-sdk');
+//var UUIDGenerator = require('node-uuid');
+//var AWS = require('aws-sdk');
 var fs = require('fs');
-var moment = require('moment');
-var Uploader = require('s3-streaming-upload').Uploader,
-    upload = null,
-    stream = require('fs').createReadStream('/etc/resolv.conf');
+//var moment = require('moment');
+//var Uploader = require('s3-streaming-upload').Uploader,
+//    upload = null,
+//    stream = require('fs').createReadStream('/etc/resolv.conf');
 
 //UTILITY
 var boolify = function(obj){
