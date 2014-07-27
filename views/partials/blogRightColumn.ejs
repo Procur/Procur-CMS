@@ -1,5 +1,5 @@
 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-  <h2>Search the Blog</h2>
+  <h2>Search the Blog </h2>
   <div class="searchBoxWrapper">
     <div class="searchText">
       <form action="/marketingblog" class="searchForm" name="searchForm" method="post" enctype="multipart/form-data">
@@ -47,6 +47,11 @@
       <a href="/marketingblogsearch?word=OCTOBER2014">October /</a>
       <a href="/marketingblogsearch?word=NOVEMBER2014">November /</a>
       <a href="/marketingblogsearch?word=DECEMBER2014">December /</a>
+      <h3>Tags<h3>
+      <%
+      for (l = 0; l < tagCounts.topPosts.length; l++) { %>
+      <a href="/marketingblogsearch?word=DECEMBER2014"><%=tagCounts.topPosts[l]%> /</a>
+      <% } %>
   </div>
 </br></br><a href="/marketingblog">Company Blog Home</a><a href="/marketingPost/new">&nbsp;&nbsp;&nbsp;Create New Post</a>
 </div>

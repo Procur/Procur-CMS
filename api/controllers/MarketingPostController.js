@@ -46,8 +46,12 @@ module.exports = {
     });
     MarketingPost.find({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
       if(err) return res.redirect('/');
+      MarketingPost.find({ published: true }).exec(function(err,allPosts){
+        if(err) return res.redirect('/');
+        res.view({ posts: posts, allPosts: allPosts, numTruePosts: numTruePosts});
+      });
 
-      res.view({ posts: posts }, { numTruePosts: numTruePosts});
+      
       //console.log(numTruePosts);
     });
   },
