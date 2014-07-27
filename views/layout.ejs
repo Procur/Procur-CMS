@@ -30,7 +30,10 @@
     <link rel="stylesheet" href="/styles/adminStyles.css">
     <script type="text/javascript" src="/js/limitStringHelper.js"></script>
     <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-    <script>tinymce.init({selector:'textarea'});</script>
+    <script>tinymce.init({selector:'textarea', toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image', plugins: [
+        "advlist autolink lists link image charmap print preview anchor",
+        "searchreplace visualblocks code fullscreen"
+    ]});</script>
 <!--<script src='/js/jquery.ui.widget.js' type='text/javascript'></script>
 <script src='/js/jquery.iframe-transport.js' type='text/javascript'></script>
 <script src='/js/jquery.fileupload.js' type='text/javascript'></script>
