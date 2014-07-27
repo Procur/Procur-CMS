@@ -59,16 +59,46 @@
   text-transform: uppercase;
 }
 
+#pressRelease .totalPostWrapper {
+  border-bottom: 1px dotted #cecece;
+  margin-bottom: 20px;
+}
+
 #pressRelease .abstractWrapper {
+
   font-size: 14px;
   font-family: 'Roboto',sans-serif;
   font-weight: 300;
 }
 
 #pressRelease .postWrapper {
-  border-bottom: 1px dotted #cecece;
   margin-bottom: 20px;
-  padding-bottom: 7px;
+
+
+}
+
+#pressRelease .downloadButtons {
+
+}
+
+#pressRelease .downloadButtons a {
+  padding-left : 10px;
+
+}
+
+#pressRelease .downloadButtons i {
+  font-size: 16px;
+  color: #5d5d5d;
+}
+
+
+#pressRelease .downloadButtons i:hover {
+  color: #fdc684;
+  -webkit-transition: all 100ms ease-in-out;
+  -moz-transition: all 100ms ease-in-out;
+  -ms-transition: all 100ms ease-in-out;
+  -o-transition: all 100ms ease-in-out;
+  transition: all 100ms ease-in-out;
 }
 
 #pressRelease .colRight p {
@@ -81,6 +111,83 @@
   color: #fdc683;
   text-decoration: none;
 }
+
+#pressRelease #CC1 img {
+  width: 30%;
+}
+#pressRelease #CC2 img {
+  width: 30%;
+}
+#pressRelease #CC3 img {
+  width: 30%;
+}
+
+
+#pressRelease #CC1 {
+  display: inline;
+  padding-right: 15px;
+}
+#pressRelease #CC2 {
+  display: inline;
+  padding-right: 15px;
+
+}
+#pressRelease #CC3 {
+  display: inline;
+}
+
+#pressRelease #downloadMK {
+  background: #cecece;
+  display: block;
+  text-align: center;
+  padding: 15px 20px;
+  color: black;
+  text-decoration: none;
+  font-family: 'Montserrat',sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 200;
+  letter-spacing: 0.06em;
+}
+
+#pressRelease #downloadPK {
+  background: #cecece;
+  margin-top: 20px;
+  display: block;
+  text-align: center;
+  padding: 15px 20px;
+  color: black;
+  text-decoration: none;
+  font-family: 'Montserrat',sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 200;
+  letter-spacing: 0.06em;
+
+}
+
+#pressRelease #downloadMK:hover{
+  color: white;
+  background: #ffad25;
+  -webkit-transition: all 100ms ease-in-out;
+  -moz-transition: all 100ms ease-in-out;
+  -ms-transition: all 100ms ease-in-out;
+  -o-transition: all 100ms ease-in-out;
+  transition: all 100ms ease-in-out;
+}
+
+#pressRelease #downloadPK:hover{
+  color: white;
+  background: #ffad25;
+  -webkit-transition: all 100ms ease-in-out;
+  -moz-transition: all 100ms ease-in-out;
+  -ms-transition: all 100ms ease-in-out;
+  -o-transition: all 100ms ease-in-out;
+  transition: all 100ms ease-in-out;
+}
+
+
+
 
 
 /*SHOWONE styles*/
@@ -122,10 +229,40 @@
   margin-bottom: 30px;
 }
 
+#pressReleaseShowOne .specsContainer .showOneLinks {
+  text-align: right;
+}
+
+#pressReleaseShowOne .showOneLinks a {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 16px;
+  color: #5d5d5d;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+}
+
+#pressReleaseShowOne .showOneLinks a:hover {
+  color: #fdc683;
+  -webkit-transition: all 100ms ease-in-out;
+  -moz-transition: all 100ms ease-in-out;
+  -ms-transition: all 100ms ease-in-out;
+  -o-transition: all 100ms ease-in-out;
+  transition: all 100ms ease-in-out;
+}
+
+#pressReleaseShowOne .showOneLinks i {
+  color: #5d5d5d;
+  font-size: 17px;
+}
+
+
+
 #pressReleaseShowOne .abstractWrapper {
   margin-bottom: 30px;
   line-height: 23px;
-  font-family: Roboto, sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 #pressReleaseShowOne .contentWrapper {
@@ -163,4 +300,84 @@
   border-bottom: 1px dotted #cecece;
   padding-bottom: 10px;
   padding-top: 10px;
+}
+
+#pressReleaseShowOne h2 {
+  border-bottom: 1px dotted #cecece;
+  padding-bottom: 10px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+}
+
+#pressReleaseShowOne .leftCol {
+  margin-top: 20px;
+}
+
+#pressReleaseShowOne .rightCol {
+  margin-top: 7px;
+}
+
+
+#pressReleaseShowOne #CC1 img {
+  width: 20%;
+}
+#pressReleaseShowOne #CC2 img {
+  width: 20%;
+}
+#pressReleaseShowOne #CC3 img {
+  width: 20%;
+}
+
+
+#pressReleaseShowOne #CC1 {
+  display: inline;
+  padding-right: 15px;
+}
+#pressReleaseShowOne #CC2 {
+  display: inline;
+  padding-right: 15px;
+
+}
+#pressReleaseShowOne #CC3 {
+  display: inline;
+}
+
+#pressReleaseShowOne #ccWrapper {
+  text-align: center;
+  margin-top: 30px;
+}
+
+#pressReleaseShowOne .finalLink {
+  display: block;
+  background-color: #5d5d5d;
+  text-transform: uppercase;
+  text-align: center;
+  color: white;
+  margin-top: 20px;
+  font-family: Open Sans, sans-serif;
+  letter-spacing: 0.06em;
+  font-weight: 200;
+  padding: 15px 20px;
+  text-decoration: none;
+}
+
+#pressReleaseShowOne .finalLink:hover {
+  background-color: #fe9925;
+  -webkit-transition: all 100ms ease-in-out;
+  -moz-transition: all 100ms ease-in-out;
+  -ms-transition: all 100ms ease-in-out;
+  -o-transition: all 100ms ease-in-out;
+  transition: all 100ms ease-in-out;
+
+
+
+/*Media Queries*/
+
+@media screen and (max-width: 800px){
+  #pressRelease .downloadButtons {
+    text-align: right;
+  }
 }

@@ -2,7 +2,7 @@
 <div id="pressReleaseShowOne">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 leftCol">
         <div class="backWrapper">
           <h5>Back to Press &amp; Media page</h5>
         </div>
@@ -13,8 +13,10 @@
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <h6>Posted On</h6><p><%= post.date %></p><h6>Tags</h6><p>Tag placeholder</p>
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                EMAIL/PRINT/DOWNLOAD placeholder
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 showOneLinks">
+                <i class="fa fa-envelope"></i><a href="#">EMAIL</a>
+                <i class="fa fa-print"></i><a href="#">PRINT</a>
+                <i class="fa fa-download"></i><a href="#">DOWNLOAD</a>
               </div>
             </div>
           </div>
@@ -31,13 +33,16 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 rightCol">
         <h2>Recent Press Releases</h2>
         <div class="recentPressRelease">
         </div>
-        <div>
-          Download Stuff
+        <div id="ccWrapper">
+          <div id="CC1"><img src="/images/cc1.png"></div>
+          <div id="CC2"><img src='/images/cc2.png'></div>
+          <div id="CC3"><img src="/images/cc3.png"></div>
         </div>
+        <a class="finalLink" href="#">Download All Press Kits</a>
       </div>
     </div>
   </div>

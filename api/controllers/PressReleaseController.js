@@ -66,10 +66,10 @@ module.exports = {
 
     createPost: function(req, res){
       var b = req.body;
-      console.log(req.files.zip);
+      //console.log(req.files.zip);
       var isPublished = boolify(b.published);
       //AWS UPLOAD
-      upload = new Uploader({
+      /*upload = new Uploader({
         accessKey:  'AKIAIPCUDSE5TKUQFEEA',
         secretKey:  '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',
         bucket:     'procurPressMedia',
@@ -80,9 +80,9 @@ module.exports = {
         }
       });
       upload.on('completed', function (err, S3_response) {
-        console.log('upload completed');
+        console.log('upload completed');*/
 
-        PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date, zip: S3_response.location, pdf: S3_response.location }, function(err,post){
+      PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date/*, zip: S3_response.location, pdf: S3_response.location*/ }, function(err,post){
                   if (err){
                     req.flash("There was a problem. Try again.");
                     res.redirect("/pressRelease/new");
@@ -98,11 +98,11 @@ module.exports = {
                   }
                 console.log(post);
                 });
-      });
+      //});
 
-      upload.on('failed', function (err) {
+      /*upload.on('failed', function (err) {
         console.log('upload failed with error', err);
-      });
+      });*/
       //END UPLOAD
 
 
