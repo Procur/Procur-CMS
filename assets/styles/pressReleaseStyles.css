@@ -15,10 +15,29 @@
   font-size: 20px;
   text-transform: uppercase;
   font-weight: 600;
-  border-bottom: 3px solid #cecece;
-  padding-bottom: 10px;
+  /*border-bottom: 3px solid #cecece;*/
+  padding-bottom: 0px;
   letter-spacing: 0.06em;
 }
+
+#pressRelease .pressLeadHead {
+  border-bottom: 3px solid #cecece;
+  margin-left: 0px;
+  margin-bottom: 20px;
+}
+
+#pressRelease .pressLeadHead .nextHead {
+  padding-left: 0px;
+}
+
+#pressRelease .pageHead {
+  color: orange;
+  font-size: 17px;
+  text-align: right;
+  margin-top: 20px;
+}
+
+
 
 #pressRelease h3 {
   text-decoration: none;
@@ -113,13 +132,13 @@
 }
 
 #pressRelease #CC1 img {
-  width: 30%;
+  width: 20%;
 }
 #pressRelease #CC2 img {
-  width: 30%;
+  width: 20%;
 }
 #pressRelease #CC3 img {
-  width: 30%;
+  width: 20%;
 }
 
 
@@ -134,6 +153,12 @@
 }
 #pressRelease #CC3 {
   display: inline;
+}
+
+#pressRelease #ccWrapper {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #pressRelease #downloadMK {
@@ -286,13 +311,14 @@
 #pressReleaseShowOne .recentPressRelease .recentTitle a {
   font-family: Roboto, sans-serif;
   font-size: 20px;
-  color: #fdc683;
+  color: black;
   font-weight: 100;
-}
-
-#pressReleaseShowOne .recentPressRelease .recentTitle a {
   display: inline;
   text-decoration: none;
+}
+
+#pressReleaseShowOne .recentPressRelease .recentTitle a:hover {
+  color: #ffa143;
 }
 
 
@@ -371,13 +397,40 @@
   -ms-transition: all 100ms ease-in-out;
   -o-transition: all 100ms ease-in-out;
   transition: all 100ms ease-in-out;
+}
 
+/*PAGE NAV*/
+#pressRelease .pageNavPressRelease {
+  text-align: right;
+}
 
+#pressRelease .nextpreviousWrapper i {
+  font-size: 20px;
+  color: #cecece;
+  text-decoration: none;
+
+}
+
+#pressRelease .nextpreviousWrapper i:hover {
+  color: #f8ac4c;
+  -webkit-transition: all 100ms ease-in-out;
+  -moz-transition: all 100ms ease-in-out;
+  -ms-transition: all 100ms ease-in-out;
+  -o-transition: all 100ms ease-in-out;
+  transition: all 100ms ease-in-out;
+}
 
 /*Media Queries*/
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 768px){
   #pressRelease .downloadButtons {
     text-align: right;
+  }
+}
+
+@media screen and (max-width: 998px){
+  #pressReleaseShowOne .specsContainer .showOneLinks {
+    text-align: left;
+    padding-top: 10px;
   }
 }

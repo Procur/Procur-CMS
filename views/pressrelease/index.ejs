@@ -7,7 +7,18 @@
       <h1>Press &amp; Media</h1>
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 
-        <h2>Press Releases</h2>
+          <div class="row pressLeadHead">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 nextHead">
+              <h2>Press Releases</h2>
+            </div>
+            <div class="ol-lg-4 col-md-4 col-sm-4 col-xs-12 pageHead">
+              <% for (i=1;i<=Math.ceil(numTruePosts/3);i++) { %>
+              <i class="fa fa-circle-thin"></i>
+              <% } %>
+            </div>
+          </div>
+
+
         <% posts.forEach(function(post){ %>
           <% if(post.published == true){ %>
             <div class="totalPostWrapper">
@@ -25,8 +36,23 @@
             </div>
           <% } %>
         <% }); %>
+
+      <!--END PRESS RELEASES-->
+
+      <!--PAGE NAV-->
+      <div class="pageNavPressRelease">
+
+
+
+        <div class="nextpreviousWrapper">
+          <a class="previous" href="#" onclick="previousPage(); return false;"><i class="fa fa-chevron-left"></i></a>
+          <a class="next" href="#" onclick="nextPage(); return false;"><i class="fa fa-chevron-right"></i></a>
+        </div>
       </div>
-      <!--END COL LEFT-->
+
+
+      </div>
+      <!--END LEFT COL-->
 
       <!--COL RIGHT-->
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 colRight">
@@ -40,9 +66,11 @@
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <h4>Creative Commons Permissions</h4>
-            <div id="CC1"><img src="/images/cc1.png"></div>
-            <div id="CC2"><img src='/images/cc2.png'></div>
-            <div id="CC3"><img src="/images/cc3.png"></div>
+            <div id="ccWrapper">
+              <div id="CC1"><img src="/images/cc1.png"></div>
+              <div id="CC2"><img src='/images/cc2.png'></div>
+              <div id="CC3"><img src="/images/cc3.png"></div>
+            </div>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <a id="downloadMK" href="#">Download Media Kit</a>
@@ -61,8 +89,7 @@
 
 
 
- <a class="next" href="#" onclick="nextPage(); return false;">NEXT</a>
- <a class="previous" href="#" onclick="previousPage(); return false;">PREVIOUS</a>
+
 
 
 <script>
