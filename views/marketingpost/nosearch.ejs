@@ -25,13 +25,36 @@
                   <i class="fa fa-list-alt"></i><h5 class="searchAlt">&nbsp;&nbsp;Viewing posts by category</h5>
                 </div>
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 outerWrap specialOuter">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 outerWrap specialOuter">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 innerWrap">
-                  <i class="fa fa-calendar"></i><h5 class="searchAlt">&nbsp;&nbsp;Or, view recent posts:</h5>
+                  <i class="fa fa-tasks"></i><h5 class="searchAlt">&nbsp;&nbsp;Or, view recent posts:</h5>
                 </div>
               </div>
 
         </div>
+
+
+
+        <!--ITERATIVELY ADD POSTS-->
+        <% posts.forEach(function(post){ %>
+          <% if(post.published == true){ %>
+            <div class="postContainer">
+              <div class="postTitle"><h3><%= post.title %></h3></a></div>
+              <div class="blogPostSpecs">
+                <h6>Posted On</h6><span><%= post.date %></span>
+                <h6>Under</h6><span><%= post.category %></span>
+                <h6>Tags</h6><span><%= post.tagArray %></span>
+              </div>
+              <% if(post.images!=null){ %><div class="companyBlogPostPhotoWrapper"><img class="companyBlogPostPhoto" src="<%= post.images %>"></div><% } %>
+              <div class="postContent"><p><%-post.shortContent%><a class="readMoreLink" href="/marketingblog/<%= post.id %>">Read More ></a></p></div>
+            </div>
+          <% } %>
+        <% }); %>
+
+
+        <!--END POSTS-->
+
+
 
       </div>
       <!--END COLUMN LEFT-->

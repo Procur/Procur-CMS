@@ -114,8 +114,9 @@ module.exports = {
 
     update: function(req, res){
       var b = req.body;
+      var id = req.param('id');
       var isPublished = boolify(b.published);
-      PressRelease.findOne({ title: b.title  }, function(err, post){
+      PressRelease.findOne({ id: id  }, function(err, post){
         if(err) return err;
         if(post==undefined) return;
         PressRelease.update(post, { title: b.title, content: b.content, abstract: b.abstract, published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date /*, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')*/ }, function(err, post){

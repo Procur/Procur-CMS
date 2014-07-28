@@ -35,21 +35,17 @@ var boolify = function(obj){
 module.exports = {
 
   index: function(req, res){
-    console.log('index action hit');
     var query = url.parse(req.url, true).query;
     var pageNumber = query['page'];
     MarketingPost.find({ published: true }).sort({ createdAt: 'desc' }).exec(function(err, posts1){
       if(err) return res.redirect('/');
       if(posts1 !== undefined){
         numTruePosts = posts1.length;
-        console.log('HERERERERER');
       }
     });
     MarketingPost.find({ published: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
       if(err) return res.redirect('/');
-
       res.view({ posts: posts }, { numTruePosts: numTruePosts});
-      //console.log(numTruePosts);
     });
   },
 
@@ -60,7 +56,7 @@ module.exports = {
       res.view({ post: post });
     });
   },
-//console.log(JSON.stringify(post,null,' '));
+
   newPost: function(req, res){
     res.view();
   },
@@ -86,7 +82,6 @@ module.exports = {
                   res.redirect('/marketingPost/drafts');
                 }
                 else {
-                  console.log(post);
                   res.redirect('/marketingblog');
                 }
 
@@ -148,21 +143,19 @@ module.exports = {
   },
 
   search: function(req, res){
-    console.log('in search action');
     var query = url.parse(req.url, true).query;
     var searchWord = query['word'];
     var pageNumber = query['page'];
 
     //for category searches...
     if ((searchWord.indexOf('Platform') != -1)||(searchWord.indexOf('Company') != -1)|| (searchWord.indexOf('International') != -1)||(searchWord.indexOf('Philosophy') != -1)||(searchWord.indexOf('Philanthropy') != -1)) {
-      MarketingPost.find().where({ category: { contains: searchWord} }).where({ published: true }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
+      MarketingPost.find().where({ category: { contains: searchWord} }).where({ published: true }).sort({ createdAt: 'desc' }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
         if(err) return res.redirect('/');
         numTruePosts = posts1.length;
         if(numTruePosts === 0) return res.redirect('/marketingPost/nosearch');
       });
-      return MarketingPost.find().where({ category: { contains: searchWord} }).where({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+      return MarketingPost.find().where({ category: { contains: searchWord} }).where({ published: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
         if(err) return res.redirect('/');
-          console.log(searchResults);
         if(searchResults) {
           res.view({ posts: searchResults }, { numTruePosts: numTruePosts });
         }
@@ -173,15 +166,13 @@ module.exports = {
     else if (searchWord.indexOf('201') != -1) {
       var numberIndex = searchWord.indexOf('2');
       searchWord = searchWord.substr(0,numberIndex) + ' ' + searchWord.substr(numberIndex,searchWord.length-1);
-      console.log(searchWord);
-      MarketingPost.find().where({ date: { contains: searchWord} }).where({ published: true }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
+      MarketingPost.find().where({ date: { contains: searchWord} }).where({ published: true }).sort({ createdAt: 'desc' }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
         if(err) return res.redirect('/');
         numTruePosts = posts1.length;
         if(numTruePosts === 0) return res.redirect('/marketingPost/nosearch');
       });
-      return MarketingPost.find().where({ date: { contains: searchWord} }).where({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+      return MarketingPost.find().where({ date: { contains: searchWord} }).where({ published: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
         if(err) return res.redirect('/');
-          console.log(searchResults);
         if(searchResults) {
           res.view({ posts: searchResults }, { numTruePosts: numTruePosts });
         }
@@ -190,14 +181,13 @@ module.exports = {
 
     //for tag searches...
     else {
-    MarketingPost.find().where({ tagArray: { contains: searchWord} }).where({ published: true }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
+    MarketingPost.find().where({ tagArray: { contains: searchWord} }).where({ published: true }).sort({ createdAt: 'desc' }).exec(function(err, posts1){  //.where({ tagArray: { contains: searchWord} })
       if(err) return res.redirect('/');
       numTruePosts = posts1.length;
       if(numTruePosts === 0) return res.redirect('/marketingPost/nosearch');
     });
-    return MarketingPost.find().where({ tagArray: { contains: searchWord} }).where({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+    return MarketingPost.find().where({ tagArray: { contains: searchWord} }).where({ published: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
       if(err) return res.redirect('/');
-        console.log(searchResults);
       if(searchResults) {
         res.view({ posts: searchResults }, { numTruePosts: numTruePosts });
       }
@@ -206,7 +196,12 @@ module.exports = {
   },
 
   nosearch: function(req,res){
-    res.view();
+    MarketingPost.find({ published: true }).sort({ createdAt: 'desc' }).limit(3).exec(function(err, posts){
+      if(err) return res.redirect('/');
+      if(posts !== undefined){
+        res.view({ posts: posts })
+      }
+    });
   }
 
 };

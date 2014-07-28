@@ -184,10 +184,18 @@
 
 #companyBlogNotFound .specialOuter {
   margin-top: 50px;
+  border-bottom: 1px dotted #cecece;
+  margin-bottom: 45px;
 }
 
 #companyBlogNotFound #notFoundContainer {
   border-bottom: 1px solid #cecece;
+}
+
+#companyBlogNotFound p {
+  font-family: 'Roboto' ,sans-serif;
+  font-size: 14px;
+  line-height: 23px;
 }
 
 /*CREATE NEW POST PAGE*/
