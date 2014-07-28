@@ -16,7 +16,7 @@
                 <h6>Tags</h6><span><%= post.tagArray %></span>
               </div>
               <% if(post.images!=null){ %><div class="companyBlogPostPhotoWrapper"><img class="companyBlogPostPhoto" src="<%= post.images %>"></div><% } %>
-              <div class="postContent"><p><%-post.shortContent%><a class="readMoreLink" href="/marketingblog/<%= post.id %>">Read More ></a></p></div>
+              <div class="postContent"><p><%-post.shortContent%><a class="readMoreLink" href="/companyblog/<%= post.id %>">Read More ></a></p></div>
             </div>
           <% } %>
         <% }); %>
@@ -26,7 +26,7 @@
         <div class="pageNavigationWrapper">
           <span class='pageNumbers'>Navigate by page:</span>
           <% for (i=1;i<=Math.ceil(numTruePosts/3);i++) { %>
-          <a class="pagenumberLink" href='/marketingblog?page=<%=i%>'><%= i %></a>
+          <a class="pagenumberLink" href='/companyblog?page=<%=i%>'><%= i %></a>
           <% } %>
           <div class="nextpreviousWrapper">
             <a class="previous" href="#" onclick="previousPage(); return false;">< Previous</a>
@@ -53,11 +53,11 @@
 function nextPageFire(){
   var a = document.createElement('a');
   a.href = '';
-  if (a.href == 'http://localhost:1337/marketingblog'){
-    a.href = '/marketingblog?page=2';
+  if (a.href == 'http://localhost:1337/companyblog'){
+    a.href = '/companyblog?page=2';
   } else {
     var pageNumber = a.search.replace( /^\D+/g, '');
-    a.href = '/marketingblog?page='+(parseInt(pageNumber)+1);
+    a.href = '/companyblog?page='+(parseInt(pageNumber)+1);
   }
   return a.href;
 }
@@ -65,11 +65,11 @@ function nextPageFire(){
 function previousPageFire(){
   var a = document.createElement('a');
   a.href = '';
-  if (a.href == 'http://localhost:1337/marketingblog'){
+  if (a.href == 'http://localhost:1337/companyblog'){
     return
   } else {
     var pageNumber = a.search.replace( /^\D+/g, '');
-    a.href = '/marketingblog?page='+(parseInt(pageNumber)-1);
+    a.href = '/companyblog?page='+(parseInt(pageNumber)-1);
   }
   return a.href;
 }

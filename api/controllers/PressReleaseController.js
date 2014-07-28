@@ -32,27 +32,22 @@ module.exports = {
     index: function(req, res){
       var query = url.parse(req.url, true).query;
       var pageNumber = query['page'];
-
       PressRelease.find({ published: true }).sort({ createdAt: 'desc' }).exec(function(err, posts1){
         if(err) return res.direct('/');
         numTruePosts = posts1.length;
       });
-
       PressRelease.find({ published: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
         if(err) return res.redirect('/');
-          console.log(posts);
           res.view({posts: posts}, { numTruePosts: numTruePosts});
         });
     },
 
     showOne: function(req, res){
       var slug = req.param('slug');
-
       PressRelease.findOne({ slug: slug }, function(err, post){
         if(err) return res.redirect('/');
         res.view({ post: post });
-
-      })
+      });
     },
 
     recent: function(req,res){
@@ -70,7 +65,7 @@ module.exports = {
       var b = req.body;
       var isPublished = boolify(b.published);
       /////AWS UPLOAD
-      upload = new Uploader({
+      /*upload = new Uploader({
         accessKey:  'AKIAIPCUDSE5TKUQFEEA',
         secretKey:  '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',
         bucket:     'procurPressMedia',
@@ -84,9 +79,9 @@ module.exports = {
         console.log('upload completed');
       upload.on('failed', function (err) {
         console.log('upload failed with error', err);
-      });
+      });*/
       /////CREATE NEW DB ENTRY
-      PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date, zip: S3_response.location, pdf: S3_response.location }, function(err,post){
+    PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date/*, zip: S3_response.location, pdf: S3_response.location*/ }, function(err,post){
         if (err){
           req.flash("There was a problem. Try again.");
           res.redirect("/pressRelease/new");
@@ -100,9 +95,8 @@ module.exports = {
             res.redirect("/pressreleases");
           }
         }
-      console.log(post);
       });
-      });
+      //});
     },
 
     edit: function(req, res){
@@ -120,13 +114,11 @@ module.exports = {
         if(err) return err;
         if(post==undefined) return;
         PressRelease.update(post, { title: b.title, content: b.content, abstract: b.abstract, published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date /*, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')*/ }, function(err, post){
-          //var slug = post[0].slug;
           var slug = post[0].slug;
           if(err) return res.redirect('/');
             req.flash("Post updated.");
           if (isPublished == true){
             res.redirect('/pressreleases/' + slug);
-            //res.redirect('/pressreleases');
           }
           else {
             res.redirect('/admin/drafts');

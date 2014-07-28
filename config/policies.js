@@ -30,7 +30,7 @@ module.exports.policies = {
 
   },
 
-  MarketingPostController: {
+  companyPostController: {
     createPost: ['isAuthenticated', 'isAdministrator'],
     edit: ['isAuthenticated', 'isAdministrator'],
     unpublish: ['isAuthenticated', 'isAdministrator']

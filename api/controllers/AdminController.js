@@ -24,10 +24,10 @@ module.exports = {
 
   drafts: function(req, res){
     var payload = [];
-    MarketingPost.find({ published: false }, function(err, marketingPosts){
+    companyPost.find({ published: false }, function(err, companyPosts){
       if(err) return res.redirect('/admin/drafts');
-      for (i=0; i < marketingPosts.length; i++){
-        payload.push(marketingPosts[i]);
+      for (i=0; i < companyPosts.length; i++){
+        payload.push(companyPosts[i]);
       }
       console.log(payload.length);
       /*NewsPost.find({ published: false }, function(err, newsPosts){
