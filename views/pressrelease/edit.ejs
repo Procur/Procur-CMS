@@ -5,10 +5,15 @@
       <form action="/pressRelease/editpost" method="post">
         <h2>TITLE</h2>
         <div><input type="text" name="title" size = "70" value="<%= post.title %>"></div>
+        <h2>DATE</h2>
+        <div><input type="text" name="date" size = "70" value="<%= post.date %>"></div>
         <h2>ABSTRACT</h2>
-        <div><textarea type="text" name="abstract" size="100" value="<%= post.abstract %>"></textarea></div>
+        <div><textarea type="text" name="abstract" size="100"><%= post.abstract %></textarea></div>
         <h2>CONTENT</h2>
         <div><textarea name="content" rows="30" cols="50"><%= post.content %></textarea></div>
+        <h2>UPLOADS:</h2>
+        <p>Upload a Zip File: <input type="file" name="zip" ></p>
+        <p>Upload a PDF File: <input type="file" name="pdf" ></p>
         <h2>PUBLISH</h2>
         <div><input type="checkbox" name="published" value="true">Publish now?</div>
         <div><input type="submit"</div>

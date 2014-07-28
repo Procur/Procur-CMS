@@ -20,6 +20,11 @@
   letter-spacing: 0.06em;
 }
 
+#pressRelease #specialh2 {
+  padding-bottom: 10px;
+  border-bottom: 3px solid #cecece;
+}
+
 #pressRelease .pressLeadHead {
   border-bottom: 3px solid #cecece;
   margin-left: 0px;
@@ -97,6 +102,7 @@
 }
 
 #pressRelease .downloadButtons {
+  text-align: right;
 
 }
 
@@ -166,7 +172,7 @@
   display: block;
   text-align: center;
   padding: 15px 20px;
-  color: black;
+  color: white;
   text-decoration: none;
   font-family: 'Montserrat',sans-serif;
   font-size: 14px;
@@ -181,7 +187,7 @@
   display: block;
   text-align: center;
   padding: 15px 20px;
-  color: black;
+  color: white;
   text-decoration: none;
   font-family: 'Montserrat',sans-serif;
   font-size: 14px;
@@ -210,6 +216,11 @@
   -o-transition: all 100ms ease-in-out;
   transition: all 100ms ease-in-out;
 }
+
+#pressRelease .downloadsWrapper {
+  margin-top: 12px;
+}
+
 
 
 
@@ -296,8 +307,13 @@
   font-family: Roboto, sans-serif;
 }
 
-#pressReleaseShowOne h5 {
+#pressReleaseShowOne h5 a {
   color: #a2a2a2;
+  text-decoration: none;
+}
+
+#pressReleaseShowOne h5 a:hover {
+  color: black;
 }
 
 #pressReleaseShowOne .recentPressRelease .recentDate {

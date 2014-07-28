@@ -1,11 +1,12 @@
+
 <div id ="pressRelease">
-  <div class="container">
+  <div class="container-fluid">
     <div
     <div class="row">
 
       <!--COL LEFT-->
       <h1>Press &amp; Media</h1>
-      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+      <div class="col-lg-7 col-md-8 col-sm-8 col-xs-12">
 
           <div class="row pressLeadHead">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 nextHead">
@@ -41,9 +42,6 @@
 
       <!--PAGE NAV-->
       <div class="pageNavPressRelease">
-
-
-
         <div class="nextpreviousWrapper">
           <a class="previous" href="#" onclick="previousPage(); return false;"><i class="fa fa-chevron-left"></i></a>
           <a class="next" href="#" onclick="nextPage(); return false;"><i class="fa fa-chevron-right"></i></a>
@@ -55,15 +53,15 @@
       <!--END LEFT COL-->
 
       <!--COL RIGHT-->
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 colRight">
-        <h2>Media Kit</h2>
+      <div class="col-lg-5 col-md-4 col-sm-4 col-xs-12 colRight">
+        <h2 id="specialh2">Media Kit</h2>
         <h4>About our Media Kit</h4>
         <p>We have provide a downloadable media kit with curated information, images and media in efforts to make generating content about our company efficient and easy. Press Kits can be downloaded individually with related press releases or downloaded as a comprehensive .zip file below.</p>
         <h4>Contacting us</h4>
-        <p>If you have additional press and/or media related questions that are not addressed in the provided Press Kits(s) or Media Kit, please email us at:<a id="mediaEmail" href="#">media@procur.com</a>.
+        <p>If you have additional press and/or media related questions that are not addressed in the provided Press Kits(s) or Media Kit, please email us at:</br><a id="mediaEmail" href="#">media@procur.com</a>.
         <h4>License and Copyright</h4>
         <p>You may use the provided media assets in accordance with the Usage Guidelines provided in the Media Kit and Press Kits(s). Please note that these are copyrighted materials.  Any use of these materials that does not adhere to these guidelines is an infringment of Procur's intellectual property rights, and will be prosecuted accordingly.
-        <div class="row">
+        <div class="row ccAndDownloadWrapper">
           <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <h4>Creative Commons Permissions</h4>
             <div id="ccWrapper">
@@ -72,7 +70,7 @@
               <div id="CC3"><img src="/images/cc3.png"></div>
             </div>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 downloadsWrapper">
             <a id="downloadMK" href="#">Download Media Kit</a>
             <a id="downloadPK"href="#">Download Press Kits</a>
           </div>
@@ -141,7 +139,6 @@ function isLastPage(){
   var a = document.createElement('a');
   a.href = '';
   var pageNumber = a.search.replace( /^\D+/g, '');
-  console.log(pageNumber);
   if((((pageNumber -1)*3)+<%= posts.length %>) == <%= numTruePosts %> || (pageNumber=="" && <%= numTruePosts %> <= 3)) return true;
   return false;
 }
@@ -153,6 +150,19 @@ if (isFirstPage()==true){
 if (isLastPage()==true){
     $(".next").hide();
 }
+
+function colorTheDot(){
+  var a = document.createElement('a');
+  a.href = '';
+  var pageNumber = a.search.replace( /^\D+/g, '');
+  console.log(pageNumber);
+  var numberOfPages = $('.pageHead').children().length;
+  console.log(numberOfPages);
+  $('.pageHead').children().eq(pageNumber-1).attr('class', 'fa fa-circle');
+
+}
+
+colorTheDot();
 
 
 /*

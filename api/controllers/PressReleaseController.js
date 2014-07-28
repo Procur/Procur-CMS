@@ -32,13 +32,14 @@ module.exports = {
       var query = url.parse(req.url, true).query;
       var pageNumber = query['page'];
 
-      PressRelease.find({ published: true }).exec(function(err, posts1){
+      PressRelease.find({ published: true }).sort({ createdAt: 'desc' }).exec(function(err, posts1){
         if(err) return res.direct('/');
         numTruePosts = posts1.length;
       });
 
-      PressRelease.find({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
+      PressRelease.find({ published: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
         if(err) return res.redirect('/');
+          console.log(posts);
           res.view({posts: posts}, { numTruePosts: numTruePosts});
         });
     },
@@ -54,7 +55,7 @@ module.exports = {
     },
 
     recent: function(req,res){
-      PressRelease.find().limit(10).exec(function(err,posts){
+      PressRelease.find().sort({ createdAt: 'desc' }).limit(10).exec(function(err,posts){
         if(err) return res.redirect('/');
         res.send(posts);
       });
@@ -122,22 +123,21 @@ module.exports = {
     update: function(req, res){
       var b = req.body;
       var isPublished = boolify(b.published);
-
-      PressRelease.findOne({ title: b.title }, function(err, post){
-        if(err) return res.redirect('/');
-      PressRelease.update(post, { title: b.title, content: b.content, abstract: b.abstract, slug: slug(b.title).toLowerCase(), published: isPublished, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a') }, function(err, post){
-        console.log("HERE");
-        console.log(post);
-        var slug = post[0].slug;
-        if(err) return res.redirect('/');
-        req.flash("Post updated.");
-        if (isPublished == true){
-          res.redirect('/pressreleases/' + slug);
-        }
-        else {
-          res.redirect('/pressRelease/drafts');
-        }
-      });
+      PressRelease.findOne({ title: b.title  }, function(err, post){
+        if(err) return err;
+        if(post==undefined) return;
+        PressRelease.update(post, { title: b.title, content: b.content, abstract: b.abstract, published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date /*, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')*/ }, function(err, post){
+          //var slug = post[0].slug;
+          if(err) return res.redirect('/');
+            req.flash("Post updated.");
+          if (isPublished == true){
+            //res.redirect('/pressreleases/' + slug);
+            res.redirect('/pressreleases');
+          }
+          else {
+            res.redirect('/admin/drafts');
+          }
+        });
       });
     },
 
