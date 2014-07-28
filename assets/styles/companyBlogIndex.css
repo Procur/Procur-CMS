@@ -198,12 +198,22 @@
 	box-sizing: border-box;
 
 	width: 100%;
+  height: auto;
 }
 
 #createNewPost .postSubmitButton {
   margin-bottom: 30px;
 }
 
+#companyBlogIndex .postContent img {
+  width: 100%;
+  margin-top: 20px;
+}
+
+#companyBlogIndex .postContent a {
+  color: #fdc683;
+  text-decoration: none;
+}
 
 
 /*showOne*/
@@ -226,5 +236,8 @@
   padding-right: 20px;
   color: #ff6666;
 }
+
+
+
 
 /*edit view*/

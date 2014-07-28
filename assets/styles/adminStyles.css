@@ -1,6 +1,8 @@
 #adminCMS a {
   text-decoration: none;
   color: black;
+  margin-top: 15px;
+  display: block;
 }
 
 #adminCMS a:hover {
@@ -8,11 +10,15 @@
 }
 
 #adminCMS .dashWrapper {
-  border: 2px solid #cecece;
+
   padding: 20px;
   margin-top: 30px;
 }
 
 #adminCMS .draftsHeader {
   border-bottom: 2px solid black;
+}
+
+#adminCMS h3 {
+  border-bottom: 2px solid #CECECE;
 }

@@ -38,13 +38,14 @@ module.exports = {
     console.log('index action hit');
     var query = url.parse(req.url, true).query;
     var pageNumber = query['page'];
-    MarketingPost.find({ published: true }).exec(function(err, posts1){
+    MarketingPost.find({ published: true }).sort({ createdAt: 'desc' }).exec(function(err, posts1){
       if(err) return res.redirect('/');
       if(posts1 !== undefined){
         numTruePosts = posts1.length;
+        console.log('HERERERERER');
       }
     });
-    MarketingPost.find({ published: true }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
+    MarketingPost.find({ published: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
       if(err) return res.redirect('/');
 
       res.view({ posts: posts }, { numTruePosts: numTruePosts});
