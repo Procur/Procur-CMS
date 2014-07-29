@@ -51,3 +51,8 @@
 #createNewPost .container {
   background-color: #fff;
 }
+
+#createNewPost .navbar {
+  margin-bottom: 0px; 
+  background-color: #e6e6e6;
+}
