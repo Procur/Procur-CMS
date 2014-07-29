@@ -3,11 +3,16 @@
   <div class="container">
     <h1>New Company Blog Post</h1>
     <section id="companyBlogPostForm">
+      
       <form action="/companyPost/new" method="post" enctype="multipart/form-data">
         <!--TITLE-->
+        <div class="row">
+        <div class="col-md-6">
         <h3>TITLE:</h3>
         <div><input type="text" name="title" placeholder="Enter Title..." size="70"></div>
         <!--DATE-->
+        </div>
+        <div class="col-md-3">
         <h3>DATE TO RELEASE:</h3>
           <div>
             <input class="dateCheckbox"  id="nowCheckbox" type="checkbox" name="checkCurrentDate" value="true" placeholder="Enter Date... (example --> 05 January 2014)" size="70">
@@ -20,6 +25,8 @@
           <div>
             <input id="futureDate" type="text" name="textFutureDate" placeHolder="Enter Date... (example  05 January 2014)" size="70">
           </div>
+          </div>
+          <div class="col-md-3">
         <!--CATEGORY-->
         <h3>CATEGORY:</h3>
         <div>
@@ -31,21 +38,37 @@
             <option value="Initiatives &amp; Philanthropy">Initiatives &amp; Philanthropy</option>
           </select></br></br>
         </div>
+        </div></div>
+        <div class="row">
+        <div class="col-md-6">
+        <!--IMAGE-->
+        <h3>IMAGE</h3>
+        <p>Image: <input type="file" name="image" /></p>
+        </div>
+
+        <div class="col-md-6">
         <!--TAGS-->
         <h3>TAGS</h3>
         <div><input type="text" class="tagField" name="tagArray" placeholder="type a TAG and PRESS RIGHT ARROW and add more..." size="70"><span><input type='button' onclick="removeTags();" value="Delete Tags"></span><span class='tagContainer'></span></div>
         <div><input type="hidden" class="tagSender" name="tagSender" placeholder="tag sender" size="70"></div>
-        <!--IMAGE-->
-        <h3>IMAGE</h3>
-        <p>Image: <input type="file" name="image" /></p>
+        </div></div>
+
+        <div class="row">
+        <div class="col-md-12">
         <!--CONTENT-->
         <h3>CONTENT</h3>
         <div><textarea name="content" rows="15" cols="50" placeholder="Content"></textarea></div>
+        </div></div>
+
+        <div class="row">
+        <div class="col-md-12">
         <!--PUBLISHED NOW???-->
         <h3>PUBLISH</h3>
-        <div><input type="checkbox" name="published" value="true">Check to publish NOW|||Uncheck to send to DRAFTS</div></br></br>
+        <div><input type="checkbox" name="published" value="true">Check to publish NOW|||Uncheck to send to DRAFTS</div>
         <!--SUBMIT-->
         <div><input type="submit"></div>
+        </div></div>
+        
       </form>
     </section>
   </div>
@@ -71,5 +94,9 @@
     $('.tagSender').val("");
     window.tagArrayAll = [];
   }
+
+  $("body").css({"background-color":"#E6E6E6"});
+
+
 
 </script>
