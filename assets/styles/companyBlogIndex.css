@@ -149,6 +149,18 @@
 
 }
 
+#companyBlogIndex .oneTopTag {
+  color: black;
+  text-decoration: none;
+  padding-right: 5px;
+  font-size: 12px;
+  font-family: Roboto, sans-serif;
+}
+
+#companyBlogIndex .oneTopTag:hover {
+  color: #fdc683;
+}
+
 /*Not Found CSS*/
 
 #companyBlogNotFound .searchAlt {

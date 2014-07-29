@@ -213,7 +213,8 @@ module.exports = {
     companyPost.find({ published: true }).sort({ createdAt: 'desc' }).exec(function(err, posts){
       if(err) return res.redirect('/');
       if(posts !== undefined){
-        res.send({ posts: posts });
+        var topFiveTags = topTag.topTagHelper(posts);
+        res.send({ posts: topFiveTags });
       }
     });
   }
