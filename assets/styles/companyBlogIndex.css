@@ -225,6 +225,10 @@
   margin-bottom: 30px;
 }
 
+#createNewPost #futureDate {
+  display:none;
+}
+
 #companyBlogIndex .postContent img {
   width: 100%;
   margin-top: 20px;
@@ -234,6 +238,9 @@
   color: #fdc683;
   text-decoration: none;
 }
+
+
+
 
 
 

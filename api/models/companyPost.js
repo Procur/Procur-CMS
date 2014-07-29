@@ -34,7 +34,7 @@ module.exports = {
     category: {
       type: 'string'
     },
-    date: {
+    status: {
       type: 'string'
     },
     tagArray: {

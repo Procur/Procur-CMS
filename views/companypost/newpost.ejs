@@ -8,8 +8,18 @@
         <h3>TITLE:</h3>
         <div><input type="text" name="title" placeholder="Enter Title..." size="70"></div>
         <!--DATE-->
-        <h3>DATE:</h3>
-        <div><input type="text" name="date" placeholder="Enter Date... (example --> 05 January 2014)" size="70"></div>
+        <h3>DATE TO RELEASE:</h3>
+          <div>
+            <input class="dateCheckbox"  id="nowCheckbox" type="checkbox" name="checkCurrentDate" value="true" placeholder="Enter Date... (example --> 05 January 2014)" size="70">
+            <span>Now</span>
+          </div>
+          <div>
+            <input class="dateCheckbox" id="futureCheckbox" type="checkbox" name="checkFutureDate" value="true">
+            <span>Later</span>
+          </div>
+          <div>
+            <input id="futureDate" type="text" name="textFutureDate" placeHolder="Enter Date... (example  05 January 2014)" size="70">
+          </div>
         <!--CATEGORY-->
         <h3>CATEGORY:</h3>
         <div>

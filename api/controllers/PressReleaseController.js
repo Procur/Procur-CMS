@@ -63,7 +63,6 @@ module.exports = {
       var filepath = req.files.zip.path;
       var filename = req.files.zip.name;
       var filetype = req.files.zip.headers['content-type'];
-      console.log(req.files.zip.headers['content-type']);
       var isPublished = boolify(b.published);
       /////AWS UPLOAD
 
@@ -79,7 +78,6 @@ module.exports = {
           if (err) return console.log('Upload error: ', err);
             console.log('Upload stats: ', stats);
             console.log('Upload successful: ', resp);
-            console.log('the location: ', resp.Location);
             PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date, zip: resp.Location, pdf: resp.Location }, function(err,post){
 
               if (err){
@@ -95,8 +93,6 @@ module.exports = {
                   res.redirect("/pressreleases");
                 }
               }
-
-            console.log(post);
             });
         }
       );

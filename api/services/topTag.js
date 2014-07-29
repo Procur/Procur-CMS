@@ -3,7 +3,6 @@ module.exports = {
     tagCounts = { topPosts : [] };
      for (i = 0; i < data.length; i++) {
        curPostTags = data[i].tagArray.toString().split(",");
-       //console.log(data[i].tagArray.toString().split(","));
        for (j = 0; j < curPostTags.length; j++) {
          //increment tag in tagCount object, or initialize to 1
          if (tagCounts[curPostTags[j]] == undefined) {
@@ -34,8 +33,6 @@ module.exports = {
          }
 
        }
-       console.log(tagCounts);
-
      }return tagCounts;
   }
 
