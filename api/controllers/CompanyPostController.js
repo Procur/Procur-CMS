@@ -37,11 +37,11 @@ module.exports = {
   index: function(req, res){
     var query = url.parse(req.url, true).query;
     var pageNumber = query['page'];
-    companyPost.find({ published: true }).exec(function(err, posts){
+    companyPost.find().where({ published: true }).where({ awake: true }).exec(function(err, posts){
       if(err) return res.redirect('/');
       if(posts !== undefined){
         numTruePosts = posts.length;
-        companyPost.find({ published: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
+        companyPost.find().where({ published: true }).where({ awake: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
           if(err) return res.redirect('/');
           res.view({ posts: posts }, { numTruePosts: numTruePosts});
         });
@@ -64,8 +64,10 @@ module.exports = {
   createPost: function(req, res){
     var b = req.body;
     var isPublished = boolify(b.published);
+    var isPostAwake = status.isAwake(b.date);
+    console.log(isPostAwake);
     cloudinary.uploader.upload(req.files.image.path, function(result){
-      companyPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , tagArray: [b.tagSender], generalCategory: 'companypost'}, function(err, post){
+      companyPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , tagArray: [b.tagSender], generalCategory: 'companypost', awake: isPostAwake}, function(err, post){
         if(err){ return res.send(err); }
         if (post !== undefined){
           var finalText = shortenContent.shortenMe(post.content); //SHORTEN CONTENT FOR VIEW
@@ -82,6 +84,7 @@ module.exports = {
                   res.redirect('/companyPost/drafts');
                 }
                 else {
+                  console.log(post);
                   res.redirect('/companyblog');
                 }
 

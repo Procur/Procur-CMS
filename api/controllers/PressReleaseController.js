@@ -79,7 +79,7 @@ module.exports = {
             console.log('Upload stats: ', stats);
             console.log('Upload successful: ', resp);
             PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date, zip: resp.Location, pdf: resp.Location }, function(err,post){
-
+              console.log(post);
               if (err){
                 req.flash("There was a problem. Try again.");
                 res.redirect("/pressRelease/new");
@@ -90,6 +90,7 @@ module.exports = {
                   res.redirect("/pressRelease/drafts");
                 }
                 else {
+
                   res.redirect("/pressreleases");
                 }
               }

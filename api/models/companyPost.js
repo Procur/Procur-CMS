@@ -34,7 +34,7 @@ module.exports = {
     category: {
       type: 'string'
     },
-    status: {
+    awake: {
       type: 'string'
     },
     tagArray: {
