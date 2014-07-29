@@ -28,22 +28,18 @@ module.exports = {
     index: function(req, res){
       var query = url.parse(req.url, true).query;
       var pageNumber = query['page'];
-
       PressRelease.find({ published: true }).sort({ createdAt: 'desc' }).exec(function(err, posts1){
         if(err) return res.direct('/');
         numTruePosts = posts1.length;
       });
-
       PressRelease.find({ published: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
         if(err) return res.redirect('/');
-          console.log(posts);
           res.view({posts: posts}, { numTruePosts: numTruePosts});
         });
     },
 
     showOne: function(req, res){
       var slug = req.param('slug');
-
       PressRelease.findOne({ slug: slug }, function(err, post){
         if(err) return res.redirect('/');
         res.view({ post: post });
@@ -70,6 +66,7 @@ module.exports = {
       console.log(req.files.zip.headers['content-type']);
       var isPublished = boolify(b.published);
       /////AWS UPLOAD
+
       var fStream = fs.createReadStream(filepath);
       //key and secret key
       var uploader = new streamingS3(fStream, 'AKIAJJ2Y43ZH662PWFUA', 'IGrhMgy29wD++dB9H9pMzLqOhx5cll45U1qWy+uJ',
@@ -78,13 +75,14 @@ module.exports = {
           Key: filename,
           ContentType: filetype
         },  function (err, resp, stats) {
-        if (err) return console.log('Upload error: ', err);
+          if (err) return console.log('Upload error: ', err);
         console.log('Upload stats: ', stats);
         console.log('Upload successful: ', resp);
         }
       );
       /////CREATE NEW DB ENTRY
       PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date }, function(err,post){
+
         if (err){
           req.flash("There was a problem. Try again.");
           res.redirect("/pressRelease/new");
@@ -98,8 +96,10 @@ module.exports = {
             res.redirect("/pressreleases");
           }
         }
+
       console.log(post);
       });
+
     },
 
     edit: function(req, res){
@@ -117,13 +117,11 @@ module.exports = {
         if(err) return err;
         if(post === undefined) return;
         PressRelease.update(post, { title: b.title, content: b.content, abstract: b.abstract, published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date /*, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')*/ }, function(err, post){
-          //var slug = post[0].slug;
           var slug = post[0].slug;
           if(err) return res.redirect('/');
             req.flash("Post updated.");
           if (isPublished === true){
             res.redirect('/pressreleases/' + slug);
-            //res.redirect('/pressreleases');
           }
           else {
             res.redirect('/admin/drafts');

@@ -55,6 +55,8 @@ module.exports.routes = {
     action: 'processLogin'
   },
 
+  //PRESS RELEASE ROUTES
+
   'get /pressreleases?:querystring': {
     controller: "PressReleaseController",
     action: "index"
@@ -96,6 +98,66 @@ module.exports.routes = {
     controller: "PressReleaseController",
     action: "recent"
   },
+
+  //////////////// company BLOG ROUTES
+
+  // SEARCH ROUTES
+    'post /companyblogsearch?:querystring': {
+      controller: 'companyPostController',
+      action: 'search'
+    },
+
+    'get /companyblogsearch?:querystring': {
+      controller: 'companyPostController',
+      action: 'search'
+    },
+
+    // external routes
+    'get /companyblog?:querystring': {
+      controller: "companyPostController",
+      action: 'index'
+    },
+
+    'get /companyblog/:id': {
+      controller: 'companyPostController',
+      action: 'showOne'
+    },
+
+    // internal routes
+    'get /companyPost/TopTags': {
+      controller: 'companyPostController',
+      action: 'topTags'
+    },
+
+    'get /companyPost/nosearch': {
+      controller: 'companyPostController',
+      action: 'nosearch'
+    },
+
+    'get /companyPost/new': {
+      controller: "companyPostController",
+      action: 'newPost'
+    },
+
+    'post /companyPost/new': {
+      controller: "companyPostController",
+      action: 'createPost'
+    },
+
+    'get /companyPost/edit/:id': {
+      controller: "companyPostController",
+      action: 'edit'
+    },
+
+    'post /companyPost/editpost': {
+      controller: "companyPostController",
+      action: 'update'
+    },
+
+    'get /companyPost/unpublish/:id': {
+      controller: "companyPostController",
+      action: 'unpublish'
+    }
 
 //  "get /pressRelease/download/:slug": {
 //    controller: "PressReleaseController",
@@ -141,64 +203,9 @@ module.exports.routes = {
     action: 'unpublish'
   },*/
 
-// MARKETING BLOG ROUTES
-
-// SEARCH ROUTES
-  'post /marketingblogsearch?:querystring': {
-    controller: 'MarketingPostController',
-    action: 'search'
-  },
-
-  'get /marketingblogsearch?:querystring': {
-    controller: 'MarketingPostController',
-    action: 'search'
-  },
 
 
-
-  // external routes
-  'get /marketingblog?:querystring': {
-    controller: "MarketingPostController",
-    action: 'index'
-  },
-
-  'get /marketingblog/:id': {
-    controller: 'MarketingPostController',
-    action: 'showOne'
-  },
-
-  // internal routes
-  'get /marketingPost/nosearch': {
-    controller: 'MarketingPostController',
-    action: 'nosearch'
-  },
-
-  'get /marketingPost/new': {
-    controller: "MarketingPostController",
-    action: 'newPost'
-  },
-
-  'post /marketingPost/new': {
-    controller: "MarketingPostController",
-    action: 'createPost'
-  },
-
-  'get /marketingPost/edit/:id': {
-    controller: "MarketingPostController",
-    action: 'edit'
-  },
-
-  'post /marketingPost/editpost': {
-    controller: "MarketingPostController",
-    action: 'update'
-  },
-
-  'get /marketingPost/unpublish/:id': {
-    controller: "MarketingPostController",
-    action: 'unpublish'
-  },
-
-
+/*
 // NEWS BLOG
   // external routes
   'get /newsblog': {
@@ -287,7 +294,7 @@ module.exports.routes = {
     action: 'index'
   }
 
-
+*/
 
 
 

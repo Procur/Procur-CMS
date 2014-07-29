@@ -149,6 +149,18 @@
 
 }
 
+#companyBlogIndex .oneTopTag {
+  color: black;
+  text-decoration: none;
+  padding-right: 5px;
+  font-size: 12px;
+  font-family: Roboto, sans-serif;
+}
+
+#companyBlogIndex .oneTopTag:hover {
+  color: #fdc683;
+}
+
 /*Not Found CSS*/
 
 #companyBlogNotFound .searchAlt {
@@ -224,26 +236,7 @@
 }
 
 
-/*showOne*/
 
- .adminToolBox h3 {
-  color: red;
-  padding-left: 20px;
-}
-
- .adminToolBox {
-  border: 1px solid black;
-}
-
- .adminTools {
-  padding-left: 20px;
-  padding-bottom: 10px;
-}
-
- .adminTools a {
-  padding-right: 20px;
-  color: #ff6666;
-}
 
 
 

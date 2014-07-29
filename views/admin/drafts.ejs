@@ -1,20 +1,20 @@
 <div id="adminCMS">
   <div class="container">
-    <div class="col-ld-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-ld-12 col-md-12 col-sm-12 col-xs-12 draftsWrapper">
       <h1 class="draftsHeader">Drafts</h1>
-      <!--MARKETING POST DRAFTS -->
+      <!--company POST DRAFTS -->
         <% drafts.forEach(function(draft){ %>
-          <% if(draft.generalCategory=='marketingpost'){ %>
-            <p>Marketing Post DRAFT</p>
-            <a href="/marketingPost/edit/<%= draft.id %>"><strong><%= draft.title %></strong></a>
-            <p><span>Content:</span><%= draft.shortContent %></p>
+          <% if(draft.generalCategory=='companypost'){ %>
+            <p>company Post DRAFT</p>
+            <a class="draftTitleLink" href="/companyPost/edit/<%= draft.id %>"><strong><%= draft.title %></strong></a>
+            <p><span>Content:</span><%- draft.shortContent %></p>
             <hr>
           <% } %>
       <!--PRESS RELEASE DRAFTS -->
           <% if(draft.category=='pressrelease'){ %>
             <p>Press Release DRAFT</p>
-            <a href="/pressRelease/edit/<%= draft.slug %>"><strong><%= draft.title %></strong></a>
-            <p><span>Abstract</span><%= draft.abstract %></p>
+            <a class="draftTitleLink" href="/pressRelease/edit/<%= draft.slug %>"><strong><%= draft.title %></strong></a>
+            <p><span>Abstract</span><%- draft.abstract %></p>
             <hr>
           <% } %>
         <% }); %>

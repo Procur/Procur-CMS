@@ -2,8 +2,8 @@
 <div id="createNewPost">
   <div class="container">
     <h1>New Company Blog Post</h1>
-    <section id="marketingBlogPostForm">
-      <form action="/marketingPost/new" method="post" enctype="multipart/form-data">
+    <section id="companyBlogPostForm">
+      <form action="/companyPost/new" method="post" enctype="multipart/form-data">
         <!--TITLE-->
         <h3>TITLE:</h3>
         <div><input type="text" name="title" placeholder="Enter Title..." size="70"></div>
@@ -15,17 +15,16 @@
         <div>
           <select type="text" name="category" placeholder="Category">
             <option>Select a category</option>
-            <option value="Platform Announcements &amp; Updates">Platform Announcements &amp; Updates</option>
+            <option value="Platform Updates &amp; Annoucements">Platform Updates &amp; Annoucements</option>
             <option value="Company News">Company News</option>
-            <option value="International Trade News &amp; Events Events">International Trade News &amp; Events Events</option>
-            <option value="Initiatives and Company Philosophy">Initiatives and Company Philosophy</option>
-            <option value="Philanthropy">Philanthropy</option>
+            <option value="Affiliates &amp; Partnerships">Affiliates &amp; Partnerships</option>
+            <option value="Initiatives &amp; Philanthropy">Initiatives &amp; Philanthropy</option>
           </select></br></br>
         </div>
         <!--TAGS-->
         <h3>TAGS</h3>
         <div><input type="text" class="tagField" name="tagArray" placeholder="type a TAG and PRESS RIGHT ARROW and add more..." size="70"><span><input type='button' onclick="removeTags();" value="Delete Tags"></span><span class='tagContainer'></span></div>
-        <div><input type="text" class="tagSender" name="tagSender" placeholder="tag sender" size="70"></div>
+        <div><input type="hidden" class="tagSender" name="tagSender" placeholder="tag sender" size="70"></div>
         <!--IMAGE-->
         <h3>IMAGE</h3>
         <p>Image: <input type="file" name="image" /></p>
