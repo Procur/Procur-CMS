@@ -18,13 +18,11 @@
     "node-uuid": "^1.4.1",
     "nodemon": "^1.1.1",
     "optimist": "0.3.4",
-    "s3-streaming-upload": "^0.1.14",
     "sails": "0.9.16",
     "sails-disk": "~0.9.0",
     "sails-mongo": "^0.9.8",
-    "skipper": "^0.1.8",
-    "skipper-s3": "0.0.5",
-    "slug": "^0.5.0"
+    "slug": "^0.5.0",
+    "streaming-s3": "^0.3.2"
   },
   "scripts": {
     "start": "node app.js",
