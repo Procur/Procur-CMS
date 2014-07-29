@@ -73,32 +73,35 @@ module.exports = {
         {
           Bucket: 'procur-cms',
           Key: filename,
-          ContentType: filetype
+          ContentType: filetype,
+          ACL: 'public-read'
         },  function (err, resp, stats) {
           if (err) return console.log('Upload error: ', err);
-        console.log('Upload stats: ', stats);
-        console.log('Upload successful: ', resp);
+            console.log('Upload stats: ', stats);
+            console.log('Upload successful: ', resp);
+            console.log('the location: ', resp.Location);
+            PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date, zip: resp.Location, pdf: resp.Location }, function(err,post){
+
+              if (err){
+                req.flash("There was a problem. Try again.");
+                res.redirect("/pressRelease/new");
+                }
+              else {
+                req.flash("Post successfully created.")
+                if(isPublished == false) {
+                  res.redirect("/pressRelease/drafts");
+                }
+                else {
+                  res.redirect("/pressreleases");
+                }
+              }
+
+            console.log(post);
+            });
         }
       );
       /////CREATE NEW DB ENTRY
-      PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date }, function(err,post){
 
-        if (err){
-          req.flash("There was a problem. Try again.");
-          res.redirect("/pressRelease/new");
-          }
-        else {
-          req.flash("Post successfully created.")
-          if(isPublished == false) {
-            res.redirect("/pressRelease/drafts");
-          }
-          else {
-            res.redirect("/pressreleases");
-          }
-        }
-
-      console.log(post);
-      });
 
     },
 
