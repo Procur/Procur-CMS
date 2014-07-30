@@ -1,12 +1,33 @@
-#adminCMS a {
+#adminCMS .readyBlockLink {
   text-decoration: none;
   color: black;
-  margin-top: 15px;
   display: block;
+  padding: 20px 0px;
+  border-bottom: 1px dotted #cecece;
+  background-color: #cdf0c2
 }
 
-#adminCMS a:hover {
-  color: orange;
+#adminCMS .readyBlockLink:hover {
+  background-color: #adebad;
+}
+
+#adminCMS .draftsBlockLink {
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 20px 0px;
+  border-bottom: 1px dotted #cecece;
+  background-color: #ffffb2;
+}
+
+#adminCMS .draftsBlockLink:hover {
+  background-color: #ffff80;
+}
+
+
+
+#adminCMS .innerblock {
+  margin-left: 20px;
 }
 
 #adminCMS .dashWrapper {
@@ -17,6 +38,7 @@
 
 #adminCMS .draftsHeader {
   border-bottom: 2px solid black;
+  margin-bottom: 0px;
 }
 
 #adminCMS .draftsWrapper .draftTitleLink {

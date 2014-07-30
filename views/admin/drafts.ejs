@@ -1,21 +1,54 @@
+
+
+
 <div id="adminCMS">
   <div class="container">
     <div class="col-ld-12 col-md-12 col-sm-12 col-xs-12 draftsWrapper">
-      <h1 class="draftsHeader">Drafts</h1>
+      <h1>Holding Tank</h1>
+      <h2 class="draftsHeader">Pending</h1>
+      <!--company POST READY-->
+        <% payload[1].forEach(function(post){ %>
+          <% if(post.generalCategory=='companypost'){ %>
+            <a class="readyBlockLink" href="/companyPost/edit/<%= post.id %>">
+              <div class="innerblock">
+                <p> Company Post </p>
+                <p><%= post.title %></p>
+                <p><%- post.shortContent %></p>
+                
+              </div>
+            </a>
+          <% } %>
+          <% if(post.generalCategory=='pressrelease'){ %>
+            <a class="readyBlockLink" href="/companyPost/edit/<%= post.id %>">
+              <div class="innerblock">
+                <p> Press Release </p>
+                <p><%= post.title %><p>
+                <p><%- post.abstract %></p>
+              </div>
+            </a>
+          <% } %>
+        <% }); %>
+      <h2 class="draftsHeader">Drafts</h1>
       <!--company POST DRAFTS -->
-        <% drafts.forEach(function(draft){ %>
-          <% if(draft.generalCategory=='companypost'){ %>
-            <p>company Post DRAFT</p>
-            <a class="draftTitleLink" href="/companyPost/edit/<%= draft.id %>"><strong><%= draft.title %></strong></a>
-            <p><span>Content:</span><%- draft.shortContent %></p>
-            <hr>
+        <% payload[0].forEach(function(post){ %>
+          <% if(post.generalCategory=='companypost'){ %>
+            <a class="draftsBlockLink" href="/companyPost/edit/<%= post.id %>">
+              <div class="innerblock">
+                <p>company Post DRAFT</p>
+                <p><%= post.title %></p>
+                <p><%- post.shortContent %></p>
+              </div>
+            </a>
           <% } %>
       <!--PRESS RELEASE DRAFTS -->
-          <% if(draft.category=='pressrelease'){ %>
-            <p>Press Release DRAFT</p>
-            <a class="draftTitleLink" href="/pressRelease/edit/<%= draft.slug %>"><strong><%= draft.title %></strong></a>
-            <p><span>Abstract</span><%- draft.abstract %></p>
-            <hr>
+          <% if(post.category=='pressrelease'){ %>
+            <a class="draftsBlockLink" href="/companyPost/edit/<%= post.id %>">
+              <div class="innerblock">
+                <p>Press Release DRAFT</p>
+                <p><%= post.title %></p>
+                <p><%- post.abstract %></p>
+              </div>
+            </a>
           <% } %>
         <% }); %>
       </div>

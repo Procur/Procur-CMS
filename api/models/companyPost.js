@@ -25,17 +25,11 @@ module.exports = {
       type: 'boolean',
       required: 'true'
     },
-    thumbnail: {
-      type: 'json'
-    },
-    timestamp: {
-      type: 'string'
-    },
     category: {
       type: 'string'
     },
     awake: {
-      type: 'string'
+      type: 'boolean'
     },
     tagArray: {
       type: 'array',
@@ -46,6 +40,12 @@ module.exports = {
       type: 'string'
     },
     generalCategory: {
+      type: 'string'
+    },
+    shortDate: {
+      type: 'string'
+    },
+    longDate: {
       type: 'string'
     }
 

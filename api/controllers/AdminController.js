@@ -23,30 +23,31 @@ module.exports = {
   },
 
   drafts: function(req, res){
-    var payload = [];
+    var payload = [[],[]]; //Initialize Titty Array: index 0 for drafts, index 1 for posts waiting on date
     companyPost.find({ published: false }, function(err, companyPosts){
       if(err) return res.redirect('/admin/drafts');
       for (i=0; i < companyPosts.length; i++){
-        payload.push(companyPosts[i]);
+        payload[0].push(companyPosts[i]);
       }
-      console.log(payload.length);
-      /*NewsPost.find({ published: false }, function(err, newsPosts){
+      companyPost.find().where({ published: true }).where({ awake: false }).exec(function(err, companyPosts){
         if(err) return res.redirect('/admin/drafts');
-        for (i=0; i < newsPosts.length; i++){
-          payload.push(newsPosts[i]);
+        for (i=0; i < companyPosts.length; i++){
+          payload[1].push(companyPosts[i]);
         }
-        console.log(payload.length);
-        //console.log(payload);*/
-        PressRelease.find({ published: false }, function(err, pressRelease){
+        PressRelease.find({ published: false }, function(err, pressReleases){
           if(err) return res.redirect('/admin/drafts');
-          for (i=0; i < pressRelease.length; i++){
-            payload.push(pressRelease[i]);
+          for (i=0; i < pressReleases.length; i++){
+            payload[0].push(pressReleases[i]);
           }
-          console.log(payload.length);
-          //console.log(payload);
-          res.view({ drafts: payload});
+          PressRelease.find().where({ published: true }).where({ awake: false }).exec(function(err, pressReleases){
+            if(err) return res.redirect('/admin/drafts');
+            for (i=0; i < pressReleases.length; i++){
+              payload[1].push(pressReleases[i]);
+            }
+            res.view({ payload: payload });
+          });
         });
-      //});
+      });
     });
 
 
