@@ -41,7 +41,7 @@ module.exports = {
         month = "December";
         break;
     }
-    return month+" "+date[1]+" "+date[2]
+    return date[1]+" "+month+" "+date[2]
   },
   short: function(date){ ////////ABSTRACT MONTH SWITCH TO BE MORE ELOQUENT
     date = date.split("/");

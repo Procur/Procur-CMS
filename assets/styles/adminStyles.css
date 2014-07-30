@@ -35,6 +35,16 @@
   padding-right: 5px;
 }
 
+#adminCMS .adminRow a {
+  color: black;
+  display: block;
+  text-decoration: none;
+  margin-top: 25px;
+}
+
+#adminCMS .adminRow a:hover {
+  color: orange;
+}
 
 #adminCMS .innerblock {
   margin-left: 20px;

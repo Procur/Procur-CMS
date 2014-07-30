@@ -35,7 +35,8 @@
         <div><textarea name="content" rows="30" cols="50"><%= post.content %></textarea></div>
         <!--PUBLISHED NOW???-->
         <h3>PUBLISH</h3>
-        <div><input type="checkbox" name="published" value="true">Publish now?</div></br>
+        <div><input type="radio" name="published" value="true" <% if(post.published){ %> checked="checked" <% } %> />&nbsp;Yes</div>
+        <div><input type="radio" name="published" value="false">&nbsp;No</div></br></br>
         <!--SUBMIT-->
         <div class="postSubmitButton"><input type="submit"></div>
       </form>
