@@ -47,6 +47,9 @@ module.exports = {
     },
     longDate: {
       type: 'string'
+    },
+    daysLeft: {
+      type: 'string'
     }
 
     /*

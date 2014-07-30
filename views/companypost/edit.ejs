@@ -8,8 +8,10 @@
         <h3>TITLE:</h3>
         <div><input type="text" name="title" size="70" value="<%= post.title %>"></div>
         <!--DATE-->
-        <h3>DATE:</h3>
-        <div><input type="text" name="date" value="<%= post.date %>" size="70"></div>
+        <h3>DATE TO RELEASE:</h3>
+          <div>
+            Date:<input id="releaseDateHook" type="text" name="date" value="<%= post.date %>" size="35">
+          </div>
         <!--CATEGORY-->
         <h3>CATEGORY:</h3>
         <div>

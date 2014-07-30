@@ -67,18 +67,15 @@ module.exports = {
     var isPostAwake = status.isAwake(b.date);
     var dateFormatLong = dateFormatter.long(b.date);
     var dateFormatShort = dateFormatter.short(b.date);
-    var daysRemaining = daysLeft.run(b.date)
-    console.log(isPostAwake);
+    var daysRemaining = daysLeft.run(b.date);
     cloudinary.uploader.upload(req.files.image.path, function(result){
-    companyPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , tagArray: [b.tagSender], generalCategory: 'companypost', awake: isPostAwake, shortDate: dateFormatLong, longDate: dateFormatShort}, function(err, post){
-        console.log(post);
+    companyPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , tagArray: [b.tagSender], generalCategory: 'companypost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining}, function(err, post){
         if(err){ return res.send(err); }
         if (post !== undefined){
           var finalText = shortenContent.shortenMe(post.content); //SHORTEN CONTENT FOR VIEW
           companyPost.findOne({ title: b.title }, function(err, post){
             if(err) return res.redirect('/');
             companyPost.update(post, { shortContent: finalText }, function(err,post){
-              console.log(post);
               if (err){
                 req.flash("There was a problem. Try again.");
                 res.redirect('/companyPost/new');
@@ -114,11 +111,15 @@ module.exports = {
   update: function(req, res){
     var b = req.body;
     var isPublished = boolify(b.published);
+    var isPostAwake = status.isAwake(b.date);
+    var dateFormatLong = dateFormatter.long(b.date);
+    var dateFormatShort = dateFormatter.short(b.date);
+    var daysRemaining = daysLeft.run(b.date);
     var id = req.param('id');
     cloudinary.uploader.upload(req.files.image.path, function(result){
       companyPost.findOne({ id: id }, function(err, post){
         if(err) return res.send(err);
-        companyPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date, tagArray: [b.tagSender] }, function(err, post){
+        companyPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date, tagArray: [b.tagSender], awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining }, function(err, post){
           if(err) { return res.send(err); }
           if(post !== undefined){
             var id = post[0].id;

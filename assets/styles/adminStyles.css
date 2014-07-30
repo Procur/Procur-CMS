@@ -18,12 +18,22 @@
   padding: 20px 0px;
   border-bottom: 1px dotted #cecece;
   background-color: #ffffb2;
+
 }
 
 #adminCMS .draftsBlockLink:hover {
   background-color: #ffff80;
 }
 
+#adminCMS .dateHover {
+  float:right;
+  display: none;
+  height: 20px;
+  color: white;
+  background-color: black;
+  padding-left: 5px;
+  padding-right: 5px;
+}
 
 
 #adminCMS .innerblock {
