@@ -9,8 +9,6 @@ module.exports = {
     var currentYear = newDate.getFullYear();
     var currentMonth = newDate.getMonth()+1;
     var currentDay = newDate.getDate();
-    console.log('a'+currentMonth);
-    console.log('b'+date[0]);
     /*switch (month) {
       case 1:
         month = "January";
@@ -51,13 +49,11 @@ module.exports = {
     }*/
 
     if ( date[2] > currentYear) {
-      console.log('a');
       return false;
     } else if ( date[0] > currentMonth ) {
-      console.log('b');
+
       return false;
     } else if ( date[1] > currentDay ) {
-      console.log('c');
       return false;
     } else {
       return true;

@@ -3,7 +3,7 @@
   <div class="container">
     <h1>Edit Company Blog Post</h1>
     <section id="editcompanyBlogPostForm">
-      <form action="/companyPost/editpost" method="post" enctype="multipart/form-data">
+      <form action="/companyPost/editpost?id=<%= post.id %>" method="post" enctype="multipart/form-data">
         <!--TITLE-->
         <h3>TITLE:</h3>
         <div><input type="text" name="title" size="70" value="<%= post.title %>"></div>

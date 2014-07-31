@@ -22,7 +22,7 @@ module.exports = {
   index: function(req, res){
     var query = url.parse(req.url, true).query;
     var pageNumber = query['page'];
-    companyPost.find().where({ published: true }).where({ awake: true }).sort({ createdAt: 'desc' }).exec(function(err, posts){
+    companyPost.find().where({ published: true }).where({ awake: true }).exec(function(err, posts){
       if(err) return res.redirect('/');
       if(posts !== undefined){
         numTruePosts = posts.length;
@@ -36,6 +36,7 @@ module.exports = {
 
   showOne: function(req, res){
     var id = req.param('id');
+    console.log('ID of ShowOne view: '+id);
     companyPost.findOne({ id: id }, function(err, post){
       if(err) return res.redirect('/companyblog');
       res.view({ post: post });
@@ -74,7 +75,6 @@ module.exports = {
                   res.redirect('/admin/drafts');
                 }
                 else {
-                  console.log(post);
                   res.redirect('/companyblog');
                 }
 
@@ -91,23 +91,27 @@ module.exports = {
 
   edit: function(req, res){
     var id = req.param('id');
+    console.log('ID of edit view: '+ id);
     companyPost.findOne({ id: id }, function(err, post){
       res.view({ post: post });
     });
   },
 
   update: function(req, res){
+    console.log('In Update Action');
+    var query = url.parse(req.url, true).query;
+    var id = query['id'];
     var b = req.body;
+    console.log('The ID: '+id);
     var isPublished = boolify(b.published);
     var isPostAwake = status.isAwake(b.date);
     var dateFormatLong = dateFormatter.long(b.date);
     var dateFormatShort = dateFormatter.short(b.date);
     var daysRemaining = daysLeft.run(b.date);
-    var id = req.param('id');
     cloudinary.uploader.upload(req.files.image.path, function(result){
       companyPost.findOne({ id: id }, function(err, post){
         if(err) return res.send(err);
-        companyPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date, tagArray: [b.tagSender], awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining }, function(err, post){
+        companyPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date, tagArray: [b.tagSender], generalCategory: 'companypost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining }, function(err, post){
           if(err) { return res.send(err); }
           if(post !== undefined){
             var id = post[0].id;

@@ -149,7 +149,7 @@ module.exports.routes = {
       action: 'edit'
     },
 
-    'post /companyPost/editpost': {
+    'post /companyPost/editpost?:querystring': {
       controller: "companyPostController",
       action: 'update'
     },
