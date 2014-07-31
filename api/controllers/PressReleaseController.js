@@ -1,13 +1,7 @@
 
-//var humanize = require('humanize');
+
 var slug = require('slug');
-//var print = console.log.bind(console,'>');
 var url = require('url');
-//var fsx = require('fs-extra');
-
-
-//var UUIDGenerator = require('node-uuid');
-//var AWS = require('aws-sdk');
 var streamingS3 = require('streaming-s3');
 var fs = require('fs');
 
@@ -28,28 +22,29 @@ module.exports = {
     index: function(req, res){
       var query = url.parse(req.url, true).query;
       var pageNumber = query['page'];
-      PressRelease.find({ published: true }).sort({ createdAt: 'desc' }).exec(function(err, posts1){
+      PressRelease.find().where({ published: true }).where({ awake: true }).exec(function(err, posts){
         if(err) return res.direct('/');
-        numTruePosts = posts1.length;
+        if(posts !== undefined){
+          numTruePosts = posts.length;
+          PressRelease.find().where({ published: true }).where({ awake: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
+            if(err) return res.redirect('https://procur.com');
+            res.view({ posts: posts }, { numTruePosts: numTruePosts});
+          });
+        }
       });
-      PressRelease.find({ published: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
-        if(err) return res.redirect('/');
-          res.view({posts: posts}, { numTruePosts: numTruePosts});
-        });
     },
 
     showOne: function(req, res){
       var slug = req.param('slug');
       PressRelease.findOne({ slug: slug }, function(err, post){
-        if(err) return res.redirect('/');
+        if(err) return res.redirect('/pressreleases');
         res.view({ post: post });
-
       });
     },
 
     recent: function(req,res){
-      PressRelease.find({ published: true }).sort({ createdAt: 'desc' }).limit(10).exec(function(err,posts){
-        if(err) return res.redirect('/');
+      PressRelease.find().where({ published: true }).where({ awake: true }).sort({ createdAt: 'desc' }).limit(10).exec(function(err,posts){
+        if(err) { res.send("Sorry, Error Loading 10 Recent Posts"); }
         res.send(posts);
       });
     },
@@ -60,6 +55,10 @@ module.exports = {
 
     createPost: function(req, res){
       var b = req.body;
+      var isPostAwake = status.isAwake(b.date);
+      var dateFormatLong = dateFormatter.long(b.date);
+      var dateFormatShort = dateFormatter.short(b.date);
+      var daysRemaining = daysLeft.run(b.date);
       var filepath = req.files.zip.path;
       var filename = req.files.zip.name;
       var filetype = req.files.zip.headers['content-type'];
@@ -78,7 +77,7 @@ module.exports = {
           if (err) return console.log('Upload error: ', err);
             console.log('Upload stats: ', stats);
             console.log('Upload successful: ', resp);
-            PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date, zip: resp.Location, pdf: resp.Location }, function(err,post){
+            PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), generalCategory: 'pressrelease', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining, date: b.date, zip: resp.Location, pdf: resp.Location }, function(err,post){
               console.log(post);
               if (err){
                 req.flash("There was a problem. Try again.");
@@ -87,7 +86,7 @@ module.exports = {
               else {
                 req.flash("Post successfully created.")
                 if(isPublished == false) {
-                  res.redirect("/pressRelease/drafts");
+                  res.redirect("/admin/drafts");
                 }
                 else {
 
@@ -113,14 +112,17 @@ module.exports = {
       var b = req.body;
       var id = req.param('id');
       var isPublished = boolify(b.published);
+      var isPostAwake = status.isAwake(b.date);
+      var dateFormatLong = dateFormatter.long(b.date);
+      var dateFormatShort = dateFormatter.short(b.date);
+      var daysRemaining = daysLeft.run(b.date);
       PressRelease.findOne({ id: id  }, function(err, post){
         if(err) return err;
-        if(post === undefined) return;
-        PressRelease.update(post, { title: b.title, content: b.content, abstract: b.abstract, published: isPublished, slug: slug(b.title).toLowerCase(), category: 'pressrelease', date: b.date /*, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')*/ }, function(err, post){
+        PressRelease.update(post, { title: b.title, content: b.content, abstract: b.abstract, published: isPublished, slug: slug(b.title).toLowerCase(), date: b.date, awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining /*, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')*/ }, function(err, post){
           var slug = post[0].slug;
           if(err) return res.redirect('/');
             req.flash("Post updated.");
-          if (isPublished === true){
+          if (isPublished === true && isPostAwake === true ){
             res.redirect('/pressreleases/' + slug);
           }
           else {

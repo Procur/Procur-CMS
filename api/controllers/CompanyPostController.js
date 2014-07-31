@@ -1,23 +1,8 @@
-/**
- * companyPostController
- *
- * @module      :: Controller
- * @description	:: A set of functions called `actions`.
- *
- *                 Actions contain code telling Sails how to respond to a certain type of request.
- *                 (i.e. do stuff, then send some JSON, show an HTML page, or redirect to another URL)
- *
- *                 You can configure the blueprint URLs which trigger these actions (`config/controllers.js`)
- *                 and/or override them with custom routes (`config/routes.js`)
- *
- *                 NOTE: The code you write here supports both HTTP and Socket.io automatically.
- *
- * @docs        :: http://sailsjs.org/#!documentation/controllers
- */
-//var humanize = require('humanize');
+
+
 var cloudinary = require('cloudinary');
 var url = require('url');
-//var moment = require('moment');
+
 
 ///////BEGIN UTILITY FUNCTIONS
 var boolify = function(obj){
@@ -42,7 +27,7 @@ module.exports = {
       if(posts !== undefined){
         numTruePosts = posts.length;
         companyPost.find().where({ published: true }).where({ awake: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
-          if(err) return res.redirect('/');
+          if(err) return res.redirect('https://procur.com');
           res.view({ posts: posts }, { numTruePosts: numTruePosts});
         });
       }
@@ -52,7 +37,7 @@ module.exports = {
   showOne: function(req, res){
     var id = req.param('id');
     companyPost.findOne({ id: id }, function(err, post){
-      if(err) return res.redirect('/');
+      if(err) return res.redirect('/companyblog');
       res.view({ post: post });
     });
   },
@@ -127,12 +112,11 @@ module.exports = {
           if(post !== undefined){
             var id = post[0].id;
             req.flash("Post updated.");
-            if (isPublished === true){
-              console.log(post);
+            if ( isPostAwake === true && isPublished === true ){
               res.redirect('/companyblog/' + id);
             }
             else {
-              res.redirect('/companyblog');
+              res.redirect('/admin/drafts');
             }
           }
         else {

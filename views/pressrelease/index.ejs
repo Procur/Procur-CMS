@@ -1,9 +1,7 @@
 <%- partial('../partials/mktheaderline') %>
 <div id ="pressRelease">
   <div class="container">
-    <div
     <div class="row">
-
       <!--COL LEFT-->
       <h1>Press &amp; Media</h1>
       <div class="col-lg-7 col-md-8 col-sm-8 col-xs-12">
@@ -19,7 +17,7 @@
             </div>
           </div>
 
-
+        <!--ITERATIVELY ADD POSTS-->
         <% posts.forEach(function(post){ %>
           <% if(post.published == true){ %>
             <div class="totalPostWrapper">
@@ -37,8 +35,7 @@
             </div>
           <% } %>
         <% }); %>
-
-      <!--END PRESS RELEASES-->
+        <!--END PRESS RELEASES-->
 
       <!--PAGE NAV-->
       <div class="pageNavPressRelease">

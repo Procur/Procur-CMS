@@ -7,7 +7,9 @@
           <h2>TITLE:</h2>
           <div><input type="text" name="title" placeholder="Enter title..." size = "70"></div>
           <h2>DATE:</h2>
-          <div><input type="text" name="date" placeholder="Enter date..." size = "70"></div>
+          <div>
+            <input id="releaseDateHook" type="text" name="date" size = "35">
+          </div>
           <h2>ABSTRACT:</h2>
           <div><textarea name="abstract" placeholder="Type abstract..." rows="7" cols="50"></textarea></div>
           <h2>CONTENT:</h2>
@@ -16,7 +18,8 @@
           <p>Upload a Zip File: <input type="file" name="zip" ></p>
           <p>Upload a PDF File: <input type="file" name="pdf" ></p>
           <h2>PUBLISH:</h2>
-          <div><input type="checkbox" name="published" value="true">Publish now?</div>
+          <div><input type="radio" name="published" value="true">&nbsp;Yes</div>
+          <div><input type="radio" name="published" value="false">&nbsp;No</div></br></br>
           <div><input type="submit" value="Submit Press Release"></div>
       </form>
     </section>
