@@ -22,7 +22,7 @@ module.exports = {
   index: function(req, res){
     var query = url.parse(req.url, true).query;
     var pageNumber = query['page'];
-    companyPost.find().where({ published: true }).where({ awake: true }).exec(function(err, posts){
+    companyPost.find().where({ published: true }).where({ awake: true }).sort({ createdAt: 'desc' }).exec(function(err, posts){
       if(err) return res.redirect('/');
       if(posts !== undefined){
         numTruePosts = posts.length;
