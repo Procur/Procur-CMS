@@ -36,7 +36,6 @@ module.exports = {
 
   showOne: function(req, res){
     var id = req.param('id');
-    console.log('ID of ShowOne view: '+id);
     companyPost.findOne({ id: id }, function(err, post){
       if(err) return res.redirect('/companyblog');
       res.view({ post: post });
@@ -91,18 +90,15 @@ module.exports = {
 
   edit: function(req, res){
     var id = req.param('id');
-    console.log('ID of edit view: '+ id);
     companyPost.findOne({ id: id }, function(err, post){
       res.view({ post: post });
     });
   },
 
   update: function(req, res){
-    console.log('In Update Action');
     var query = url.parse(req.url, true).query;
     var id = query['id'];
     var b = req.body;
-    console.log('The ID: '+id);
     var isPublished = boolify(b.published);
     var isPostAwake = status.isAwake(b.date);
     var dateFormatLong = dateFormatter.long(b.date);

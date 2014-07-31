@@ -37,7 +37,7 @@ module.exports = {
     showOne: function(req, res){
       var slug = req.param('slug');
       PressRelease.findOne({ slug: slug }, function(err, post){
-        if(err) return res.redirect('/pressreleases');
+        if(err) return res.redirect('/pressreleases?page=1');
         res.view({ post: post });
       });
     },
@@ -91,7 +91,7 @@ module.exports = {
                 }
                 else {
 
-                  res.redirect("/pressreleases");
+                  res.redirect("/pressreleases?page=1");
                 }
               }
             });
@@ -110,8 +110,9 @@ module.exports = {
     },
 
     update: function(req, res){
+      var query = url.parse(req.url, true).query;
+      var id = query['id'];
       var b = req.body;
-      var id = req.param('id');
       var isPublished = boolify(b.published);
       var isPostAwake = status.isAwake(b.date);
       var dateFormatLong = dateFormatter.long(b.date);
@@ -140,7 +141,7 @@ module.exports = {
         PressRelease.update(post, { published: false}, function(err, post){
           if(err) return res.redirect('/pressRelease/edit/' + slug);
           req.flash('Post unpublished.');
-          res.redirect('/pressreleases')
+          res.redirect('/pressreleases?page=1')
         });
       });
     }

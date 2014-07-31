@@ -84,7 +84,7 @@ module.exports.routes = {
     action: "edit"
   },
 
-  "post /pressRelease/editpost": {
+  "post /pressRelease/editpost?:querystring": {
     controller: "PressReleaseController",
     action: "update"
   },

@@ -2,7 +2,7 @@
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <h1>Edit Press Release</h1>
     <section id="editPressReleaseForm">
-      <form action="/pressRelease/editpost" method="post">
+      <form action="/pressRelease/editpost?id=<%= post.id %>" method="post" enctype="multipart/form-data">
         <h2>TITLE</h2>
         <div><input type="text" name="title" size = "70" value="<%= post.title %>"></div>
         <h2>DATE</h2>
