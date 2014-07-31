@@ -19,7 +19,7 @@
             </a>
           <% } %>
           <% if(post.generalCategory=='pressrelease'){ %>
-            <a class="readyBlockLink" href="/companyPost/edit/<%= post.id %>">
+            <a class="readyBlockLink" href="/pressrelease/edit/<%= post.id %>">
               <div class="innerblock">
                 <p class="titleHoldingTank"> Press Release </p>
                 <p><%= post.title %><p>
@@ -43,7 +43,7 @@
           <% } %>
       <!--PRESS RELEASE DRAFTS -->
           <% if(post.generalCategory=='pressrelease'){ %>
-            <a class="draftsBlockLink" href="/companyPost/edit/<%= post.id %>">
+            <a class="draftsBlockLink" href="/pressrelease/edit/<%= post.slug %>">
               <div class="innerblock">
                 <p class="titleHoldingTank">Press Release DRAFT</p>
                 <p><%= post.title %></p>

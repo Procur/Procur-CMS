@@ -41,7 +41,20 @@ module.exports = {
     },
     date: {
       type: 'string'
+    },
+    generalCategory: {
+      type: 'string'
+    },
+    shortDate: {
+      type: 'string'
+    },
+    longDate: {
+      type: 'string'
+    },
+    daysLeft: {
+      type: 'string'
     }
+
 
   }
 
