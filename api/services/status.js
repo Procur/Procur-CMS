@@ -1,7 +1,6 @@
 module.exports = {
   isAwake: function(date){
     date = date.split("/");
-    console.log(date);
     for (i=0; i<date.length; i++){
       date[i] = parseInt(date[i]);
     }
@@ -10,7 +9,8 @@ module.exports = {
     var currentYear = newDate.getFullYear();
     var currentMonth = newDate.getMonth()+1;
     var currentDay = newDate.getDate();
-    console.log(currentDay);
+    console.log('a'+currentMonth);
+    console.log('b'+date[0]);
     /*switch (month) {
       case 1:
         month = "January";
@@ -50,17 +50,17 @@ module.exports = {
         break;
     }*/
 
-    if ( date[2] < currentYear) {
+    if ( date[2] > currentYear) {
       console.log('a');
-      return true;
-    } else if ( date[0] < currentMonth ) {
-      console.log('b');
-      return true;
-    } else if ( date[1] < currentDay ) {
-      console.log('c');
-      return true;
-    } else {
       return false;
+    } else if ( date[0] > currentMonth ) {
+      console.log('b');
+      return false;
+    } else if ( date[1] > currentDay ) {
+      console.log('c');
+      return false;
+    } else {
+      return true;
     }
   }
 }

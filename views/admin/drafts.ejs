@@ -11,7 +11,7 @@
           <% if(post.generalCategory=='companypost'){ %>
             <a class="readyBlockLink" href="/companyPost/edit/<%= post.id %>">
               <div class="innerblock">
-                <p> Company Post </p>
+                <p class="titleHoldingTank"> Company Post </p>
                 <p><%= post.title %></p>
                 <p><%- post.shortContent %></p>
                 <div class="dateHover">Days Left:&nbsp;<%- post.daysLeft %></div>
@@ -21,9 +21,10 @@
           <% if(post.generalCategory=='pressrelease'){ %>
             <a class="readyBlockLink" href="/companyPost/edit/<%= post.id %>">
               <div class="innerblock">
-                <p> Press Release </p>
+                <p class="titleHoldingTank"> Press Release </p>
                 <p><%= post.title %><p>
                 <p><%- post.abstract %></p>
+                <div class="dateHover">Days Left:&nbsp;<%- post.daysLeft %></div>
               </div>
             </a>
           <% } %>
@@ -34,7 +35,7 @@
           <% if(post.generalCategory=='companypost'){ %>
             <a class="draftsBlockLink" href="/companyPost/edit/<%= post.id %>">
               <div class="innerblock">
-                <p>company Post DRAFT</p>
+                <p class="titleHoldingTank">Company Post DRAFT</p>
                 <p><%= post.title %></p>
                 <p><%- post.shortContent %></p>
               </div>
@@ -44,7 +45,7 @@
           <% if(post.category=='pressrelease'){ %>
             <a class="draftsBlockLink" href="/companyPost/edit/<%= post.id %>">
               <div class="innerblock">
-                <p>Press Release DRAFT</p>
+                <p class="titleHoldingTank">Press Release DRAFT</p>
                 <p><%= post.title %></p>
                 <p><%- post.abstract %></p>
               </div>

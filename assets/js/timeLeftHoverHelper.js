@@ -1,3 +1,3 @@
 $('.readyBlockLink').hover(function(){
-  $('.dateHover').animate({width: 'toggle'});
+  $(this).find('.dateHover').animate({width: 'toggle'});
 });

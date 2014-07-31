@@ -69,6 +69,10 @@
   border-bottom: 2px solid #CECECE;
 }
 
+#adminCMS .titleHoldingTank {
+  font-size: 20px;
+}
+
 /*showOne*/
 
  .adminToolBox h3 {
@@ -87,5 +91,10 @@
 
  .adminTools a {
   padding-right: 20px;
-  color: #ff6666;
+  color: #cecece;
+  text-decoration: none;
+}
+
+.adminTools a:hover {
+  color: orange
 }

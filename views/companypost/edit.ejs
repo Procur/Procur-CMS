@@ -36,7 +36,7 @@
         <!--PUBLISHED NOW???-->
         <h3>PUBLISH</h3>
         <div><input type="radio" name="published" value="true" <% if(post.published){ %> checked="checked" <% } %> />&nbsp;Yes</div>
-        <div><input type="radio" name="published" value="false">&nbsp;No</div></br></br>
+        <div><input type="radio" name="published" value="false" <% if(!post.published){ %> checked="checked" <% } %> />&nbsp;No</div></br></br>
         <!--SUBMIT-->
         <div class="postSubmitButton"><input type="submit"></div>
       </form>
