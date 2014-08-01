@@ -9,17 +9,19 @@ module.exports = {
     var currentYear = newDate.getFullYear();
     var currentMonth = newDate.getMonth()+1;
     var currentDay = newDate.getDate();
-    
+    console.log('Now: '+currentYear+'/'+currentMonth+'/'+currentDay);
 
-    if ( date[2] > currentYear) {
-      return false;
-    } else if ( date[0] > currentMonth ) {
-
-      return false;
-    } else if ( date[1] > currentDay ) {
-      return false;
-    } else {
+    if ( currentYear > date[2] ) {
+      console.log('a');
       return true;
+    } else if ( currentMonth > date[0] ) {
+      console.log('b');
+      return true;
+    } else if ( currentDay > date[1] ) {
+      console.log('c');
+      return true;
+    } else {
+      return false;
     }
   }
 }

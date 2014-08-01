@@ -1,5 +1,11 @@
 $('.dynamicDateLinks').ready( function(){
   $.get('/companyPost/dateFetch').done(function(data){
-    console.log(data);
+    searchStrings = data["posts"]["search"];
+    clientStrings = data["posts"]["months"];
+    console.log(searchStrings);
+    console.log(clientStrings);
+    for ( i=0; i < searchStrings.length; i++) {
+      $(".dynamicDateLinks").append("<a class='oneDateLink' href='/companyblogsearch?word="+clientStrings[i][1]+clientStrings[i][0]+"'>"+clientStrings[i][0]+"</a>");
+    }
   });
 });

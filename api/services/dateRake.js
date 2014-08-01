@@ -13,10 +13,11 @@ module.exports = {
   },
 
   run: function(data){
+    console.log(data);
     dateList = [];
     var numPosts = data.length;
     var oneDate;
-    for ( i=0; i<numPosts-1; i++){
+    for ( i=0; i<numPosts; i++){
       oneDate = data[i]['date'];
       dateList.push(oneDate);
     }

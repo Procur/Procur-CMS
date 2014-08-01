@@ -1,17 +1,19 @@
 module.exports = {
   run: function ( data ){
     var dataToSend = { search: data, months: [] };
-    var numDates = data.length
-    var arrayDate
+    var numDates = data.length;
+    var arrayDate;
     for ( i=0; i<numDates; i++ ){
       arrayDate = data[0].split('/');
       var monthNum = arrayDate[0];
       var yearNum = arrayDate[2];
       var monthWord = this.getMonth(monthNum);
       var monthyearArray = [monthWord,yearNum];
-      dataToSend['months'].push(monthyearArray);
+      //console.log(i);
+      //if ( dataToSend['months'].indexOf('monthyearArray')  ){
+        dataToSend['months'].push(monthyearArray);
+      //}
     }
-    console.log(dataToSend);
     return dataToSend;
   },
 
