@@ -129,6 +129,11 @@ module.exports.routes = {
       action: 'topTags'
     },
 
+    'get /companyPost/dateFetch': {
+      controller: 'companyPostController',
+      action: 'dateFetch'
+    },
+
     'get /companyPost/nosearch': {
       controller: 'companyPostController',
       action: 'nosearch'
