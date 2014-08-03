@@ -5,7 +5,7 @@ $('.dynamicDateLinks').ready( function(){
     console.log(searchStrings);
     console.log(clientStrings);
     for ( i=0; i < searchStrings.length; i++) {
-      $(".dynamicDateLinks").append("<a class='oneDateLink' href='/companyblogsearch?word="+clientStrings[i][1]+clientStrings[i][0]+"'>"+clientStrings[i][0]+"</a>");
+      $(".dynamicDateLinks").append("<a class='oneDateLink' href='/companyblogsearch?word="+clientStrings[i][1]+clientStrings[i][0]+"'>"+clientStrings[i][0]+"&nbsp;/&nbsp;</a>");
     }
   });
 });

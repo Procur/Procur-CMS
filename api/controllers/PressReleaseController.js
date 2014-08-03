@@ -81,11 +81,11 @@ module.exports = {
           PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), generalCategory: 'pressrelease', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining, date: b.date/*, zip: resp.Location, pdf: resp.Location*/ }, function(err,post){
               console.log(post);
               if (err){
-                req.flash("There was a problem. Try again.");
+                //req.flash("There was a problem. Try again.");
                 res.redirect("/pressRelease/new");
                 }
               else {
-                req.flash("Post successfully created.")
+                //req.flash("Post successfully created.")
                 if(isPublished == false) {
                   res.redirect("/admin/drafts");
                 }
@@ -123,7 +123,7 @@ module.exports = {
         PressRelease.update(post, { title: b.title, content: b.content, abstract: b.abstract, published: isPublished, slug: slug(b.title).toLowerCase(), date: b.date, awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining /*, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')*/ }, function(err, post){
           var slug = post[0].slug;
           if(err) return res.redirect('/');
-            req.flash("Post updated.");
+            //req.flash("Post updated.");
           if (isPublished === true && isPostAwake === true ){
             res.redirect('/pressreleases/' + slug);
           }
@@ -140,7 +140,7 @@ module.exports = {
         if(err) return res.redirect('/pressRelease/edit/' + slug);
         PressRelease.update(post, { published: false}, function(err, post){
           if(err) return res.redirect('/pressRelease/edit/' + slug);
-          req.flash('Post unpublished.');
+          //req.flash('Post unpublished.');
           res.redirect('/pressreleases?page=1')
         });
       });

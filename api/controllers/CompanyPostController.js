@@ -3,7 +3,6 @@
 var cloudinary = require('cloudinary');
 var url = require('url');
 
-
 ///////BEGIN UTILITY FUNCTIONS
 var boolify = function(obj){
   if(obj == "true"){
@@ -61,13 +60,12 @@ module.exports = {
           companyPost.findOne({ title: b.title }, function(err, post){
             if(err) return res.redirect('/');
             companyPost.update(post, { shortContent: finalText }, function(err,post){
-              console.log(post);
               if (err){
-                req.flash("There was a problem. Try again.");
+                //req.flash("There was a problem. Try again.");
                 res.redirect('/companyPost/new');
               }
               else {
-                req.flash("Post successfully created.");
+                //req.flash("Post successfully created.");
                 if ( isPostAwake === false) {
                   res.redirect('/admin/drafts');
                 }
@@ -112,7 +110,7 @@ module.exports = {
           if(err) { return res.send(err); }
           if(post !== undefined){
             var id = post[0].id;
-            req.flash("Post updated.");
+            //req.flash("Post updated.");
             if ( isPostAwake === true && isPublished === true ){
               res.redirect('/companyblog/' + id);
             }
@@ -134,7 +132,7 @@ module.exports = {
       if(err) return res.redirect('/companyPost/edit/' + id);
       companyPost.update(post, { published: false }, function(err, post){
         if(err) return res.redirect('/companyPost/edit/' + id);
-        req.flash('Post unpublished.');
+        //req.flash('Post unpublished.');
         res.redirect('/companyblog');
       });
     });
@@ -162,10 +160,8 @@ module.exports = {
 
     //for date searches...
     else if (searchWord.indexOf('201') != -1) {
-      console.log('In date search...');
       //var numberIndex = searchWord.indexOf('2');
       searchWord =  searchWord.substr(4,searchWord.length-1);
-      console.log('search wor: '+searchWord);
       companyPost.find().where({ longDate: { contains: searchWord} }).where({ published: true }).where({ awake: true }).exec(function(err, posts1){
         if(err) return res.redirect('/');
         numTruePosts = posts1.length;
@@ -220,9 +216,7 @@ module.exports = {
       if(posts !== undefined && posts.length !== 0){
 
         var uniqueDates = dateRake.run(posts);
-        console.log('1st: '+uniqueDates);
         uniqueDates = monthDups.run(uniqueDates);
-        console.log('2nd: '+uniqueDates);
         uniqueDates = monthInject.run(uniqueDates);
         res.send({ posts: uniqueDates });
       }

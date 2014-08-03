@@ -13,7 +13,7 @@ module.exports = {
   },
 
   run: function(data){
-    console.log(data);
+    console.log('In dateRake: '+data);
     dateList = [];
     var numPosts = data.length;
     var oneDate;

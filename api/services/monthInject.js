@@ -4,17 +4,21 @@ module.exports = {
     var numDates = data.length;
     var arrayDate;
     for ( i=0; i<numDates; i++ ){
-      arrayDate = data[0].split('/');
+      arrayDate = data[i].split('/');
       var monthNum = arrayDate[0];
       var yearNum = arrayDate[2];
       var monthWord = this.getMonth(monthNum);
-      var monthyearArray = [monthWord,yearNum];
-      //console.log(i);
-      //if ( dataToSend['months'].indexOf('monthyearArray')  ){
-        dataToSend['months'].push(monthyearArray);
-      //}
+      var monthyearArray = [monthWord,yearNum,monthNum];
+      dataToSend['months'].push(monthyearArray);
     }
+    sortedArray = dataToSend['months'].sort(this.Comparator);
     return dataToSend;
+  },
+
+  Comparator: function ( a,b ){
+    if (a[2] < b[2]) return -1;
+    if (a[2] > b[2]) return 1;
+    return 0;
   },
 
   getMonth: function ( data ){
