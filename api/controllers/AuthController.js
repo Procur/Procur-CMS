@@ -41,6 +41,6 @@ module.exports = {
 	logout: function(req, res){
 		req.session.authenticated = false;
     //req.logout();
-		return res.redirect('http://procur.com');
+		return res.redirect('/login');
 	}
 };
