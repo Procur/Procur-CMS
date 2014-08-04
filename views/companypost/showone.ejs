@@ -19,6 +19,7 @@
           </div>
         <% } %>
         <!--ADMIN TOOLBOX-->
+        <% if (req.session.authenticated){ %>
             <div class="adminToolBox">
               <h3>ADMIN TOOLBOX</h3>
               <div class="adminTools">
@@ -30,6 +31,7 @@
 
               </div>
             </div>
+        <% } %>
       </div>
 
       <!--START RIGHT COLUMN-->

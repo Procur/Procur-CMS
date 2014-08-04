@@ -24,6 +24,7 @@
           <div class="abstractWrapper"><p><strong><%- post.abstract %></strong></p></div>
           <div class="contentWrapper"><p><%- post.content %></p></div>
         <% } %>
+        <% if (req.session.authenticated){ %>
         <div class="adminToolBox">
           <h3>ADMIN TOOLBOX</h3>
           <div class="adminTools">
@@ -35,6 +36,7 @@
 
           </div>
         </div>
+        <% } %>
       </div>
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 rightCol">
         <h2>Recent Press Releases</h2>
