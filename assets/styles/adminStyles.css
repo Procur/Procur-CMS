@@ -103,4 +103,20 @@
   color: orange
 }
 
-/*AUTH STYLES
+/*AUTH STYLES*/
+
+#AuthStyle button {
+  margin-top: 20px;
+}
+
+#AuthStyle h1{
+  border-bottom: 1px solid #cecece;
+  font-size: 25px;
+  font-family: Roboto, sans-serif;
+  margin-bottom: 30px;
+}
+
+#AuthStyle h4 {
+  font-size: 20px;
+  font-family: Roboto, sans-serif;
+}
