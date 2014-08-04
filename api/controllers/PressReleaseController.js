@@ -26,7 +26,7 @@ module.exports = {
         if(err) return res.direct('/');
         if(posts !== undefined){
           numTruePosts = posts.length;
-          PressRelease.find().where({ published: true }).where({ awake: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
+          PressRelease.find().where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
             if(err) return res.redirect('https://procur.com');
             res.view({ posts: posts }, { numTruePosts: numTruePosts});
           });
@@ -43,7 +43,7 @@ module.exports = {
     },
 
     recent: function(req,res){
-      PressRelease.find().where({ published: true }).where({ awake: true }).sort({ createdAt: 'desc' }).limit(10).exec(function(err,posts){
+      PressRelease.find().where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).limit(10).exec(function(err,posts){
         if(err) { res.send("Sorry, Error Loading 10 Recent Posts"); }
         res.send(posts);
       });
@@ -59,6 +59,7 @@ module.exports = {
       var dateFormatLong = dateFormatter.long(b.date);
       var dateFormatShort = dateFormatter.short(b.date);
       var daysRemaining = daysLeft.run(b.date);
+      var isoDate = transformToISO.run(b.date);
       var filepath = req.files.zip.path;
       var filename = req.files.zip.name;
       var filetype = req.files.zip.headers['content-type'];
@@ -78,7 +79,7 @@ module.exports = {
           if (err) return console.log('Upload error: ', err);
             console.log('Upload stats: ', stats);
             console.log('Upload successful: ', resp);*/
-          PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), generalCategory: 'pressrelease', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining, date: b.date/*, zip: resp.Location, pdf: resp.Location*/ }, function(err,post){
+          PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), generalCategory: 'pressrelease', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining, date: b.date, isoDate: isoDate/*, zip: resp.Location, pdf: resp.Location*/ }, function(err,post){
               console.log(post);
               if (err){
                 //req.flash("There was a problem. Try again.");
@@ -118,9 +119,10 @@ module.exports = {
       var dateFormatLong = dateFormatter.long(b.date);
       var dateFormatShort = dateFormatter.short(b.date);
       var daysRemaining = daysLeft.run(b.date);
+      var isoDate = transformToISO.run(b.date);
       PressRelease.findOne({ id: id  }, function(err, post){
         if(err) return err;
-        PressRelease.update(post, { title: b.title, content: b.content, abstract: b.abstract, published: isPublished, slug: slug(b.title).toLowerCase(), date: b.date, awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining /*, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')*/ }, function(err, post){
+        PressRelease.update(post, { title: b.title, content: b.content, abstract: b.abstract, published: isPublished, slug: slug(b.title).toLowerCase(), date: b.date, isoDate: isoDate, awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining /*, timestamp: moment().format('MMMM Do YYYY, h:mm:ss a')*/ }, function(err, post){
           var slug = post[0].slug;
           if(err) return res.redirect('/');
             //req.flash("Post updated.");

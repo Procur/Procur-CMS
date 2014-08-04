@@ -25,7 +25,7 @@ module.exports = {
       if(err) return res.redirect('/');
       if(posts !== undefined){
         numTruePosts = posts.length;
-        companyPost.find().where({ published: true }).where({ awake: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
+        companyPost.find().where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
           if(err) return res.redirect('https://procur.com');
           res.view({ posts: posts }, { numTruePosts: numTruePosts});
         });
@@ -52,14 +52,16 @@ module.exports = {
     var dateFormatLong = dateFormatter.long(b.date);
     var dateFormatShort = dateFormatter.short(b.date);
     var daysRemaining = daysLeft.run(b.date);
+    var isoDate = transformToISO.run(b.date);
     cloudinary.uploader.upload(req.files.image.path, function(result){
-    companyPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , tagArray: [b.tagSender], generalCategory: 'companypost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining}, function(err, post){
+    companyPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , isoDate: isoDate, tagArray: [b.tagSender], generalCategory: 'companypost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining}, function(err, post){
         if(err){ return res.send(err); }
         if (post !== undefined){
           var finalText = shortenContent.shortenMe(post.content); //SHORTEN CONTENT FOR VIEW
           companyPost.findOne({ title: b.title }, function(err, post){
             if(err) return res.redirect('/');
             companyPost.update(post, { shortContent: finalText }, function(err,post){
+              console.log(post);
               if (err){
                 //req.flash("There was a problem. Try again.");
                 res.redirect('/companyPost/new');
@@ -103,10 +105,11 @@ module.exports = {
     var dateFormatLong = dateFormatter.long(b.date);
     var dateFormatShort = dateFormatter.short(b.date);
     var daysRemaining = daysLeft.run(b.date);
+    var isoDate = transformToISO.run(b.date);
     cloudinary.uploader.upload(req.files.image.path, function(result){
       companyPost.findOne({ id: id }, function(err, post){
         if(err) return res.send(err);
-        companyPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date, tagArray: [b.tagSender], generalCategory: 'companypost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining }, function(err, post){
+        companyPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date, isoDate: isoDate, tagArray: [b.tagSender], generalCategory: 'companypost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining }, function(err, post){
           if(err) { return res.send(err); }
           if(post !== undefined){
             var id = post[0].id;
@@ -150,7 +153,7 @@ module.exports = {
         numTruePosts = posts1.length;
         if(numTruePosts === 0) return res.redirect('/companyPost/nosearch');
       });
-      return companyPost.find().where({ category: { contains: searchWord} }).where({ published: true }).where({ awake: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+      return companyPost.find().where({ category: { contains: searchWord} }).where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
         if(err) return res.redirect('/');
         if(searchResults) {
           res.view({ posts: searchResults }, { numTruePosts: numTruePosts });
@@ -167,7 +170,7 @@ module.exports = {
         numTruePosts = posts1.length;
         if(numTruePosts === 0) return res.redirect('/companyPost/nosearch');
       });
-      return companyPost.find().where({ longDate: { contains: searchWord} }).where({ published: true }).where({ awake: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+      return companyPost.find().where({ longDate: { contains: searchWord} }).where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
         if(err) return res.redirect('/');
         if(searchResults) {
           res.view({ posts: searchResults }, { numTruePosts: numTruePosts });
@@ -182,7 +185,7 @@ module.exports = {
       numTruePosts = posts1.length;
       if(numTruePosts === 0) return res.redirect('/companyPost/nosearch');
     });
-    return companyPost.find().where({ tagArray: { contains: searchWord} }).where({ published: true }).where({ awake: true }).sort({ createdAt: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+    return companyPost.find().where({ tagArray: { contains: searchWord} }).where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
       if(err) return res.redirect('/');
       if(searchResults) {
         res.view({ posts: searchResults }, { numTruePosts: numTruePosts });
@@ -192,7 +195,7 @@ module.exports = {
   },
 
   nosearch: function(req,res){
-    companyPost.find().where({ published: true }).where({ awake: true }).sort({ createdAt: 'desc' }).limit(3).exec(function(err, posts){
+    companyPost.find().where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).limit(3).exec(function(err, posts){
       if(err) return res.redirect('/');
       if(posts !== undefined){
         res.view({ posts: posts })

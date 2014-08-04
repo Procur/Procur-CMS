@@ -50,6 +50,9 @@ module.exports = {
     },
     daysLeft: {
       type: 'string'
+    },
+    isoDate: {
+      type: 'string'
     }
 
     /*
