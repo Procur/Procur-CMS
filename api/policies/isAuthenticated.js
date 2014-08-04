@@ -13,7 +13,7 @@ module.exports = function(req, res, next) {
   // or if this is the last policy, the controller
   if (req.session.authenticated) {
     console.log('this is req.session.user obj');
-    console.log(req.session.user);
+    console.log(req);
     return next();
   }
 
