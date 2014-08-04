@@ -51,6 +51,13 @@ module.exports = {
     });
 
 
+  },
+
+  greetUser: function(req,res){
+    User.findOne({ id: req.session.user }, function(err, user){
+      if(err) return err;
+      res.send(user);
+    });
   }
 
 

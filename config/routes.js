@@ -43,6 +43,11 @@ module.exports.routes = {
   //  action: "index"
   //},
 
+  'get /greetUser': {
+    controller: 'AdminController',
+    action: 'greetUser'
+  },
+
   //AUTH ROUTES
 
   'get /login': {
