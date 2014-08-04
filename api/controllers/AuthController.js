@@ -40,7 +40,7 @@ module.exports = {
 
 	logout: function(req, res){
 		req.session.authenticated = false;
-    req.logout();
+    //req.logout();
 		return res.redirect('http://procur.com');
 	}
 };
