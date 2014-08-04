@@ -55,6 +55,11 @@ module.exports.routes = {
     action: 'processLogin'
   },
 
+  'get /logout': {
+    controller: 'AuthController',
+    action: 'logout'
+  },
+
   //PRESS RELEASE ROUTES
 
   'get /pressreleases?:querystring': {
