@@ -16,8 +16,8 @@ module.exports.policies = {
 
   // Default policy for all controllers and actions
   // (`true` allows public access)
-  '*': true//,
-/*
+  '*': true,//,
+
   AdminController: {
     '*': ['isAuthenticated']
   },
@@ -49,9 +49,7 @@ module.exports.policies = {
   },
 
   TradeShowPostController: {
-
   }
-*/
   /*
 	// Here's an example of adding some policies to a controller
 	RabbitController: {
