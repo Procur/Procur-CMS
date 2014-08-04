@@ -12,6 +12,8 @@ module.exports = {
       dataToSend['months'].push(monthyearArray);
     }
     sortedArray = dataToSend['months'].sort(this.Comparator);
+    console.log('data.....');
+    console.log(dataToSend);
     return dataToSend;
   },
 

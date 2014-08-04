@@ -27,6 +27,8 @@ module.exports = {
         numTruePosts = posts.length;
         companyPost.find().where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
           if(err) return res.redirect('https://procur.com');
+          //console.log('ALL POSTS......');
+          //console.log(posts);
           res.view({ posts: posts }, { numTruePosts: numTruePosts});
         });
       }
@@ -61,6 +63,7 @@ module.exports = {
           companyPost.findOne({ title: b.title }, function(err, post){
             if(err) return res.redirect('/');
             companyPost.update(post, { shortContent: finalText }, function(err,post){
+              console.log('BRAND NEW POST.....');
               console.log(post);
               if (err){
                 //req.flash("There was a problem. Try again.");
@@ -106,10 +109,11 @@ module.exports = {
     var dateFormatShort = dateFormatter.short(b.date);
     var daysRemaining = daysLeft.run(b.date);
     var isoDate = transformToISO.run(b.date);
+    var finalText = shortenContent.shortenMe(b.content);
     cloudinary.uploader.upload(req.files.image.path, function(result){
       companyPost.findOne({ id: id }, function(err, post){
         if(err) return res.send(err);
-        companyPost.update(post, { title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date, isoDate: isoDate, tagArray: [b.tagSender], generalCategory: 'companypost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining }, function(err, post){
+        companyPost.update(post, { title: b.title, content: b.content, shortContent: finalText, published: isPublished, images: result.url, category: b.category, date: b.date, isoDate: isoDate, tagArray: [b.tagSender], generalCategory: 'companypost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining }, function(err, post){
           if(err) { return res.send(err); }
           if(post !== undefined){
             var id = post[0].id;
