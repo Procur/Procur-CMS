@@ -54,9 +54,10 @@ module.exports = {
   },
 
   greetUser: function(req,res){
+    console.log("IN GREET USER ACTION.....")
     User.findOne({ id: req.session.user }, function(err, user){
       if(err) return err;
-      res.send(user);
+      res.send({ user: user });
     });
   }
 
