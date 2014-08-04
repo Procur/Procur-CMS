@@ -18,5 +18,5 @@ module.exports = function(req, res, next) {
   // User is not allowed
   // (default res.forbidden() behavior can be overridden in `config/403.js`)
   console.log(req.session);
-  return res.redirect('http://procur.com/login');
+  return res.redirect('/login');
 };
