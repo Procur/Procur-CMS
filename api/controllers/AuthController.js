@@ -28,7 +28,7 @@ module.exports = {
 					req.session.user = user.id;
 
 					console.log(req.session);
-					return res.redirect('/admin/drafts');
+					return res.redirect('/admin/index');
 				});
 			}
 			else{
