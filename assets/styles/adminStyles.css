@@ -35,6 +35,10 @@
   padding-right: 5px;
 }
 
+#adminCMS .welcomeMessage {
+  color: red;
+  font-size: 15px;
+}
 #adminCMS .adminRow a {
   color: black;
   display: block;
