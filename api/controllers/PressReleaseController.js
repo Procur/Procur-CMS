@@ -60,16 +60,15 @@ module.exports = {
       var dateFormatShort = dateFormatter.short(b.date);
       var daysRemaining = daysLeft.run(b.date);
       var isoDate = transformToISO.run(b.date);
-      var filepath = req.files.zip.path;
-      var filename = req.files.zip.name;
-      var filetype = req.files.zip.headers['content-type'];
-      console.log(filepath+"AAAAAA"+filename);
+      var filepath = req.files.pdf.path;
+      var filename = req.files.pdf.name;
+      var filetype = req.files.pdf.headers['content-type'];
       var isPublished = boolify(b.published);
       /////AWS UPLOAD
 
       var fStream = fs.createReadStream(filepath);
       //key and secret key
-      /*var uploader = new streamingS3(fStream, 'AKIAJJ2Y43ZH662PWFUA', 'IGrhMgy29wD++dB9H9pMzLqOhx5cll45U1qWy+uJ',
+      var uploader = new streamingS3(fStream, 'AKIAJJ2Y43ZH662PWFUA', 'IGrhMgy29wD++dB9H9pMzLqOhx5cll45U1qWy+uJ',
         {
           Bucket: 'procur-cms',
           Key: filename,
@@ -77,10 +76,9 @@ module.exports = {
           ACL: 'public-read'
         },  function (err, resp, stats) {
           if (err) return console.log('Upload error: ', err);
-            console.log('Upload stats: ', stats);
-            console.log('Upload successful: ', resp);*/
-          PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), generalCategory: 'pressrelease', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining, date: b.date, isoDate: isoDate/*, zip: resp.Location, pdf: resp.Location*/ }, function(err,post){
-              console.log(post);
+            //console.log('Upload stats: ', stats);
+            //console.log('Upload successful: ', resp);
+          PressRelease.create({ title: b.title, content: b.content, abstract: b.abstract,  published: isPublished, slug: slug(b.title).toLowerCase(), generalCategory: 'pressrelease', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining, date: b.date, isoDate: isoDate/*, zip: resp.Location*/, pdf: resp.Location }, function(err,post){
               if (err){
                 //req.flash("There was a problem. Try again.");
                 res.redirect("/pressRelease/new");
@@ -91,13 +89,11 @@ module.exports = {
                   res.redirect("/admin/drafts");
                 }
                 else {
-
                   res.redirect("/pressreleases?page=1");
                 }
               }
             });
-        //}
-      //);
+        });
       /////CREATE NEW DB ENTRY
 
 
