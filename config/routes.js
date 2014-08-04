@@ -55,7 +55,7 @@ module.exports.routes = {
     action: 'processLogin'
   },
 
-  'get /logout': {
+  '/logout': {
     controller: 'AuthController',
     action: 'logout'
   },
