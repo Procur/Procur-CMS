@@ -14,12 +14,14 @@
 
       <div class="collapse navbar-collapse" id="nav-links">
         <ul class="nav navbar-nav navbar-right">
+          <% if (req.session.authenticated){ %>
           <li class="tri">
             <a href="/admin/index">Admin Dashboard</a>
             <div class="hoverTriContainer">
               <div class="hoverTri"></div>
             </div>
           </li>
+          <% } %>
         <li class="tri">
           <a href="http://procur.com">Procur Home</a>
           <div class="hoverTriContainer">
@@ -38,8 +40,11 @@
             <div class="hoverTri"></div>
           </div>
         </li>
+        <% if (req.session.authenticated){ %>
         <li class="tri">
-          <a href="/logout"><i class="fa fa-sign-out"></i></a> 
+          <a href="/logout"><i class="fa fa-sign-out"></i></a>
+        </li>
+        <% } %>
           </ul>
       </div>
     </div>
