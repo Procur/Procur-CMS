@@ -15,9 +15,9 @@
         <div><textarea type="text" name="abstract" size="100"><%= post.abstract %></textarea></div>
         <h2>CONTENT</h2>
         <div><textarea name="content" rows="30" cols="50"><%= post.content %></textarea></div>
-        <h2>UPLOADS:</h2>
-        <!--<p>Upload a Zip File: <input type="file" name="zip" ></p>-->
-        <p>Upload a PDF File: <input type="file" name="pdf" ></p>
+        <!--<h2>UPLOADS:</h2>
+        <p>Upload a Zip File: <input type="file" name="zip" ></p>-->
+        <!--<p>Upload a New PDF File: <input type="file" name="pdf"></p>-->
         <h2>PUBLISH</h2>
         <div><input type="radio" name="published" value="true" <% if(post.published){ %> checked="checked" <% } %> />&nbsp;Yes</div>
         <div><input type="radio" name="published" value="false" <% if(!post.published){ %> checked="checked" <% } %> />&nbsp;No</div></br></br>

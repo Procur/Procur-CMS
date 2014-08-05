@@ -15,7 +15,7 @@
                 <h6>Posted On</h6><p><%= post.longDate %></p><!--<h6>Tags</h6><p>Tag placeholder</p>-->
               </div>
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 showOneLinks">
-                <i class="fa fa-envelope"></i><a href="#">EMAIL</a>
+                <i class="fa fa-envelope"></i><a href="mailto:?subject=Procur Press Release &body=Title: <%= post.slug %>" >EMAIL</a>
                 <i class="fa fa-print"></i><a href="#" onclick="window.print();return false;">PRINT</a>
                 <i class="fa fa-download"></i><a href="<%= post.pdf %>">DOWNLOAD</a>
               </div>

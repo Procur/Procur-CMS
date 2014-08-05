@@ -27,7 +27,7 @@
                   <div class="abstractWrapper"><p><%- post.abstract %></p></div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 downloadButtons">
-                  <a href="#"><i class="fa fa-envelope"></i></a>
+                  <a href="mailto:?subject=Procur Press Release&body=Title: <%= post.slug %> "><i class="fa fa-envelope"></i></a>
                   <a href="#" onclick="window.print();return false;"><i class="fa fa-print"></i></a>
                   <a href="<%= post.pdf %>"><i class="fa fa-download"></i></a>
                 </div>
