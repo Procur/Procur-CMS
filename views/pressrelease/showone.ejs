@@ -54,7 +54,20 @@
 </div>
 
 
+<script>
 
+function isPrintable(){
+  var a = document.createElement('a');
+  a.href = '';
+  if (a.href.indexOf('print') !== -1) { return true };
+  return false;
+}
+
+window.onload = function(){
+  if (isPrintable()) { window.print() };
+}
+
+</script>
 
 
 
