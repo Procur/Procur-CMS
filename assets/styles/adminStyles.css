@@ -106,7 +106,8 @@
 /*AUTH STYLES*/
 
 #AuthStyle button {
-  margin-top: 20px;
+  margin-top: 0px;
+  width: 70px;
 }
 
 #AuthStyle h1{
@@ -119,4 +120,8 @@
 #AuthStyle h4 {
   font-size: 20px;
   font-family: Roboto, sans-serif;
+}
+
+#AuthStyle input {
+  margin-bottom: 20px;
 }
