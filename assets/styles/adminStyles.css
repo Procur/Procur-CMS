@@ -125,3 +125,7 @@
 #AuthStyle input {
   margin-bottom: 20px;
 }
+
+#AuthStyle button:hover {
+  color: orange;
+}
