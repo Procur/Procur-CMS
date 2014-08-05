@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 leftCol">
-        <div class="backWrapper">
+        <div class="backWrapper noprint">
           <h5><a href="/pressreleases?page=1">Back to Press &amp; Media page</a></h5>
         </div>
         <% if(post.published == true){ %>
@@ -14,8 +14,8 @@
               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <h6>Posted On</h6><p><%= post.longDate %></p><!--<h6>Tags</h6><p>Tag placeholder</p>-->
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 showOneLinks">
-                <i class="fa fa-envelope"></i><a href="mailto:?subject=Procur Press Release &body=Title: <%= post.slug %>" >EMAIL</a>
+              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 showOneLinks noprint">
+                <i class="fa fa-envelope"></i><a href="mailto:?subject=Procur Press Release &body=Title: <%= post.title %>" >EMAIL</a>
                 <i class="fa fa-print"></i><a href="#" onclick="window.print();return false;">PRINT</a>
                 <i class="fa fa-download"></i><a href="<%= post.pdf %>">DOWNLOAD</a>
               </div>
@@ -25,7 +25,7 @@
           <div class="contentWrapper"><p><%- post.content %></p></div>
         <% } %>
         <% if (req.session.authenticated){ %>
-        <div class="adminToolBox">
+        <div class="adminToolBox noprint">
           <h3>ADMIN TOOLBOX</h3>
           <div class="adminTools">
             <a href="/admin/index">Dashboard</a>
@@ -38,7 +38,7 @@
         </div>
         <% } %>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 rightCol">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 rightCol noprint">
         <h2>Recent Press Releases</h2>
         <div class="recentPressRelease">
         </div>
