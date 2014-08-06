@@ -19,7 +19,7 @@ module.exports.policies = {
   /*'*': true,//,
 
   AdminController: {
-    '*': ['isAuthenticated']
+    '*': ['isAuthenticated', 'isAdministrator']
   },
 
   ApiController: {
