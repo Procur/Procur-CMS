@@ -27,8 +27,6 @@ module.exports = {
         numTruePosts = posts.length;
         companyPost.find().where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
           if(err) return res.redirect('https://procur.com');
-          //console.log('ALL POSTS......');
-          //console.log(posts);
           res.view({ posts: posts }, { numTruePosts: numTruePosts});
         });
       }
@@ -63,8 +61,6 @@ module.exports = {
           companyPost.findOne({ title: b.title }, function(err, post){
             if(err) return res.redirect('/');
             companyPost.update(post, { shortContent: finalText }, function(err,post){
-              console.log('BRAND NEW POST.....');
-              console.log(post);
               if (err){
                 //req.flash("There was a problem. Try again.");
                 res.redirect('/companyPost/new');

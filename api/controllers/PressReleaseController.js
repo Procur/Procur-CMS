@@ -122,7 +122,6 @@ module.exports = {
     edit: function(req, res){
       var slug = req.param('slug');
       PressRelease.findOne({ slug: slug }, function(err, post){
-        console.log(post);
         res.view({ post: post });
       });
     },

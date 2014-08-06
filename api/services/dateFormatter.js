@@ -1,7 +1,6 @@
 module.exports = {
   long: function(date){
     date = date.split("/");
-    console.log(date);
     var month = parseInt(date[0]);
     switch (month) {
       case 1:
@@ -45,7 +44,6 @@ module.exports = {
   },
   short: function(date){ ////////ABSTRACT MONTH SWITCH TO BE MORE ELOQUENT
     date = date.split("/");
-    console.log(date);
     var month = parseInt(date[0]);
     switch (month) {
       case 1:

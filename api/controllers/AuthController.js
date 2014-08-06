@@ -27,7 +27,7 @@ module.exports = {
 					req.session.authenticated = true;
 					req.session.user = user.id;
 
-					console.log(req.session);
+					
 					return res.redirect('/admin/index');
 				});
 			}
