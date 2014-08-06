@@ -92,7 +92,8 @@
 function nextPageFire(){
      var a = document.createElement('a');
      a.href = '';
-     if (a.href == 'http://localhost:1337/pressreleases'){
+     alert(a.href.slice(a.href.length-14,a.href.length));
+     if (a.href.slice(a.href.length-14,a.href.length) == '/pressreleases'){
      a.href = '/pressreleases?page=2';
      } else {
      var pageNumber = a.search.replace( /^\D+/g, '');
@@ -106,7 +107,7 @@ function nextPageFire(){
 function previousPageFire(){
      var a = document.createElement('a');
      a.href = '';
-     if (a.href == 'http://localhost:1337/pressreleases'){
+     if (a.href.slice(a.href.length-14,a.href.length) == '/pressreleases'){
      return
      } else {
      var pageNumber = a.search.replace( /^\D+/g, '');
