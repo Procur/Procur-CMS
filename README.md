@@ -1,2 +1,5 @@
 # Procur-CMS
-### a Sails application
+### Current Collections:
+1. Company Blog
+2. Press & Media
+
