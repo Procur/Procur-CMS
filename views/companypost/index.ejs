@@ -51,12 +51,13 @@
 <script>
 
 function nextPageFire(){
-  console.log("BOOMMMMMMM");
+  alert('Here 1');
   var a = document.createElement('a');
   a.href = '';
-  if (a.href == 'http://localhost:1337/companyblog'){
+  if (a.href.slice(a.href.length-12,a.href.length) == '/companyblog'){
     a.href = '/companyblog?page=2';
   } else {
+    alert
     var pageNumber = a.search.replace( /^\D+/g, '');
     a.href = '/companyblog?page='+(parseInt(pageNumber)+1);
   }
@@ -66,7 +67,7 @@ function nextPageFire(){
 function previousPageFire(){
   var a = document.createElement('a');
   a.href = '';
-  if (a.href == 'http://localhost:1337/companyblog'){
+  if (a.href.slice(a.href.length-12,a.href.length) == '/companyblog'){
     return
   } else {
     var pageNumber = a.search.replace( /^\D+/g, '');
