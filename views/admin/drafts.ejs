@@ -6,12 +6,12 @@
     <div class="col-ld-12 col-md-12 col-sm-12 col-xs-12 draftsWrapper">
       <h1>Holding Tank</h1>
       <h2 class="draftsHeader">Pending</h1>
-      <!--company POST READY-->
+      <!--Blog POST READY-->
         <% payload[1].forEach(function(post){ %>
-          <% if(post.generalCategory=='companypost'){ %>
-            <a class="readyBlockLink" href="/companyPost/edit/<%= post.id %>">
+          <% if(post.generalCategory=='Blogpost'){ %>
+            <a class="readyBlockLink" href="/BlogPost/edit/<%= post.id %>">
               <div class="innerblock">
-                <p class="titleHoldingTank"> Company Post </p>
+                <p class="titleHoldingTank"> Blog Post </p>
                 <p><%= post.title %></p>
                 <p><%- post.shortContent %></p>
                 <div class="dateHover">Days Left:&nbsp;<%- post.daysLeft %></div>
@@ -30,12 +30,12 @@
           <% } %>
         <% }); %>
       <h2 class="draftsHeader">Drafts</h1>
-      <!--company POST DRAFTS -->
+      <!--Blog POST DRAFTS -->
         <% payload[0].forEach(function(post){ %>
-          <% if(post.generalCategory=='companypost'){ %>
-            <a class="draftsBlockLink" href="/companyPost/edit/<%= post.id %>">
+          <% if(post.generalCategory=='Blogpost'){ %>
+            <a class="draftsBlockLink" href="/BlogPost/edit/<%= post.id %>">
               <div class="innerblock">
-                <p class="titleHoldingTank">Company Post DRAFT</p>
+                <p class="titleHoldingTank">Blog Post DRAFT</p>
                 <p><%= post.title %></p>
                 <p><%- post.shortContent %></p>
               </div>

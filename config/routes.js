@@ -109,68 +109,68 @@ module.exports.routes = {
     action: "recent"
   },
 
-  //////////////// company BLOG ROUTES
+  //////////////// Blog Blog ROUTES
 
   // SEARCH ROUTES
-    'post /companyblogsearch?:querystring': {
-      controller: 'companyPostController',
+    'post /Blogsearch?:querystring': {
+      controller: 'BlogPostController',
       action: 'search'
     },
 
-    'get /companyblogsearch?:querystring': {
-      controller: 'companyPostController',
+    'get /Blogsearch?:querystring': {
+      controller: 'BlogPostController',
       action: 'search'
     },
 
     // external routes
-    'get /companyblog?:querystring': {
-      controller: "companyPostController",
+    'get /Blog?:querystring': {
+      controller: "BlogPostController",
       action: 'index'
     },
 
-    'get /companyblog/:id': {
-      controller: 'companyPostController',
+    'get /Blog/:id': {
+      controller: 'BlogPostController',
       action: 'showOne'
     },
 
     // internal routes
-    'get /companyPost/TopTags': {
-      controller: 'companyPostController',
+    'get /BlogPost/TopTags': {
+      controller: 'BlogPostController',
       action: 'topTags'
     },
 
-    'get /companyPost/dateFetch': {
-      controller: 'companyPostController',
+    'get /BlogPost/dateFetch': {
+      controller: 'BlogPostController',
       action: 'dateFetch'
     },
 
-    'get /companyPost/nosearch': {
-      controller: 'companyPostController',
+    'get /BlogPost/nosearch': {
+      controller: 'BlogPostController',
       action: 'nosearch'
     },
 
-    'get /companyPost/new': {
-      controller: "companyPostController",
+    'get /BlogPost/new': {
+      controller: "BlogPostController",
       action: 'newPost'
     },
 
-    'post /companyPost/new': {
-      controller: "companyPostController",
+    'post /BlogPost/new': {
+      controller: "BlogPostController",
       action: 'createPost'
     },
 
-    'get /companyPost/edit/:id': {
-      controller: "companyPostController",
+    'get /BlogPost/edit/:id': {
+      controller: "BlogPostController",
       action: 'edit'
     },
 
-    'post /companyPost/editpost?:querystring': {
-      controller: "companyPostController",
+    'post /BlogPost/editpost?:querystring': {
+      controller: "BlogPostController",
       action: 'update'
     },
 
-    'get /companyPost/unpublish/:id': {
-      controller: "companyPostController",
+    'get /BlogPost/unpublish/:id': {
+      controller: "BlogPostController",
       action: 'unpublish'
     }
 
@@ -221,14 +221,14 @@ module.exports.routes = {
 
 
 /*
-// NEWS BLOG
+// NEWS Blog
   // external routes
-  'get /newsblog': {
+  'get /newsBlog': {
     controller: 'NewsPostController',
     action: 'index'
   },
 
-  'get /newsblog/:id': {
+  'get /newsBlog/:id': {
     controller: 'NewsPostController',
     action: 'showOne'
   },

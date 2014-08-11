@@ -1,7 +1,7 @@
 <%- partial('../partials/mktheaderline') %>
 
-<div id="companyBlogIndex">
-  <div id="companyBlogNotFound">
+<div id="BlogIndex">
+  <div id="BlogNotFound">
   <div class="container">
     <div class="row">
       <!--START LEFT COLUMN-->
@@ -15,7 +15,7 @@
                   <i class="fa fa-font"></i><h5 class="searchAlt">&nbsp;&nbsp;Typing the address again</h5>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 innerWrap">
-                  <i class="fa fa-search"></i><h5 class="searchAlt">&nbsp;&nbsp;Searching the blog</h5>
+                  <i class="fa fa-search"></i><h5 class="searchAlt">&nbsp;&nbsp;Searching the Blog</h5>
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 outerWrap">
@@ -41,13 +41,13 @@
           <% if(post.published == true){ %>
             <div class="postContainer">
               <div class="postTitle"><h3><%= post.title %></h3></a></div>
-              <div class="blogPostSpecs">
+              <div class="BlogPostSpecs">
                 <h6>Posted On</h6><span><%= post.longDate %></span>
                 <h6>Under</h6><span><%= post.category %></span>
                 <h6>Tags</h6><span><%= post.tagArray %></span>
               </div>
-              <% if(post.images!=null){ %><div class="companyBlogPostPhotoWrapper"><img class="companyBlogPostPhoto" src="<%= post.images %>"></div><% } %>
-              <div class="postContent"><p><%-post.shortContent%><a class="readMoreLink" href="/companyblog/<%= post.id %>">Read More ></a></p></div>
+              <% if(post.images!=null){ %><div class="BlogPostPhotoWrapper"><img class="BlogPostPhoto" src="<%= post.images %>"></div><% } %>
+              <div class="postContent"><p><%-post.shortContent%><a class="readMoreLink" href="/Blog/<%= post.id %>">Read More ></a></p></div>
             </div>
           <% } %>
         <% }); %>
@@ -66,7 +66,7 @@
 
 
       <!--START COLUMN RIGHT-->
-      <%- partial('../partials/blogRightColumn') %>
+      <%- partial('../partials/BlogRightColumn') %>
       <!--END COLUMN RIGHT-->
 
     </div>

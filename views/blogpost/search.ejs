@@ -1,6 +1,6 @@
 <%- partial('../partials/mktheaderline') %>
 
-<div id="companyBlogIndex">
+<div id="BlogIndex">
   <div class="container">
     <div class="row">
       <!--START LEFT COLUMN-->
@@ -11,13 +11,13 @@
           <% if(post.published == true){ %>
             <div class="postContainer">
               <div class="postTitle"><h3><%= post.title %></h3></a></div>
-              <div class="blogPostSpecs">
+              <div class="BlogPostSpecs">
                 <h6>Posted On</h6><span><%= post.longDate %></span>
                 <h6>Under</h6><span><%= post.category %></span>
                 <h6>Tags</h6><span><%= post.tagArray %></span>
               </div>
-              <% if(post.images!=null){ %><div class="companyBlogPostPhotoWrapper"><img class="companyBlogPostPhoto" src="<%= post.images %>"></div><% } %>
-              <div class="postContent"><p><%-post.shortContent%><a class="readMoreLink" href="/companyblog/<%= post.id %>">Read More ></a></p></div>
+              <% if(post.images!=null){ %><div class="BlogPostPhotoWrapper"><img class="BlogPostPhoto" src="<%= post.images %>"></div><% } %>
+              <div class="postContent"><p><%-post.shortContent%><a class="readMoreLink" href="/Blog/<%= post.id %>">Read More ></a></p></div>
             </div>
           <% } %>
         <% }); %>
@@ -53,7 +53,7 @@
       <!--END COLUMN LEFT-->
 
       <!--START COLUMN RIGHT-->
-      <%- partial('../partials/blogRightColumn') %>
+      <%- partial('../partials/BlogRightColumn') %>
       <!-- END COLUMN RIGHT-->
 
     </div>

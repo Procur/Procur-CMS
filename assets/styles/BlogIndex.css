@@ -1,4 +1,4 @@
-#companyBlogIndex h6 {
+#BlogIndex h6 {
   display: inline;
   margin-right:7px;
   font-family: Monterrat, sans-serif;
@@ -9,7 +9,7 @@
 
 }
 
-#companyBlogIndex h2 {
+#BlogIndex h2 {
   font-family: Monterrat, sans-serif;
   font-weight: 600;
   font-size: 14px;
@@ -17,14 +17,14 @@
   color: black;
 }
 
-#companyBlogIndex .rightColumnLinks h3 {
+#BlogIndex .rightColumnLinks h3 {
   font-size: 12px;
   font-family: Roboto, sans-serif;
   color: black;
   font-style: italic;
   font-weight: 500;
 }
-#companyBlogIndex .rightColumnLinks a {
+#BlogIndex .rightColumnLinks a {
   text-decoration: none;
   color: black;
   font-size: 12px;
@@ -32,15 +32,15 @@
   line-height: 20px;
 }
 
-#companyBlogIndex .rightColumnLinks a:hover {
+#BlogIndex .rightColumnLinks a:hover {
   color: #fdc683;
 }
 
-#companyBlogIndex .rightColumnLinks .rightColumnLinksBlock a {
+#BlogIndex .rightColumnLinks .rightColumnLinksBlock a {
   display: block;
 }
 
-#companyBlogIndex .blogPostSpecs {
+#BlogIndex .BlogPostSpecs {
   border-bottom: 3px solid #cecece;
   border-top: 1px solid #cecece;
   padding-bottom: 15px;
@@ -49,26 +49,26 @@
 }
 
 
-#companyBlogIndex .blogPostSpecs span {
+#BlogIndex .BlogPostSpecs span {
   margin-right: 20px;
   color: black;
   font-family: Roboto, sans-serif;
 }
 
-#companyBlogIndex .companyBlogPostPhoto {
+#BlogIndex .BlogPostPhoto {
   width: 100%;
   height: auto;
 }
 
-#companyBlogIndex .companyBlogPostPhotoWrapper {
+#BlogIndex .BlogPostPhotoWrapper {
   margin-bottom: 25px;
 }
 
-#companyBlogIndex .postTitle {
+#BlogIndex .postTitle {
   margin-bottom: 15px;
 }
 
-#companyBlogIndex h3 {
+#BlogIndex h3 {
   font-family: 'Open Sans',sans-serif;
   font-size: 25px;
   font-weight: 200;
@@ -76,21 +76,21 @@
   letter-spacing: 0.06em;
 }
 
-#companyBlogIndex .readMoreLink {
+#BlogIndex .readMoreLink {
   color: #fdc683;
   text-decoration: none;
 }
 
-#companyBlogIndex .nextpreviousWrapper {
+#BlogIndex .nextpreviousWrapper {
   float:right;
 }
 
-#companyBlogIndex .pageNavigationWrapper {
+#BlogIndex .pageNavigationWrapper {
   border-top: 1px solid #cecece;
   padding-top: 10px;
 }
 
-#companyBlogIndex .searchText input {
+#BlogIndex .searchText input {
   float:left;
   width:75%;
   border: 2px solid #cecece;
@@ -103,7 +103,7 @@
 
 }
 
-#companyBlogIndex .searchIcon {
+#BlogIndex .searchIcon {
   float:left;
   height: 34px;
   width: 34px;
@@ -113,43 +113,43 @@
   border-left: 0px;
 }
 
-#companyBlogIndex .searchBoxWrapper {
+#BlogIndex .searchBoxWrapper {
 }
 
-#companyBlogIndex #marginHook {
+#BlogIndex #marginHook {
   margin-top: 70px;
   border-top: 1px solid #cecece;
   padding-top: 30px;
 }
 
-#companyBlogIndex .altTopBorder {
+#BlogIndex .altTopBorder {
   border-top: 1px solid #cecece;
   padding-top: 20px;
 }
 
-#companyBlogIndex .postContent {
+#BlogIndex .postContent {
   line-height: 23px;
   font-family: Roboto, sans-serif;
   margin-bottom: 50px;
 }
 
-#companyBlogIndex .pageNavigationWrapper {
+#BlogIndex .pageNavigationWrapper {
   font-family: Roboto, sans-serif;
   margin-bottom: 30px;
 }
 
-#companyBlogIndex .pageNavigationWrapper a {
+#BlogIndex .pageNavigationWrapper a {
   text-decoration: none;
   color: black;
 
 }
 
-#companyBlogIndex .pageNavigationWrapper a:hover {
+#BlogIndex .pageNavigationWrapper a:hover {
   color: #fdc683;
 
 }
 
-#companyBlogIndex .oneTopTag {
+#BlogIndex .oneTopTag {
   color: black;
   text-decoration: none;
   padding-right: 5px;
@@ -157,13 +157,13 @@
   font-family: Roboto, sans-serif;
 }
 
-#companyBlogIndex .oneTopTag:hover {
+#BlogIndex .oneTopTag:hover {
   color: #fdc683;
 }
 
 /*Not Found CSS*/
 
-#companyBlogNotFound .searchAlt {
+#BlogNotFound .searchAlt {
   display: inline;
   font-family: 'Open Sans',sans-serif;
   font-size: 25px;
@@ -172,11 +172,11 @@
   letter-spacing: 0.06em;
 }
 
-#companyBlogNotFound .searchAlternativesWrapper {
+#BlogNotFound .searchAlternativesWrapper {
   margin-top: 30px;
 }
 
-#companyBlogNotFound p {
+#BlogNotFound p {
   font-family: 'Open Sans',sans-serif;
   font-size: 25px;
   font-weight: 200;
@@ -185,26 +185,26 @@
   padding-bottom: 33px;
 }
 
-#companyBlogNotFound .outerWrap {
+#BlogNotFound .outerWrap {
   padding-left: 0px;
 }
 
-#companyBlogNotFound .innerWrap {
+#BlogNotFound .innerWrap {
   padding-left: 0px;
   padding-bottom: 20px;
 }
 
-#companyBlogNotFound .specialOuter {
+#BlogNotFound .specialOuter {
   margin-top: 50px;
   border-bottom: 1px dotted #cecece;
   margin-bottom: 45px;
 }
 
-#companyBlogNotFound #notFoundContainer {
+#BlogNotFound #notFoundContainer {
   border-bottom: 1px solid #cecece;
 }
 
-#companyBlogNotFound p {
+#BlogNotFound p {
   font-family: 'Roboto' ,sans-serif;
   font-size: 14px;
   line-height: 23px;
@@ -229,12 +229,12 @@
   display:none;
 }
 
-#companyBlogIndex .postContent img {
+#BlogIndex .postContent img {
   width: 100%;
   margin-top: 20px;
 }
 
-#companyBlogIndex .postContent a {
+#BlogIndex .postContent a {
   color: #fdc683;
   text-decoration: none;
 }

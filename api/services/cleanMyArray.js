@@ -23,6 +23,6 @@ if (post){
   var tags = post.tagArray.toString();
   var newTags = tags.split(",");
   post.tagArray = newTags;
-  companyPost.update( post, { tagArray:post.tagArray });
+  BlogPost.update( post, { tagArray:post.tagArray });
 }
 */

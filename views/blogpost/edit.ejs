@@ -2,9 +2,9 @@
 
 <div id="createNewPost">
   <div class="container">
-    <h1>Edit Company Blog Post</h1>
-    <section id="editcompanyBlogPostForm">
-      <form action="/companyPost/editpost?id=<%= post.id %>" method="post" enctype="multipart/form-data">
+    <h1>Edit Blog Blog Post</h1>
+    <section id="editBlogPostForm">
+      <form action="/BlogPost/editpost?id=<%= post.id %>" method="post" enctype="multipart/form-data">
         <!--TITLE-->
         <h3>TITLE:</h3>
         <div><input type="text" name="title" size="70" value="<%= post.title %>"></div>
@@ -19,7 +19,7 @@
           <select type="text" name="category">
             <option selected value="<%=post.category%>"><%=post.category%></option>
             <option value="Platform Updates &amp; Annoucements">Platform Updates &amp; Annoucements</option>
-            <option value="Company News">Company News</option>
+            <option value="Blog News">Blog News</option>
             <option value="Affiliates &amp; Partnerships">Affiliates &amp; Partnerships</option>
             <option value="Initiatives &amp; Philanthropy">Initiatives &amp; Philanthropy</option>
           </select></br></br>

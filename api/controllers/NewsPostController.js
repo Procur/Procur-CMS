@@ -70,7 +70,7 @@ module.exports = {
           res.redirect('/newsPost/drafts');
         }
         else {
-          res.redirect('/newsblog');
+          res.redirect('/newsBlog');
         }
       }
     });
@@ -97,7 +97,7 @@ module.exports = {
         if(err) return res.redirect('/');
         req.flash("Post updated.");
         if (isPublished === true){
-          res.redirect('/newsblog/' + id);
+          res.redirect('/newsBlog/' + id);
         }
         else {
           res.redirect('/newsPosts/drafts');

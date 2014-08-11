@@ -30,7 +30,7 @@ module.exports.policies = {
 
   },
 
-  companyPostController: {
+  BlogPostController: {
     newPost: ['isAuthenticated', 'isAdministrator'],
     createPost: ['isAuthenticated', 'isAdministrator'],
     edit: ['isAuthenticated', 'isAdministrator'],

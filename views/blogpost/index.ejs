@@ -1,5 +1,5 @@
 <%- partial('../partials/mktheaderline') %>
-<div id="companyBlogIndex">
+<div id="BlogIndex">
   <div class="container">
     <div class="row">
       <!--START LEFT COLUMN-->
@@ -10,23 +10,23 @@
           <% if(post.published == true ){ %>
             <div class="postContainer">
               <div class="postTitle"><h3><%= post.title %></h3></a></div>
-              <div class="blogPostSpecs">
+              <div class="BlogPostSpecs">
                 <h6>Posted On</h6><span><%= post.longDate %></span>
                 <h6>Under</h6><span><%= post.category %></span>
                 <h6>Tags</h6><span><%= post.tagArray %></span>
               </div>
-              <% if(post.images!=null){ %><div class="companyBlogPostPhotoWrapper"><img class="companyBlogPostPhoto" src="<%= post.images %>"></div><% } %>
-              <div class="postContent"><p><%-post.shortContent%><a class="readMoreLink" href="/companyblog/<%= post.id %>">Read More ></a></p></div>
+              <% if(post.images!=null){ %><div class="BlogPostPhotoWrapper"><img class="BlogPostPhoto" src="<%= post.images %>"></div><% } %>
+              <div class="postContent"><p><%-post.shortContent%><a class="readMoreLink" href="/Blog/<%= post.id %>">Read More ></a></p></div>
             </div>
           <% } %>
         <% }); %>
-        <!--END BLOG POSTS-->
+        <!--END Blog POSTS-->
 
         <!--START PAGINATION CALLS-->
         <div class="pageNavigationWrapper">
           <span class='pageNumbers'>Navigates by page:</span>
           <% for (i=1;i<=Math.ceil(numTruePosts/3);i++) { %>
-          <a class="pagenumberLink" href='/companyblog?page=<%=i%>'><%= i %></a>
+          <a class="pagenumberLink" href='/Blog?page=<%=i%>'><%= i %></a>
           <% } %>
           <div class="nextpreviousWrapper">
             <a class="previous" href="#" onclick="previousPage(); return false;">< Previous</a>
@@ -39,7 +39,7 @@
 
 
       <!--START COLUMN RIGHT-->
-      <%- partial('../partials/blogRightColumn') %>
+      <%- partial('../partials/BlogRightColumn') %>
       <!--END COLUMN RIGHT-->
 
     <div>
@@ -53,12 +53,12 @@
 function nextPageFire(){
   var a = document.createElement('a');
   a.href = '';
-  if (a.href.slice(a.href.length-12,a.href.length) == '/companyblog'){
-    a.href = '/companyblog?page=2';
+  if (a.href.slice(a.href.length-12,a.href.length) == '/Blog'){
+    a.href = '/Blog?page=2';
   } else {
     alert
     var pageNumber = a.search.replace( /^\D+/g, '');
-    a.href = '/companyblog?page='+(parseInt(pageNumber)+1);
+    a.href = '/Blog?page='+(parseInt(pageNumber)+1);
   }
   return a.href;
 }
@@ -66,11 +66,11 @@ function nextPageFire(){
 function previousPageFire(){
   var a = document.createElement('a');
   a.href = '';
-  if (a.href.slice(a.href.length-12,a.href.length) == '/companyblog'){
+  if (a.href.slice(a.href.length-12,a.href.length) == '/Blog'){
     return
   } else {
     var pageNumber = a.search.replace( /^\D+/g, '');
-    a.href = '/companyblog?page='+(parseInt(pageNumber)-1);
+    a.href = '/Blog?page='+(parseInt(pageNumber)-1);
   }
   return a.href;
 }

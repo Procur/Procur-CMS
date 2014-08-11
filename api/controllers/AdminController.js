@@ -24,15 +24,15 @@ module.exports = {
 
   drafts: function(req, res){
     var payload = [[],[]]; //Initialize Titty Array: index 0 for drafts, index 1 for posts waiting on date
-    companyPost.find({ published: false }, function(err, companyPosts){
+    BlogPost.find({ published: false }, function(err, BlogPosts){
       if(err) return res.redirect('/admin/drafts');
-      for (i=0; i < companyPosts.length; i++){
-        payload[0].push(companyPosts[i]);
+      for (i=0; i < BlogPosts.length; i++){
+        payload[0].push(BlogPosts[i]);
       }
-      companyPost.find().where({ published: true }).where({ awake: false }).exec(function(err, companyPosts){
+      BlogPost.find().where({ published: true }).where({ awake: false }).exec(function(err, BlogPosts){
         if(err) return res.redirect('/admin/drafts');
-        for (i=0; i < companyPosts.length; i++){
-          payload[1].push(companyPosts[i]);
+        for (i=0; i < BlogPosts.length; i++){
+          payload[1].push(BlogPosts[i]);
         }
         PressRelease.find({ published: false }, function(err, pressReleases){
           if(err) return res.redirect('/admin/drafts');

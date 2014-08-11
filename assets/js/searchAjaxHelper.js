@@ -1,5 +1,5 @@
 
 $('.searchInput').keyup(function(e){
   theWord = $(this).val();
-  $('.searchForm').attr('action', '/companyblogsearch?word='+ theWord);
+  $('.searchForm').attr('action', '/Blogsearch?word='+ theWord);
 });

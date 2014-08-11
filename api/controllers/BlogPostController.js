@@ -21,11 +21,11 @@ module.exports = {
   index: function(req, res){
     var query = url.parse(req.url, true).query;
     var pageNumber = query['page'];
-    companyPost.find().where({ published: true }).where({ awake: true }).exec(function(err, posts){
+    BlogPost.find().where({ published: true }).where({ awake: true }).exec(function(err, posts){
       if(err) return res.redirect('/');
       if(posts !== undefined){
         numTruePosts = posts.length;
-        companyPost.find().where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
+        BlogPost.find().where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, posts){
           if(err) return res.redirect('https://procur.com');
           res.view({ posts: posts }, { numTruePosts: numTruePosts});
         });
@@ -35,8 +35,8 @@ module.exports = {
 
   showOne: function(req, res){
     var id = req.param('id');
-    companyPost.findOne({ id: id }, function(err, post){
-      if(err) return res.redirect('/companyblog');
+    BlogPost.findOne({ id: id }, function(err, post){
+      if(err) return res.redirect('/Blog');
       res.view({ post: post });
     });
   },
@@ -54,16 +54,16 @@ module.exports = {
     var daysRemaining = daysLeft.run(b.date);
     var isoDate = transformToISO.run(b.date);
     cloudinary.uploader.upload(req.files.image.path, function(result){
-    companyPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , isoDate: isoDate, tagArray: [b.tagSender], generalCategory: 'companypost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining}, function(err, post){
+    BlogPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , isoDate: isoDate, tagArray: [b.tagSender], generalCategory: 'Blogpost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining}, function(err, post){
         if(err){ return res.send(err); }
         if (post !== undefined){
           var finalText = shortenContent.shortenMe(post.content); //SHORTEN CONTENT FOR VIEW
-          companyPost.findOne({ title: b.title }, function(err, post){
+          BlogPost.findOne({ title: b.title }, function(err, post){
             if(err) return res.redirect('/');
-            companyPost.update(post, { shortContent: finalText }, function(err,post){
+            BlogPost.update(post, { shortContent: finalText }, function(err,post){
               if (err){
                 //req.flash("There was a problem. Try again.");
-                res.redirect('/companyPost/new');
+                res.redirect('/BlogPost/new');
               }
               else {
                 //req.flash("Post successfully created.");
@@ -74,7 +74,7 @@ module.exports = {
                   res.redirect('/admin/drafts');
                 }
                 else {
-                  res.redirect('/companyblog');
+                  res.redirect('/Blog');
                 }
 
               }
@@ -82,7 +82,7 @@ module.exports = {
           });
         }
       else {
-        return res.redirect('/companyblog');
+        return res.redirect('/Blog');
       }
       });
     });
@@ -90,7 +90,7 @@ module.exports = {
 
   edit: function(req, res){
     var id = req.param('id');
-    companyPost.findOne({ id: id }, function(err, post){
+    BlogPost.findOne({ id: id }, function(err, post){
       res.view({ post: post });
     });
   },
@@ -107,22 +107,22 @@ module.exports = {
     var isoDate = transformToISO.run(b.date);
     var finalText = shortenContent.shortenMe(b.content);
     cloudinary.uploader.upload(req.files.image.path, function(result){
-      companyPost.findOne({ id: id }, function(err, post){
+      BlogPost.findOne({ id: id }, function(err, post){
         if(err) return res.send(err);
-        companyPost.update(post, { title: b.title, content: b.content, shortContent: finalText, published: isPublished, images: result.url, category: b.category, date: b.date, isoDate: isoDate, tagArray: [b.tagSender], generalCategory: 'companypost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining }, function(err, post){
+        BlogPost.update(post, { title: b.title, content: b.content, shortContent: finalText, published: isPublished, images: result.url, category: b.category, date: b.date, isoDate: isoDate, tagArray: [b.tagSender], generalCategory: 'Blogpost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining }, function(err, post){
           if(err) { return res.send(err); }
           if(post !== undefined){
             var id = post[0].id;
             //req.flash("Post updated.");
             if ( isPostAwake === true && isPublished === true ){
-              res.redirect('/companyblog/' + id);
+              res.redirect('/Blog/' + id);
             }
             else {
               res.redirect('/admin/drafts');
             }
           }
         else {
-          res.redirect('/companyblog');
+          res.redirect('/Blog');
         }
       });
     });
@@ -131,12 +131,12 @@ module.exports = {
 
   unpublish: function(req, res){
     var id = req.param('id');
-    companyPost.findOne({ id: id }, function(err, post){
-      if(err) return res.redirect('/companyPost/edit/' + id);
-      companyPost.update(post, { published: false }, function(err, post){
-        if(err) return res.redirect('/companyPost/edit/' + id);
+    BlogPost.findOne({ id: id }, function(err, post){
+      if(err) return res.redirect('/BlogPost/edit/' + id);
+      BlogPost.update(post, { published: false }, function(err, post){
+        if(err) return res.redirect('/BlogPost/edit/' + id);
         //req.flash('Post unpublished.');
-        res.redirect('/companyblog');
+        res.redirect('/Blog');
       });
     });
   },
@@ -147,13 +147,13 @@ module.exports = {
     var pageNumber = query['page'];
 
     //for category searches...
-    if ((searchWord.indexOf('Platform') != -1)||(searchWord.indexOf('Company') != -1)|| (searchWord.indexOf('Affiliates') != -1)||(searchWord.indexOf('Philanthropy') != -1)) {
-      companyPost.find().where({ category: { contains: searchWord} }).where({ published: true }).where({ awake: true }).exec(function(err, posts1){
+    if ((searchWord.indexOf('Platform') != -1)||(searchWord.indexOf('Blog') != -1)|| (searchWord.indexOf('Affiliates') != -1)||(searchWord.indexOf('Philanthropy') != -1)) {
+      BlogPost.find().where({ category: { contains: searchWord} }).where({ published: true }).where({ awake: true }).exec(function(err, posts1){
         if(err) return res.redirect('/');
         numTruePosts = posts1.length;
-        if(numTruePosts === 0) return res.redirect('/companyPost/nosearch');
+        if(numTruePosts === 0) return res.redirect('/BlogPost/nosearch');
       });
-      return companyPost.find().where({ category: { contains: searchWord} }).where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+      return BlogPost.find().where({ category: { contains: searchWord} }).where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
         if(err) return res.redirect('/');
         if(searchResults) {
           res.view({ posts: searchResults }, { numTruePosts: numTruePosts });
@@ -165,12 +165,12 @@ module.exports = {
     else if (searchWord.indexOf('201') != -1) {
       //var numberIndex = searchWord.indexOf('2');
       searchWord =  searchWord.substr(4,searchWord.length-1);
-      companyPost.find().where({ longDate: { contains: searchWord} }).where({ published: true }).where({ awake: true }).exec(function(err, posts1){
+      BlogPost.find().where({ longDate: { contains: searchWord} }).where({ published: true }).where({ awake: true }).exec(function(err, posts1){
         if(err) return res.redirect('/');
         numTruePosts = posts1.length;
-        if(numTruePosts === 0) return res.redirect('/companyPost/nosearch');
+        if(numTruePosts === 0) return res.redirect('/BlogPost/nosearch');
       });
-      return companyPost.find().where({ longDate: { contains: searchWord} }).where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+      return BlogPost.find().where({ longDate: { contains: searchWord} }).where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
         if(err) return res.redirect('/');
         if(searchResults) {
           res.view({ posts: searchResults }, { numTruePosts: numTruePosts });
@@ -180,12 +180,12 @@ module.exports = {
 
     //for tag searches...
     else {
-    companyPost.find().where({ tagArray: { contains: searchWord} }).where({ published: true }).where({ awake: true }).exec(function(err, posts1){
+    BlogPost.find().where({ tagArray: { contains: searchWord} }).where({ published: true }).where({ awake: true }).exec(function(err, posts1){
       if(err) return res.redirect('/');
       numTruePosts = posts1.length;
-      if(numTruePosts === 0) return res.redirect('/companyPost/nosearch');
+      if(numTruePosts === 0) return res.redirect('/BlogPost/nosearch');
     });
-    return companyPost.find().where({ tagArray: { contains: searchWord} }).where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
+    return BlogPost.find().where({ tagArray: { contains: searchWord} }).where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).paginate({page: pageNumber, limit: 3}).exec(function(err, searchResults){
       if(err) return res.redirect('/');
       if(searchResults) {
         res.view({ posts: searchResults }, { numTruePosts: numTruePosts });
@@ -195,7 +195,7 @@ module.exports = {
   },
 
   nosearch: function(req,res){
-    companyPost.find().where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).limit(3).exec(function(err, posts){
+    BlogPost.find().where({ published: true }).where({ awake: true }).sort({ isoDate: 'desc' }).limit(3).exec(function(err, posts){
       if(err) return res.redirect('/');
       if(posts !== undefined){
         res.view({ posts: posts })
@@ -204,7 +204,7 @@ module.exports = {
   },
 
   topTags: function(req,res){
-    companyPost.find().where({ published: true }).where({ awake: true }).exec(function(err, posts){
+    BlogPost.find().where({ published: true }).where({ awake: true }).exec(function(err, posts){
       if(err) return res.redirect('/');
       if(posts !== undefined){
         var topFiveTags = topTag.topTagHelper(posts);
@@ -214,7 +214,7 @@ module.exports = {
   },
 
   dateFetch: function(req,res){
-    companyPost.find().where({ published: true }).where({ awake: true }).exec(function(err,posts){
+    BlogPost.find().where({ published: true }).where({ awake: true }).exec(function(err,posts){
       if(err) return res.redirect('/');
       if(posts !== undefined && posts.length !== 0){
 
