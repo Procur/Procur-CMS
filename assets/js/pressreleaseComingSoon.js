@@ -1,3 +1,3 @@
-$('.rightColumnLinksBlock').find('a').hover( function() {
-  $(this).text('New Text');
-})
+$('#companyBlogIndex').hover( function() {
+  $(this).find('a').text('New Text');
+});
