@@ -42,6 +42,10 @@ module.exports.routes = {
   //  controller: "PressReleaseController",
   //  action: "index"
   //},
+  'get /': {
+    controller: 'BlogPostController',
+    action: 'index'
+  },
 
   'get /greetUser': {
     controller: 'AdminController',
