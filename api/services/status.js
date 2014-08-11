@@ -17,7 +17,7 @@ module.exports = {
     } else if ( currentMonth > date[0] ) {
       console.log('b');
       return true;
-    } else if ( currentDay > date[1] ) {
+    } else if ( currentDay >= date[1] ) {
       console.log('c');
       return true;
     } else {
