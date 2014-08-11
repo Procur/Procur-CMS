@@ -1,7 +1,7 @@
 module.exports = {
   shortenMe: function(content){
     var textToLimit = content;
-    var wordLimit = 50;
+    var wordLimit = 75;
     var finalText = "";
     var text2 = textToLimit.replace(/\s+/g, ' ');
     var text3 = text2.split(' ');
