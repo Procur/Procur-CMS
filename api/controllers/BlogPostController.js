@@ -147,7 +147,7 @@ module.exports = {
     var pageNumber = query['page'];
 
     //for category searches...
-    if ((searchWord.indexOf('Platform') != -1)||(searchWord.indexOf('Blog') != -1)|| (searchWord.indexOf('Affiliates') != -1)||(searchWord.indexOf('Philanthropy') != -1)) {
+    if ((searchWord.indexOf('Platform') != -1)||(searchWord.indexOf('Company') != -1)|| (searchWord.indexOf('Affiliates') != -1)||(searchWord.indexOf('Philanthropy') != -1)) {
       BlogPost.find().where({ category: { contains: searchWord} }).where({ published: true }).where({ awake: true }).exec(function(err, posts1){
         if(err) return res.redirect('/');
         numTruePosts = posts1.length;
