@@ -19,6 +19,7 @@ var boolify = function(obj){
 module.exports = {
 
   index: function(req, res){
+    console.log('request hit me.');
     var query = url.parse(req.url, true).query;
     var pageNumber = query['page'];
     BlogPost.find().where({ published: true }).where({ awake: true }).exec(function(err, posts){
