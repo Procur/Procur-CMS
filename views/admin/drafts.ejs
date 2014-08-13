@@ -9,7 +9,7 @@
       <!--Blog POST READY-->
         <% payload[1].forEach(function(post){ %>
           <% if(post.generalCategory=='Blogpost'){ %>
-            <a class="readyBlockLink" href="/BlogPost/edit/<%= post.id %>">
+            <a class="readyBlockLink" href="/BlogPost/edit/<%= post.slug %>">
               <div class="innerblock">
                 <p class="titleHoldingTank"> Blog Post </p>
                 <p><%= post.title %></p>
@@ -33,7 +33,7 @@
       <!--Blog POST DRAFTS -->
         <% payload[0].forEach(function(post){ %>
           <% if(post.generalCategory=='Blogpost'){ %>
-            <a class="draftsBlockLink" href="/BlogPost/edit/<%= post.id %>">
+            <a class="draftsBlockLink" href="/BlogPost/edit/<%= post.slug %>">
               <div class="innerblock">
                 <p class="titleHoldingTank">Blog Post DRAFT</p>
                 <p><%= post.title %></p>
