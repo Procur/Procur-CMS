@@ -132,7 +132,7 @@ module.exports.routes = {
       action: 'index'
     },
 
-    'get /Blog/:id': {
+    'get /Blog/:slug': {
       controller: 'BlogPostController',
       action: 'showOne'
     },
@@ -163,7 +163,7 @@ module.exports.routes = {
       action: 'createPost'
     },
 
-    'get /BlogPost/edit/:id': {
+    'get /BlogPost/edit/:slug': {
       controller: "BlogPostController",
       action: 'edit'
     },
@@ -173,7 +173,7 @@ module.exports.routes = {
       action: 'update'
     },
 
-    'get /BlogPost/unpublish/:id': {
+    'get /BlogPost/unpublish/:slug': {
       controller: "BlogPostController",
       action: 'unpublish'
     }

@@ -1,5 +1,5 @@
 
-
+var slug = require('slug');
 var cloudinary = require('cloudinary');
 var url = require('url');
 
@@ -34,8 +34,8 @@ module.exports = {
   },
 
   showOne: function(req, res){
-    var id = req.param('id');
-    BlogPost.findOne({ id: id }, function(err, post){
+    var slug = req.param('slug');
+    BlogPost.findOne({ slug: slug }, function(err, post){
       if(err) return res.redirect('/Blog');
       res.view({ post: post });
     });
@@ -54,7 +54,7 @@ module.exports = {
     var daysRemaining = daysLeft.run(b.date);
     var isoDate = transformToISO.run(b.date);
     cloudinary.uploader.upload(req.files.image.path, function(result){
-    BlogPost.create({ title: b.title, content: b.content, published: isPublished, images: result.url, category: b.category, date: b.date , isoDate: isoDate, tagArray: [b.tagSender], generalCategory: 'Blogpost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining}, function(err, post){
+    BlogPost.create({ title: b.title, content: b.content, published: isPublished, slug: slug(b.title).toLowerCase(), images: result.url, category: b.category, date: b.date , isoDate: isoDate, tagArray: [b.tagSender], generalCategory: 'Blogpost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining}, function(err, post){
         if(err){ return res.send(err); }
         if (post !== undefined){
           var finalText = shortenContent.shortenMe(post.content); //SHORTEN CONTENT FOR VIEW
@@ -89,8 +89,8 @@ module.exports = {
   },
 
   edit: function(req, res){
-    var id = req.param('id');
-    BlogPost.findOne({ id: id }, function(err, post){
+    var slug = req.param('slug');
+    BlogPost.findOne({ slug: slug }, function(err, post){
       res.view({ post: post });
     });
   },
@@ -109,13 +109,14 @@ module.exports = {
     cloudinary.uploader.upload(req.files.image.path, function(result){
       BlogPost.findOne({ id: id }, function(err, post){
         if(err) return res.send(err);
-        BlogPost.update(post, { title: b.title, content: b.content, shortContent: finalText, published: isPublished, images: result.url, category: b.category, date: b.date, isoDate: isoDate, tagArray: [b.tagSender], generalCategory: 'Blogpost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining }, function(err, post){
+        BlogPost.update(post, { title: b.title, content: b.content, shortContent: finalText, published: isPublished, slug: slug(b.title).toLowerCase(), images: result.url, category: b.category, date: b.date, isoDate: isoDate, tagArray: [b.tagSender], generalCategory: 'Blogpost', awake: isPostAwake, shortDate: dateFormatShort, longDate: dateFormatLong, daysLeft: daysRemaining }, function(err, post){
+
           if(err) { return res.send(err); }
           if(post !== undefined){
-            var id = post[0].id;
+            var slug = post[0].slug;
             //req.flash("Post updated.");
             if ( isPostAwake === true && isPublished === true ){
-              res.redirect('/Blog/' + id);
+              res.redirect('/Blog/' + slug);
             }
             else {
               res.redirect('/admin/drafts');
@@ -130,11 +131,11 @@ module.exports = {
   },
 
   unpublish: function(req, res){
-    var id = req.param('id');
-    BlogPost.findOne({ id: id }, function(err, post){
-      if(err) return res.redirect('/BlogPost/edit/' + id);
+    var slug = req.param('slug');
+    BlogPost.findOne({ slug: slug }, function(err, post){
+      if(err) return res.redirect('/BlogPost/edit/' + slug);
       BlogPost.update(post, { published: false }, function(err, post){
-        if(err) return res.redirect('/BlogPost/edit/' + id);
+        if(err) return res.redirect('/BlogPost/edit/' + slug);
         //req.flash('Post unpublished.');
         res.redirect('/Blog');
       });
