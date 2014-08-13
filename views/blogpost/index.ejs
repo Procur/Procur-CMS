@@ -16,7 +16,7 @@
                 <h6>Tags</h6><span><%= post.tagArray %></span>
               </div>
               <% if(post.images!=null){ %><div class="BlogPostPhotoWrapper"><img class="BlogPostPhoto" src="<%= post.images %>"></div><% } %>
-              <div class="postContent"><p><%-post.shortContent%><a class="readMoreLink" href="/Blog/<%= post.id %>">Read More ></a></p></div>
+              <div class="postContent"><p><%-post.shortContent%><a class="readMoreLink" href="/Blog/<%= post.slug %>">Read More ></a></p></div>
             </div>
           <% } %>
         <% }); %>
