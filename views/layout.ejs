@@ -52,7 +52,27 @@
       If necessary, shut down and then lift your app again.
 
     -->
+    <!--Pardot-->
+    <% if (process.env.ENVIRONMENT_URL == 'blog.procur.com') { %>
 
+    <script>
+      piAId = '50892';
+      piCId = '2280';
+      (function() {
+          function async_load(){
+              var s = document.createElement('script'); s.type = 'text/javascript';
+              s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+              var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+          }
+          if(window.attachEvent) { window.attachEvent('onload', async_load); }
+          else { window.addEventListener('load', async_load, false); }
+
+      })();
+
+    </script>
+
+    <% } %>
+    <!--End Pardot-->
   </head>
 
   <body>
@@ -84,7 +104,7 @@
 
 
 
-    <!-- OUR SHIT-->
+    <!-- OUR STUFF-->
     <script type="text/javascript" src="/js/searchAjaxHelper.js"></script>
     <script type="text/javascript" src="/js/recentPressReleaseHelper.js"></script>
     <script type="text/javascript" src="/js/topTagAjaxHelper.js"></script>
